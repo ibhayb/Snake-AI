@@ -11,3 +11,7 @@ logs
 /bin/
 documentation/*.jpg
 documentation/*.pdf
+documentation/*.aux
+documentation/*.log
+documentation/*.gz
+documentation/*.toc
