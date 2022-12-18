@@ -9,3 +9,5 @@ production/
 *.iws
 logs
 /bin/
+documentation/*.jpg
+documentation/*.pdf
