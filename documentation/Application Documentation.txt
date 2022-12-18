@@ -1,0 +1,69 @@
+For the second part, please do in Team a documentation which include following Topics. 
+
+Use LaTeX for the documentation and LaTeX Beamer for the presentation, document your code for JavaDoc
+
+Format Springer Book Chapter
+
+Topics: 
+
+1. Team Work
+
+     who what does
+
+     work structure (communication, decisions, bug tracking, repository, engineering, ...)
+
+     ideas (brainstorming)
+
+2. Introduction
+
+      General topic
+
+      Similar problems in practice  (References every time, look for actual ones)
+
+3. Problem Description
+
+      Formal description: definitions, examples, ...
+
+4. Related Work
+
+      Related Algorithms, Applications
+
+!for example: Fractals, Data Generation, Games, Evolutionary Algorithms (Genetic Algortihms; Collective Intelligence like Particle Swarm Optimization - PSO, Ant Colony Optimizaton - ACO; Evolutionary Multiobjective Optimization, ...)
+
+5. Proposed Approaches
+
+     Input/Output Format, Benchmarks (Generation, Examples)
+
+     Algorithms in Pseudocode
+
+6. Implementation Details
+
+     Application Structure
+
+     GUI Details
+
+     UML Diagram
+
+     Used Libraries
+
+     Code Snippets
+
+7.  Experimental Results and Statistical Tests
+
+      Simulations (Play with the Parameters!)
+
+      Use Benchmarks  
+
+     Tables: input data details, results of different algorithms
+
+     Charts
+
+     Evaluations
+
+8.  Conclusions and Future Work
+
+    How was the team work
+
+    What you have learned
+
+    Ideas for the future development of your application, new algorithms

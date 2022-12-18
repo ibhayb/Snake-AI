@@ -92,7 +92,7 @@ public class Snake implements Cloneable {
         if (elements.contains(newHead))
             return false; // Collided with itself
 
-        body.addFirst(newHead);
+         body.addFirst(newHead);
         elements.add(newHead);
 
         return true;

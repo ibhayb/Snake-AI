@@ -40,6 +40,7 @@ public class Coordinate implements Comparable<Coordinate> {
      * @param other point to move
      * @return direction
      */
+
     public Direction getDirection(Coordinate other) {
         final Coordinate vector = new Coordinate(other.x - this.x, other.y - this.y);
         for (Direction direction : Direction.values())

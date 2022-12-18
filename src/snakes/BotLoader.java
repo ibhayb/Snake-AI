@@ -16,6 +16,7 @@ public class BotLoader extends ClassLoader {
      * @param classBinName The name of the Bot class to load.
      * @return An instance of the Bot class
      */
+
     public Class<? extends Bot> getBotClass(String classBinName) {
         try {
             // Create a new JavaClassLoader
