@@ -154,6 +154,9 @@ public class SnakesUIMain {
             System.out.println(bots_names.get(playerNumber.get(i)) + " earned: " + points.get(playerNumber.get(i)).toString());
             results_fw.write(bots_names.get(playerNumber.get(i)) + " earned: " + points.get(playerNumber.get(i)).toString() + "\n");
         }
+        
+        System.out.println("Servus Herr Hyber");
+        
     }
 }
 
