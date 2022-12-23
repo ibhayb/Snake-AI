@@ -3,10 +3,16 @@
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{minted}
+\usepackage{adigraph}
 \usepackage{graphicx}
+\usepackage[colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,
+bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,
+citecolor = black] {hyperref}
 
+\pdfbookmark[1]{tableofcontents}{toc}
 \title{Snake-AI\\Project Documentation}
-\author{Ibrahim Enes Hayber, Rana MD Jewel, Maximilian Lüttich\\
+\author{
+		Ibrahim Enes Hayber, Rana MD Jewel, Maximilian Lüttich\\
 		Frankfurt University of Applied Sciences\\
 		Faculty 2, Computer Science (B. Sc.)\\
 		Object-oriented Programming in Java by Prof. Dr. Doina Logofatu
@@ -41,9 +47,50 @@ The aim of a bot is to be the last standing snake or have the highest score by e
 \textit{Survival of the fittest} is a great saying.\\
 This chapter focuses on the general overview of this project and comparison to similar problems in practice.
 \subsection{General Topic}
+Our main objective is to make two efficiently working Snake Bots. To create a working bot, all we have to do is to implement a class that implements the Bot interface. This interface has one method which is the \textit{chooseDirection()} method. We can say that the method simulates the brain of the bot. The return value of this method is the direction in which the snake should move to. For directions we have \textit{up, down, left or right}. For example we could implement a first simple bot that just turns right one time. But this type of bot is really uninteresting. For our project we are aiming to implement a bot that uses alogrithms from the fields of Artificial Intelligence. But for now let us look into the game rules.\\
+\\The rules are described as follows:
+\textbf{Rule 1:}  A bot controls only the direction (going either north, south, east, or west) to
+be taken by its own snake.\\
+\textbf{Rule 2:} Snakes always move simultaneously and forward. Their size increases by one position
+(i.e. pixel) after taking an apple.\\
+\textbf{Rule 3:} A Snake loses in any of these conditions:\\
+\begin{enumerate}
+\item If it leaves the board;
+\item If it hits its own body;
+\item If it hits the other snake's body;
+\item If it takes more than one second to make a decision (i.e. which direction to take).
+\end{enumerate}
+\textbf{Rule 4:} If snakes collide head to head, the longest snake wins the game.\\
+\textbf{Rule 5:} Apples appear randomly at an unoccupied position of the board, and there is only
+one apple available at any time.\\
+\textbf{Rule 6:} An apple will disappear if it is not eaten by either snake in 10 seconds and reappear
+somewhere else on the map.\\
+\textbf{Rule 7:} At the end of the tournament, players are ranked according to the number of
+victories; then the number of draws; then the result of\\
 
 \subsection{Similar problems in practice (References every time, look for actual ones)}
-to-do
+Furthermore, since our bot should be smart then it definetly should use intelligent algorithms. What if we could implement a simple bot that just goes into the direction of the apple and gets closer and closer after every decision. But would this be enough to call it a smart bot? Of course not. Well it is a good behaviour that our snake goes for apples.  But thats not enough. It should also take the shortest path to the apple. For this we want to use algorithm of dijkstra. Dijkstra algorithm is a graph based algorithm which calculates the shortest path from one node to every other node. Let us get a better understanding of this by looking into an example.\\
+\\
+\NewAdigraph{mygraph}
+{
+A,blue:0,0;
+B:2,0;
+C:2,2;
+D:0,2;
+E,blue:1,3.4
+}
+{
+A,B:12;
+B,C:4;
+C,A:7; 
+A,D, red :1;
+D,E, red :2; 
+E,C:5;
+C,D:9;
+}[-]
+\mygraph{}
+\\
+\\We want to know the shortest path from node A to node B. We as human can easily look into that graph and see that taking the route from A-D with cost of 1 is much lesser than rather taking A-C with cost of 7 or A-B with cost of 12. As next we would also see that we have a cost of 2 from D-E. So in total we see that the shortest path from A to D is A-D-E. But telling this to a computer which only knows 0's and 1's is nonsense. Thats why we have algorithms like Dijkstra, which calculates and erases paths with higher costs and returns us the shortest path. Anyway there are many daily life problems where we are using algorithms to compute the shortest path. For example when you are using a navigation tool to drive from one city to an other city. We all would have serious problems if the navigation would take any random path to our destination rather than taking the shortest path or the path with less travel time. Or even when you are crossing over a street where cars are driving. You surely want to take the shortest walkway to the other side. Intuitively we are trying to take the shortest way to the other side.
 
 \section{Team Work}
 to-do

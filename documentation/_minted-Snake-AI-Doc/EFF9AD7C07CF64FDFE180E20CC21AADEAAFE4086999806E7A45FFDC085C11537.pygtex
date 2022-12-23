@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public}\PYG{+w}{ }\PYG{k+kd}{class} \PYG{n+nc}{IntBot1}\PYG{+w}{ }\PYG{k+kd}{implements}\PYG{+w}{ }\PYG{n}{Bot}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{k+kd}{private}\PYG{+w}{ }\PYG{k+kd}{static}\PYG{+w}{ }\PYG{k+kd}{final}\PYG{+w}{ }\PYG{n}{Direction}\PYG{o}{[]}\PYG{+w}{ }\PYG{n}{DIRECTIONS}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Direction}\PYG{o}{[]}\PYG{p}{\PYGZob{}}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{,}
+\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{\PYGZcb{};}
+\PYG{n+nd}{@Override}
+\PYG{k+kd}{public}\PYG{+w}{ }\PYG{n}{Direction}\PYG{+w}{ }\PYG{n+nf}{chooseDirection}\PYG{p}{(}\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{opponent}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Coordinate}
+\PYG{n}{mazeSize}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\end{Verbatim}

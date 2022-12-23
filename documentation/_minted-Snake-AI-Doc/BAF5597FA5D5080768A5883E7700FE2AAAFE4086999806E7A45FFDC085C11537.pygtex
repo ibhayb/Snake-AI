@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{//Position of second Element of opponent}
+\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{afterHeadNotFinal2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k+kc}{null}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{body}\PYG{p}{.}\PYG{n+na}{size}\PYG{p}{()}\PYG{o}{\PYGZgt{}=}\PYG{l+m+mi}{2}\PYG{p}{)\PYGZob{}}
+\PYG{n}{Iterator}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{it}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{body}\PYG{p}{.}\PYG{n+na}{iterator}\PYG{p}{();}
+\PYG{n}{it}\PYG{p}{.}\PYG{n+na}{next}\PYG{p}{();}
+\PYG{n}{afterHeadNotFinal2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{it}\PYG{p}{.}\PYG{n+na}{next}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kd}{final}\PYG{+w}{ }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{afterHead2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{afterHeadNotFinal2}\PYG{p}{;}
+\PYG{c+c1}{//second element of opponent snake}
+\end{Verbatim}
