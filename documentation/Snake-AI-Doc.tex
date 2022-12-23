@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{minted}
 \usepackage{graphicx}
 
 \title{Snake-AI\\Project Documentation}
@@ -89,6 +90,135 @@ to-do
 \section{Evolution of Bots}
 to-do
 \subsection{Bot1}
+\title{Bot 1 (IntBot1.java):}\\
+\\
+After getting to know the framework of our task, one of our first objectives was implementing a
+basic bot by ourselves that does the following:\\
+\begin{itemize}
+\item Calculate all valid moves
+\item Exhibit a basic avoidance behavior regarding the opponent
+\item Go for the apple
+\end{itemize}
+This basic bot also served as an opponent for more advanced bots later on.\\
+\\
+To keep things organized, we decided to create a package for each bot. The packages were created
+in the „src“-folder of the given project. Each bot consists of a public class that implements the
+Interface „Bot“, which as previously described, consists of only one method: „chooseDirection“.
+Properly overriding this method turned this class into a bot that could be used in the game.
+\\
+\\
+The basic idea for creating this bot was that a static array that contains all possible directions
+(Direction.RIGHT, Direction.DOWN, Direction.UP, Direction.LEFT) is created outside the method
+„chooseDirection“ and inside the method each element of this array is checked for its worth
+concerning the stated objectives.\\
+\\
+Creating the static array:
+\begin{minted}{java}
+public class IntBot1 implements Bot {
+private static final Direction[] DIRECTIONS = new Direction[]{Direction.RIGHT,
+Direction.DOWN, Direction.UP, Direction.LEFT};
+@Override
+public Direction chooseDirection(Snake snake, Snake opponent, Coordinate
+mazeSize, Coordinate apple) {
+\end{minted}
+The first thing we did was to create an array of possible directions of the opponent’s head and a set
+that contains the resulting coordinates, so that at the end of the method „chooseDirection“ the
+coordinates could be removed from the pool of possible directions of our bot’s head. To create such
+an array, it was necessary to determine the coordinate of the second element of the opponent snake.
+We used an iterator to achieve this in the following way:\\
+\begin{minted}{java}
+//Position of second Element of opponent
+Coordinate afterHeadNotFinal2 = null;
+if(opponent.body.size()>=2){
+Iterator<Coordinate> it = opponent.body.iterator();
+it.next();
+afterHeadNotFinal2 = it.next();
+}
+final Coordinate afterHead2 = afterHeadNotFinal2;
+//second element of opponent snake
+\end{minted}
+Note that the class „Snake“ featured a deque of elements of the „Coordinate“-class called „body“.\\
+\\
+After that, we used a stream method to get a sequential stream of the elements from the array
+„DIRECTIONS“ to create a new array of directions called „validMovesOpponent“. The direction
+whose result would equal the second element of the opponent snake was filtered out using the “equals”-method on coordinate objects. Finally, a Set of coordinates called
+“possiblePositionsOpponent” was created by simply using the “moveTo” method on the head of the
+opponent snake and having all elements of “validMovesOpponent” as parameters.
+\begin{minted}{java}
+Direction[] validMovesOpponent = Arrays.stream(DIRECTIONS)
+.filter(d -> !head2.moveTo(d).equals(afterHead2))
+.sorted()
+.toArray(Direction[]::new);
+Set<Coordinate> possiblePositionsOpponent = new HashSet<>();
+for(int i=0; i< validMovesOpponent.length; i++){
+possiblePositionsOpponent.add(head2.moveTo(validMovesOpponent[i]));
+}
+\end{minted}
+
+
+Since no other restrictions were made, the set „possiblePositionsOpponent“ always contained three
+elements, even if they were to be outside the maze.\\
+\\
+Analogous to the array „validMovesOpponent“ we created an array of directions called
+„validMoves“ for our bot’s snake that excluded the possibility of backwards movement of the
+snake. This array „validMoves“ was subsequently used as a parameter of the stream method to
+create a new array of directions called „notLosing“, that with the use of the filter method excluded
+some unfavorable outcomes.
+\begin{minted}{java}
+Direction[] notLosing = Arrays.stream(validMoves)
+.filter(d -> head.moveTo(d).inBounds(mazeSize))
+.filter(d -> !opponent.elements.contains(head.moveTo(d)))
+.filter(d -> !snake.elements.contains(head.moveTo(d)))
+.filter(d -> !possiblePositionsOpponent.contains(head.moveTo(d)))
+.sorted()
+.toArray(Direction[]::new);
+\end{minted}
+
+Using the filter method, we checked the following: Is the resulting coordinate outside the
+maze? Is the resulting coordinate part of the opponent’s body? Is the resulting coordinate
+part of our snake’s body? And finally, does the set „possiblePositionsOpponent“ contain the
+resulting coordinate? If the answer to each of these question was „no“ the streamed element
+was added to the array.\\
+\\
+Finally, we used the bubble sort algorithm to sort the elements of „notLosing“ based upon
+the distance to the apple. „chooseDirection“ returns the first element of „notLosing“
+provided that this array is not empty. If this array happens to be empty, the first element of
+„validMoves“ is returned which, is never empty.
+\begin{minted}{java}
+//Bubble Sort; Sorting Elements of "NotLosing"
+double distance1, distance2;
+int a1, a2, h11, h12, h21, h22, d1, d2;
+Coordinate test1, test2;
+Direction temp;
+if (notLosing.length > 0){
+a1=apple.x;
+a2=apple.y;
+for(int i=0; i< notLosing.length; i++){
+for(int a= i+1; a< notLosing.length; a++){
+test1 = head.moveTo(notLosing[i]);
+test2 = head.moveTo(notLosing[a]);
+h11= test1.x;
+h12 = test1.y;
+d1 = (h11-a1)*(h11-a1)+(h12-a2)*(h12-a2);
+distance1=Math.sqrt((double)d1);
+h21= test2.x;
+h22 = test2.y;
+d2 = (h21-a1)*(h21-a1)+(h22-a2)*(h22-a2);
+distance2=Math.sqrt((double)d2);
+if(distance2<distance1){
+temp=notLosing[i];
+notLosing[i]=notLosing[a];
+notLosing[a]=temp;
+}
+}
+}
+return notLosing[0];
+}
+else{
+return validMoves[0];
+}
+}
+\end{minted}
 \subsection{Bot2}
 \subsection{Bot3}
 

@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Direction}\PYG{o}{[]} \PYG{n}{validMovesOpponent} \PYG{o}{=} \PYG{n}{Arrays}\PYG{p}{.}\PYG{n+na}{stream}\PYG{p}{(}\PYG{n}{DIRECTIONS}\PYG{p}{)}
+\PYG{p}{.}\PYG{n+na}{filter}\PYG{p}{(}\PYG{n}{d} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{!}\PYG{n}{head2}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{).}\PYG{n+na}{equals}\PYG{p}{(}\PYG{n}{afterHead2}\PYG{p}{))}
+\PYG{p}{.}\PYG{n+na}{sorted}\PYG{p}{()}
+\PYG{p}{.}\PYG{n+na}{toArray}\PYG{p}{(}\PYG{n}{Direction}\PYG{o}{[]}\PYG{p}{::}\PYG{k}{new}\PYG{p}{);}
+\PYG{n}{Set}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}} \PYG{n}{possiblePositionsOpponent} \PYG{o}{=} \PYG{k}{new} \PYG{n}{HashSet}\PYG{o}{\PYGZlt{}\PYGZgt{}}\PYG{p}{();}
+\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}} \PYG{n}{validMovesOpponent}\PYG{p}{.}\PYG{n+na}{length}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+\PYG{n}{possiblePositionsOpponent}\PYG{p}{.}\PYG{n+na}{add}\PYG{p}{(}\PYG{n}{head2}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{validMovesOpponent}\PYG{o}{[}\PYG{n}{i}\PYG{o}{]}\PYG{p}{));}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

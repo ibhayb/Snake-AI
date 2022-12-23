@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Direction}\PYG{o}{[]} \PYG{n}{notLosing} \PYG{o}{=} \PYG{n}{Arrays}\PYG{p}{.}\PYG{n+na}{stream}\PYG{p}{(}\PYG{n}{validMoves}\PYG{p}{)}
+\PYG{p}{.}\PYG{n+na}{filter}\PYG{p}{(}\PYG{n}{d} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{head}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{).}\PYG{n+na}{inBounds}\PYG{p}{(}\PYG{n}{mazeSize}\PYG{p}{))}
+\PYG{p}{.}\PYG{n+na}{filter}\PYG{p}{(}\PYG{n}{d} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{!}\PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{elements}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{head}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{)))}
+\PYG{p}{.}\PYG{n+na}{filter}\PYG{p}{(}\PYG{n}{d} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{!}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{elements}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{head}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{)))}
+\PYG{p}{.}\PYG{n+na}{filter}\PYG{p}{(}\PYG{n}{d} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{!}\PYG{n}{possiblePositionsOpponent}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{head}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{)))}
+\PYG{p}{.}\PYG{n+na}{sorted}\PYG{p}{()}
+\PYG{p}{.}\PYG{n+na}{toArray}\PYG{p}{(}\PYG{n}{Direction}\PYG{o}{[]}\PYG{p}{::}\PYG{k}{new}\PYG{p}{);}
+\end{Verbatim}
