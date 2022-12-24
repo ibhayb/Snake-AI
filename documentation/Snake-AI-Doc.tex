@@ -5,6 +5,7 @@
 \usepackage{minted}
 \usepackage{adigraph}
 \usepackage{graphicx}
+\usepackage{url}
 \usepackage[colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,
 bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,
 citecolor = black] {hyperref}
@@ -48,7 +49,7 @@ The aim of a bot is to be the last standing snake or have the highest score by e
 This chapter focuses on the general overview of this project and comparison to similar problems in practice.
 \subsection{General Topic}
 Our main objective is to make two efficiently working Snake Bots. To create a working bot, all we have to do is to implement a class that implements the Bot interface. This interface has one method which is the \textit{chooseDirection()} method. We can say that the method simulates the brain of the bot. The return value of this method is the direction in which the snake should move to. For directions we have \textit{up, down, left or right}. For example we could implement a first simple bot that just turns right one time. But this type of bot is really uninteresting. For our project we are aiming to implement a bot that uses alogrithms from the fields of Artificial Intelligence. But for now let us look into the game rules.\\
-\\The rules are described as follows:
+\\The rules are described as follows: \\
 \textbf{Rule 1:}  A bot controls only the direction (going either north, south, east, or west) to
 be taken by its own snake.\\
 \textbf{Rule 2:} Snakes always move simultaneously and forward. Their size increases by one position
@@ -160,7 +161,7 @@ Properly overriding this method turned this class into a bot that could be used 
 The basic idea for creating this bot was that a static array that contains all possible directions
 (Direction.RIGHT, Direction.DOWN, Direction.UP, Direction.LEFT) is created outside the method
 „chooseDirection“ and inside the method each element of this array is checked for its worth
-concerning the stated objectives.\\
+concerning the stated objectives. This concept was also used in the provided example of  a bot  on the following website: \url{https://github.com/BeLuckyDaf/snakes-game-tutorial} The only thing that this bot was concerned with was not killing itself.\\
 \\
 Creating the static array:
 \begin{minted}{java}
@@ -269,6 +270,7 @@ return validMoves[0];
 }
 }
 \end{minted}
+The biggest drawback of this bot was the frequent entrapment with itself or the opponent’s snake. Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent’s snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
 \subsection{Bot2}
 \subsection{Bot3}
 
