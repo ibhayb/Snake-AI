@@ -1,0 +1,111 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{MyBot} \PYG{k+kd}{implements} \PYG{n}{Bot} \PYG{p}{\PYGZob{}}
+     \PYG{c+c1}{// Arry to contains all the moves}
+    \PYG{k+kd}{private} \PYG{k+kd}{static} \PYG{k+kd}{final} \PYG{n}{Direction}\PYG{o}{[]} \PYG{n}{DIRECTIONS} \PYG{o}{=} \PYG{k}{new} \PYG{n}{Direction}\PYG{o}{[]}\PYG{p}{\PYGZob{}}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{,}
+            \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{,} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{,} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{\PYGZcb{};}
+
+    \PYG{c+c1}{// functions to evaluate a valid move}
+    \PYG{k+kt}{boolean} \PYG{n+nf}{isValidMove}\PYG{p}{(}\PYG{n}{Snake} \PYG{n}{snake}\PYG{p}{,}\PYG{n}{Coordinate} \PYG{n}{mazeSize}\PYG{p}{,}\PYG{n}{Direction} \PYG{n}{d}\PYG{p}{,}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{n}{opponentPos}\PYG{p}{,}\PYG{n}{Snake} \PYG{n}{opponent}\PYG{p}{)\PYGZob{}}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{).}\PYG{n+na}{inBounds}\PYG{p}{(}\PYG{n}{mazeSize}\PYG{p}{)} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{o}{!}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{elements}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{))} \PYG{o}{\PYGZam{}\PYGZam{}}
+        \PYG{o}{!}\PYG{n}{opponentPos}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{))} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{o}{!}\PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{elements}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{)))\PYGZob{}}
+            \PYG{c+c1}{//\PYGZam{}\PYGZam{} !opponent.elements.contains(snake.getHead().moveTo(d)}
+            \PYG{k}{return} \PYG{k+kc}{true}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{return}  \PYG{k+kc}{false}\PYG{p}{;}
+
+    \PYG{p}{\PYGZcb{}}
+    \PYG{c+c1}{// Function to give next direction}
+    \PYG{n+nd}{@Override}
+    \PYG{k+kd}{public} \PYG{n}{Direction} \PYG{n+nf}{chooseDirection}\PYG{p}{(}\PYG{n}{Snake} \PYG{n}{snake}\PYG{p}{,} \PYG{n}{Snake} \PYG{n}{opponent}\PYG{p}{,} \PYG{n}{Coordinate} \PYG{n}{mazeSize}\PYG{p}{,} \PYG{n}{Coordinate} \PYG{n}{apple}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{Coordinate} \PYG{n}{head} \PYG{o}{=} \PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{();}
+        \PYG{n}{Coordinate} \PYG{n}{head2} \PYG{o}{=} \PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{();}
+
+        \PYG{c+c1}{//Position of second Element of opponent}
+        \PYG{n}{Coordinate} \PYG{n}{afterHeadNotFinal2} \PYG{o}{=} \PYG{k+kc}{null}\PYG{p}{;}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{body}\PYG{p}{.}\PYG{n+na}{size}\PYG{p}{()}\PYG{o}{\PYGZgt{}=}\PYG{l+m+mi}{2}\PYG{p}{)\PYGZob{}}
+            \PYG{n}{Iterator}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}} \PYG{n}{it} \PYG{o}{=} \PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{body}\PYG{p}{.}\PYG{n+na}{iterator}\PYG{p}{();}
+            \PYG{n}{it}\PYG{p}{.}\PYG{n+na}{next}\PYG{p}{();}
+            \PYG{n}{afterHeadNotFinal2} \PYG{o}{=} \PYG{n}{it}\PYG{p}{.}\PYG{n+na}{next}\PYG{p}{();}
+        \PYG{p}{\PYGZcb{}}
+
+        \PYG{k+kd}{final} \PYG{n}{Coordinate} \PYG{n}{afterHead2} \PYG{o}{=} \PYG{n}{afterHeadNotFinal2}\PYG{p}{;}
+        \PYG{c+c1}{// save all the possible next move of the opponent snake validMovesOpponent}
+        \PYG{n}{Direction}\PYG{o}{[]} \PYG{n}{validMovesOpponent} \PYG{o}{=} \PYG{n}{Arrays}\PYG{p}{.}\PYG{n+na}{stream}\PYG{p}{(}\PYG{n}{DIRECTIONS}\PYG{p}{)}
+                \PYG{p}{.}\PYG{n+na}{filter}\PYG{p}{(}\PYG{n}{d} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{o}{!}\PYG{n}{head2}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{).}\PYG{n+na}{equals}\PYG{p}{(}\PYG{n}{afterHead2}\PYG{p}{))}
+                \PYG{p}{.}\PYG{n+na}{sorted}\PYG{p}{()}
+                \PYG{p}{.}\PYG{n+na}{toArray}\PYG{p}{(}\PYG{n}{Direction}\PYG{o}{[]}\PYG{p}{::}\PYG{k}{new}\PYG{p}{);}
+        \PYG{c+c1}{// save all possible next move of the opponent in a HashSet. beacuse HashSet takes O(1) time to search any element in it.}
+        \PYG{n}{Set}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}} \PYG{n}{possiblePositionsOpponent} \PYG{o}{=} \PYG{k}{new} \PYG{n}{HashSet}\PYG{o}{\PYGZlt{}\PYGZgt{}}\PYG{p}{();}
+        \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}} \PYG{n}{validMovesOpponent}\PYG{p}{.}\PYG{n+na}{length}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+            \PYG{n}{possiblePositionsOpponent}\PYG{p}{.}\PYG{n+na}{add}\PYG{p}{(}\PYG{n}{head2}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{validMovesOpponent}\PYG{o}{[}\PYG{n}{i}\PYG{o}{]}\PYG{p}{));}
+        \PYG{p}{\PYGZcb{}}
+
+
+       \PYG{c+c1}{//  variable to find all the distance from next move to apple}
+        \PYG{k+kt}{int} \PYG{n}{disFromLeft} \PYG{o}{=} \PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,} \PYG{n}{disFromRight}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}\PYG{n}{disFromUp}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}\PYG{n}{disFromDown}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{;}
+
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{isValidMove}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{,} \PYG{n}{mazeSize}\PYG{p}{,} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{,} \PYG{p}{(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)} \PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+
+            \PYG{n}{Coordinate} \PYG{n}{toUp} \PYG{o}{=} \PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{);}
+            \PYG{n}{disFromUp} \PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)} \PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toUp}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toUp}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
+
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{isValidMove}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{,} \PYG{n}{mazeSize}\PYG{p}{,} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{,(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)} \PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+
+            \PYG{n}{Coordinate} \PYG{n}{toLeft} \PYG{o}{=} \PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{);}
+            \PYG{c+c1}{//disFromLeft = Math.abs((toLeft.x\PYGZhy{} apple.x)+(toLeft.y\PYGZhy{} apple.y));}
+            \PYG{n}{disFromLeft} \PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)} \PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toLeft}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toLeft}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
+
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{isValidMove}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{,} \PYG{n}{mazeSize}\PYG{p}{,} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{,(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)} \PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+
+            \PYG{n}{Coordinate} \PYG{n}{toDown} \PYG{o}{=} \PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{);}
+            \PYG{n}{disFromDown} \PYG{o}{=} \PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{abs}\PYG{p}{((}\PYG{n}{toDown}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{)}\PYG{o}{+}\PYG{p}{(}\PYG{n}{toDown}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{));}
+            \PYG{n}{disFromDown} \PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)} \PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toDown}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toDown}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
+
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n}{isValidMove}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{,} \PYG{n}{mazeSize}\PYG{p}{,} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{,(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)} \PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+
+            \PYG{n}{Coordinate} \PYG{n}{toRight} \PYG{o}{=} \PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{);}
+            \PYG{c+c1}{//disFromRight = Math.abs((toRight.x\PYGZhy{} apple.x)+(toRight.y\PYGZhy{} apple.y));}
+            \PYG{n}{disFromRight} \PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)} \PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toRight}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toRight}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}} \PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
+        \PYG{p}{\PYGZcb{}}
+       \PYG{c+c1}{// find minimum from all the possible paths}
+        \PYG{k+kt}{int} \PYG{n}{minDis} \PYG{o}{=} \PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{n}{disFromRight}\PYG{p}{,}\PYG{n}{disFromDown}\PYG{p}{),}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{n}{disFromUp}\PYG{p}{,}\PYG{n}{disFromLeft}\PYG{p}{));}
+
+            \PYG{c+c1}{//give direction to the snake}
+
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{minDis}\PYG{o}{==}\PYG{n}{disFromRight}\PYG{p}{)\PYGZob{}}
+            \PYG{k}{return} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n}{minDis}\PYG{o}{==}\PYG{n}{disFromDown}\PYG{p}{)\PYGZob{}}
+
+            \PYG{k}{return} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n}{minDis}\PYG{o}{==}\PYG{n}{disFromLeft}\PYG{p}{)\PYGZob{}}
+
+            \PYG{k}{return}  \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n}{minDis}\PYG{o}{==}\PYG{n}{disFromUp}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{k}{return} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{else}\PYG{p}{\PYGZob{}}
+          \PYG{c+c1}{// to avoid worst cases.}
+            \PYG{n}{Random} \PYG{n}{rn} \PYG{o}{=} \PYG{k}{new} \PYG{n}{Random}\PYG{p}{();}
+            \PYG{k+kt}{int} \PYG{n}{pos} \PYG{o}{=} \PYG{n}{rn}\PYG{p}{.}\PYG{n+na}{nextInt}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{);}
+            \PYG{k}{switch} \PYG{p}{(}\PYG{n}{pos}\PYG{p}{)\PYGZob{}}
+
+                \PYG{k}{case} \PYG{l+m+mi}{0}\PYG{p}{:}
+                    \PYG{k}{return} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{;}
+                \PYG{k}{case} \PYG{l+m+mi}{1}\PYG{p}{:}
+                    \PYG{k}{return} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{;}
+                \PYG{k}{case} \PYG{l+m+mi}{2}\PYG{p}{:}
+                    \PYG{k}{return} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{;}
+                \PYG{k}{default}\PYG{p}{:}
+                    \PYG{k}{return} \PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{;}
+            \PYG{p}{\PYGZcb{}}
+        \PYG{p}{\PYGZcb{}}
+
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -140,7 +140,7 @@ to-do
 to-do
 \section{Evolution of Bots}
 to-do
-\subsection{Bot1}
+\subsection{Max}
 \title{Bot 1 (IntBot1.java):}\\
 \\
 After getting to know the framework of our task, one of our first objectives was implementing a
@@ -271,8 +271,134 @@ return validMoves[0];
 }
 \end{minted}
 The biggest drawback of this bot was the frequent entrapment with itself or the opponent’s snake. Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent’s snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
-\subsection{Bot2}
-\subsection{Bot3}
+\subsection{Rana}
+The idea behind my Bot is the famous Dijkstra Algorithem which is most widely used to find the shortest path.
+In my Programm before I give my Snake a Direction first of all I  always choose four adjucent cells from the current
+Head position of the Snake. Secondly, I have to eliminate one of the cell from them which is already located in the Snake
+body (next Cordinate after the Head). Thirdly, I have been checking whether the given move leads the Snake out of the Maze.
+Then with the help of Pythagoras formula I calculate the distance between the next postion of the Snake  and the apple.
+After that I calculate the minimum between all the distances. Finally I give the Snake the next Direction.\\
+\\But in this Algorithem I was not considering the position of the opponent Snake. As a result there were many collisions between my Snake and opponent 
+Snake. To get rid of this I have also figured out all the possible next move of the Opponent Snake and saved them in a HashSet. While giving the next move 
+to my Snake I check whether this next move is also the next move of the opponent Snake or not. This has solved the Head to Head collision. But still there were some 
+collision with Body of the opponent Snake. That's why I have also justified whether the next move is one of the element of the opponent Body or not.\\
+\\In term of Time and Space Complexity this Algorithem is quite efficient. The Algorithem has Time Complexity of O(1) and Space
+Complexity is approximately O(n). Wher n is the number of elements of Opponent Snake body. \\
+\\Inspite of all the Consideration there is still some Collisions in critical Situation. Anothe problem is Self Entrapping.\\
+
+\begin{minted}{java}
+public class MyBot implements Bot {
+     // Arry to contains all the moves
+    private static final Direction[] DIRECTIONS = new Direction[]{Direction.RIGHT,
+            Direction.DOWN, Direction.UP, Direction.LEFT};
+    
+    // functions to evaluate a valid move
+    boolean isValidMove(Snake snake,Coordinate mazeSize,Direction d,HashSet<Coordinate>opponentPos,Snake opponent){
+        if(snake.getHead().moveTo(d).inBounds(mazeSize) && !snake.elements.contains(snake.getHead().moveTo(d)) && 
+        !opponentPos.contains(snake.getHead().moveTo(d)) && !opponent.elements.contains(snake.getHead().moveTo(d))){
+            //&& !opponent.elements.contains(snake.getHead().moveTo(d)
+            return true;
+        }
+        return  false;
+
+    }
+    // Function to give next direction 
+    @Override
+    public Direction chooseDirection(Snake snake, Snake opponent, Coordinate mazeSize, Coordinate apple) {
+        Coordinate head = snake.getHead();
+        Coordinate head2 = opponent.getHead();
+
+        //Position of second Element of opponent
+        Coordinate afterHeadNotFinal2 = null;
+        if(opponent.body.size()>=2){
+            Iterator<Coordinate> it = opponent.body.iterator();
+            it.next();
+            afterHeadNotFinal2 = it.next();
+        }
+
+        final Coordinate afterHead2 = afterHeadNotFinal2;
+        // save all the possible next move of the opponent snake validMovesOpponent
+        Direction[] validMovesOpponent = Arrays.stream(DIRECTIONS)
+                .filter(d -> !head2.moveTo(d).equals(afterHead2))
+                .sorted()
+                .toArray(Direction[]::new);
+        // save all possible next move of the opponent in a HashSet. beacuse HashSet takes O(1) time to search any element in it.
+        Set<Coordinate> possiblePositionsOpponent = new HashSet<>();
+        for(int i=0; i< validMovesOpponent.length; i++){
+            possiblePositionsOpponent.add(head2.moveTo(validMovesOpponent[i]));
+        }
+
+
+       //  variable to find all the distance from next move to apple
+        int disFromLeft = Integer.MAX_VALUE, disFromRight=Integer.MAX_VALUE,disFromUp=Integer.MAX_VALUE,disFromDown=Integer.MAX_VALUE;
+
+        if (isValidMove(snake, mazeSize, Direction.UP, (HashSet<Coordinate>) possiblePositionsOpponent,opponent)) {
+
+            Coordinate toUp = snake.getHead().moveTo(Direction.UP);
+            disFromUp =(int) Math.sqrt(Math.pow(toUp.x- apple.x,2)+Math.pow(toUp.y- apple.y,2));
+
+        }
+        if (isValidMove(snake, mazeSize, Direction.LEFT,(HashSet<Coordinate>) possiblePositionsOpponent,opponent)) {
+
+            Coordinate toLeft = snake.getHead().moveTo(Direction.LEFT);
+            //disFromLeft = Math.abs((toLeft.x- apple.x)+(toLeft.y- apple.y));
+            disFromLeft =(int) Math.sqrt(Math.pow(toLeft.x- apple.x,2)+Math.pow(toLeft.y- apple.y,2));
+
+        }
+        if (isValidMove(snake, mazeSize, Direction.DOWN,(HashSet<Coordinate>) possiblePositionsOpponent,opponent)) {
+
+            Coordinate toDown = snake.getHead().moveTo(Direction.DOWN);
+            disFromDown = Math.abs((toDown.x- apple.x)+(toDown.y- apple.y));
+            disFromDown =(int) Math.sqrt(Math.pow(toDown.x- apple.x,2)+Math.pow(toDown.y- apple.y,2));
+
+        }
+        if (isValidMove(snake, mazeSize, Direction.RIGHT,(HashSet<Coordinate>) possiblePositionsOpponent,opponent)) {
+
+            Coordinate toRight = snake.getHead().moveTo(Direction.RIGHT);
+            //disFromRight = Math.abs((toRight.x- apple.x)+(toRight.y- apple.y));
+            disFromRight =(int) Math.sqrt(Math.pow(toRight.x- apple.x,2)+Math.pow(toRight.y- apple.y,2));
+        }
+       // find minimum from all the possible paths
+        int minDis = Math.min(Math.min(disFromRight,disFromDown),Math.min(disFromUp,disFromLeft));
+            
+            //give direction to the snake
+
+        if(minDis==disFromRight){
+            return Direction.RIGHT;
+        } 
+        else if(minDis==disFromDown){
+
+            return Direction.DOWN;
+        }
+        else if(minDis==disFromLeft){
+
+            return  Direction.LEFT;
+        }
+        else if(minDis==disFromUp) {
+            return Direction.UP;
+        }
+        else{
+          // to avoid worst cases.
+            Random rn = new Random();
+            int pos = rn.nextInt(3);
+            switch (pos){
+
+                case 0:
+                    return Direction.RIGHT;
+                case 1:
+                    return Direction.LEFT;
+                case 2:
+                    return Direction.UP;
+                default:
+                    return Direction.DOWN;
+            }
+        }
+
+    }
+}
+\end{minted}
+
+\subsection{Ibrahim}
 
 \section{Experimental Results and Statistical Tests}
 to-do
