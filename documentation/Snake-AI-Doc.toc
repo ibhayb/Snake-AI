@@ -1,4 +1,4 @@
-\babel@toc {english}{}\relax 
+\babel@toc {english}{}
 \contentsline {section}{\numberline {1}How we started}{4}{}%
 \contentsline {section}{\numberline {2}Introduction}{5}{}%
 \contentsline {subsection}{\numberline {2.1}General Topic}{5}{}%
@@ -16,17 +16,25 @@
 \contentsline {subsection}{\numberline {6.2}Algorithms in Pseudocode}{6}{}%
 \contentsline {section}{\numberline {7}Implementation Details}{6}{}%
 \contentsline {subsection}{\numberline {7.1}Application Structure}{6}{}%
-\contentsline {subsection}{\numberline {7.2}GUI Details}{6}{}%
-\contentsline {subsection}{\numberline {7.3}UML Diagram}{6}{}%
-\contentsline {subsection}{\numberline {7.4}Used Libraries}{7}{}%
-\contentsline {subsection}{\numberline {7.5}Code Snippets}{7}{}%
-\contentsline {section}{\numberline {8}Experimental Results and Statistical Tests}{7}{}%
-\contentsline {subsection}{\numberline {8.1}Simulations (Play with the Parameters!)}{7}{}%
-\contentsline {subsection}{\numberline {8.2}Use Benchmarks}{7}{}%
-\contentsline {subsection}{\numberline {8.3}Tables: input data details, results of different algorithms}{7}{}%
-\contentsline {subsection}{\numberline {8.4}Charts}{7}{}%
-\contentsline {subsection}{\numberline {8.5}Evaluations}{7}{}%
-\contentsline {section}{\numberline {9}Conclusions and Future Work}{7}{}%
-\contentsline {subsection}{\numberline {9.1}How the team work went}{7}{}%
-\contentsline {subsection}{\numberline {9.2}What we have learned}{8}{}%
-\contentsline {subsection}{\numberline {9.3}Ideas for the future development of your application, new algorithms}{8}{}%
+\contentsline {subsection}{\numberline {7.2}GUI Details}{7}{}%
+\contentsline {subsubsection}{\numberline {7.2.1}SnakeUIMain}{7}{}%
+\contentsline {subsubsection}{\numberline {7.2.2}BotLoader}{7}{}%
+\contentsline {subsubsection}{\numberline {7.2.3}SnakesWindow}{8}{}%
+\contentsline {subsubsection}{\numberline {7.2.4}SnakesRunner}{8}{}%
+\contentsline {subsubsection}{\numberline {7.2.5}SnakesGame}{8}{}%
+\contentsline {subsubsection}{\numberline {7.2.6}SnakeCanvas}{9}{}%
+\contentsline {subsubsection}{\numberline {7.2.7}Snake}{9}{}%
+\contentsline {subsubsection}{\numberline {7.2.8}Coordinate}{9}{}%
+\contentsline {subsubsection}{\numberline {7.2.9}Bot}{10}{}%
+\contentsline {subsection}{\numberline {7.3}UML Diagram}{10}{}%
+\contentsline {subsection}{\numberline {7.4}Used Libraries}{10}{}%
+\contentsline {section}{\numberline {8}Experimental Results and Statistical Tests}{11}{}%
+\contentsline {subsection}{\numberline {8.1}Simulations (Play with the Parameters!)}{11}{}%
+\contentsline {subsection}{\numberline {8.2}Use Benchmarks}{11}{}%
+\contentsline {subsection}{\numberline {8.3}Tables: input data details, results of different algorithms}{11}{}%
+\contentsline {subsection}{\numberline {8.4}Charts}{11}{}%
+\contentsline {subsection}{\numberline {8.5}Evaluations}{11}{}%
+\contentsline {section}{\numberline {9}Conclusions and Future Work}{11}{}%
+\contentsline {subsection}{\numberline {9.1}How the team work went}{11}{}%
+\contentsline {subsection}{\numberline {9.2}What we have learned}{11}{}%
+\contentsline {subsection}{\numberline {9.3}Ideas for the future development of your application, new algorithms}{11}{}%
