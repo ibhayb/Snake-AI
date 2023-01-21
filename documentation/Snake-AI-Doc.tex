@@ -48,7 +48,7 @@ The aim of a bot is to be the last standing snake or have the highest score by e
 \textit{Survival of the fittest} is a great saying.\\
 This chapter focuses on the general overview of this project and comparison to similar problems in practice.
 \subsection{General Topic}
-Our main objective is to make two efficiently working Snake Bots. To create a working bot, all we have to do is to implement a class that implements the Bot interface. This interface has one method which is the \textit{chooseDirection()} method. We can say that the method simulates the brain of the bot. The return value of this method is the direction in which the snake should move to. For directions we have \textit{up, down, left or right}. For example we could implement a first simple bot that just turns right one time. But this type of bot is really uninteresting. For our project we are aiming to implement a bot that uses alogrithms from the fields of Artificial Intelligence. But for now let us look into the game rules.\\
+Our main objective is to make two efficiently working Snake Bots. To create a working bot, all we have to do is to implement a class that implements the Bot interface. This interface has one method which is the \textit{chooseDirection()} method. We can say that the method simulates the brain of the bot. The return value of this method is the direction in which the snake should move to. For directions we have \textit{up, down, left or right}. For example we could implement a first simple bot that just turns right one time. But this type of bot is really uninteresting. For our project we are aiming to implement a bot that uses algorithms from the fields of Artificial Intelligence. But for now let us look into the game rules.\\
 \\The rules are described as follows: \\
 \textbf{Rule 1:}  A bot controls only the direction (going either north, south, east, or west) to
 be taken by its own snake.\\
@@ -70,7 +70,7 @@ somewhere else on the map.\\
 victories; then the number of draws; then the result of\\
 
 \subsection{Similar problems in practice (References every time, look for actual ones)}
-Furthermore, since our bot should be smart then it definetly should use intelligent algorithms. What if we could implement a simple bot that just goes into the direction of the apple and gets closer and closer after every decision. But would this be enough to call it a smart bot? Of course not. Well it is a good behaviour that our snake goes for apples.  But thats not enough. It should also take the shortest path to the apple. For this we want to use algorithm of dijkstra. Dijkstra algorithm is a graph based algorithm which calculates the shortest path from one node to every other node. Let us get a better understanding of this by looking into an example.\\
+Furthermore, since our bot should be smart then it definitely should use intelligent algorithms. What if we could implement a simple bot that just goes into the direction of the apple and gets closer and closer after every decision. But would this be enough to call it a smart bot? Of course not. Well it is a good behavior that our snake goes for apples.  But that is not enough. It should also take the shortest path to the apple. For this we want to use algorithm of Dijkstra. Dijkstra algorithm is a graph based algorithm which calculates the shortest path from one node to every other node. Let us get a better understanding of this by looking into an example.\\
 \\
 \NewAdigraph{mygraph}
 {
@@ -92,8 +92,8 @@ C,D:9;
 \mygraph{}
 \\
 \\We want to know the shortest path from node A to node B. We as human can easily look into that graph and see that taking the route from A-D with cost of 1 is much lesser than rather taking A-C with cost of 7 or A-B with cost of 12. As next we would also see that we have a cost of 2 from D-E. So in total we see that the shortest path from A to D is A-D-E. But telling this to a computer which only knows 0's and 1's is nonsense. Thats why we have algorithms like Dijkstra, which calculates and erases paths with higher costs and returns us the shortest path. Anyway there are many daily life problems where we are using algorithms to compute the shortest path. For example when you are using a navigation tool to drive from one city to an other city. We all would have serious problems if the navigation would take any random path to our destination rather than taking the shortest path or the path with less travel time. Or even when you are crossing over a street where cars are driving. You surely want to take the shortest and safest walkway to the other side.\\
-\\Well thats not the only use case of dijkstra in real life applications. When we talk about computer networks we will see a use case of dijkstra too. Considering IP routing to find the shortest path between source and destination router. Dijkstra algorithm is common ly used in routing protocols for updating the forwarding tables.\\
-\\Even many dating or social media applications are using dijkstra to recommend you a person which you may know or be interested in. The users can be seen as nodes. The distance could be defined on different aspects like common friends, same interest or even living in the same city.\\
+\\Well that is not the only use case of Dijkstra in real life applications. When we talk about computer networks we will see a use case of Dijkstra too. Considering IP-routing to find the shortest path between source and destination router. Dijkstra algorithm is common ly used in routing protocols for updating the forwarding tables.\\
+\\Even many dating or social media applications are using Dijkstra to recommend you a person which you may know or be interested in. The users can be seen as nodes. The distance could be defined on different aspects like common friends, same interest or even living in the same city.\\
 \\A really interesting real life application would be that we could use pathing algorithms in case of emergency calls. If there is a fire anywhere and a emergency call was send out. The algorithm could calculate based on the location which firefighter department is the closest one. Based on this they could send out firefighters. The same could be used for police department and hospitals.
 
 \section{Team Work}
@@ -187,7 +187,7 @@ This Interface provides functions that should be implemented to create smart and
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.26]{ui.png}
+%\\includegraphics[scale=0.26]{ui.png}
 \caption{UML diagram of the GUI}
 %\label{fig:abc}
 \end{figure}
@@ -198,6 +198,7 @@ Some Components from AWT framework have also been used.\\
 Swing is a Java Foundation Classes [JFC] library and an extension of the Abstract Window Toolkit [AWT]. Swing offers much-improved functionality over AWT, new components, expanded components features, and excellent event handling with drag-and-drop support.(to-do ref)
  
 %\subsection{Code Snippets} write code snippet with discription.
+\section{Our Bots with different implementations}
 \subsection{Bot1}
 \title{Bot 1 (IntBot1.java):}\\
 \\
@@ -328,10 +329,140 @@ return validMoves[0];
 }
 }
 \end{minted}
-The biggest drawback of this bot was the frequent entrapment with itself or the opponent’s snake. Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent’s snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
+The biggest drawback of this bot was the frequent entrapment with itself or the opponent's snake. Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent's snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
 \subsection{Bot2}
 \subsection{Bot3}
+This bot is using theorem of Pythagoras, a simplified shortest path algorithm and a kind of reversed Dijkstra which uses the longest path.\\
+The bot needs to handle the following problems:
+\begin{itemize}
+\item avoid boundaries
+\item avoid enemy snakes body
+\item avoid snakes head
+\item avoid himself
+\item take shortest path to apple
+\end{itemize}
+To explain how we solved these problems let us look into the source code.
+As usual we first implement the static array of directions and with that we also create a array of direction which filters with lambda functions the the valid moves.
+\newpage
+\begin{minted}{java}
+private static final Direction[] DIRECTIONS = new Direction[] 
+{ Direction.RIGHT, Direction.DOWN, Direction.UP, Direction.LEFT};
+.
+.
+.
+Coordinate head = snake.getHead();
+        Coordinate oppHead = opponent.getHead();
+        Coordinate afterHead = null;
 
+        if(snake.body.size() >= 2) {
+            Iterator<Coordinate> it = snake.body.iterator();
+            it.next(); // first element
+            afterHead = it.next(); // second element
+        }
+
+        final Coordinate afterHeadPos = afterHead;
+        // avoids going backwards
+        Direction[] validMoves = Arrays.stream(DIRECTIONS)
+                .filter(d -> !head.moveTo(d).equals(afterHeadPos))
+                .sorted()
+                .toArray(Direction[]::new);
+\end{minted}
+So far we avoid going backwards. Now we need to handle the maze boundaries, enemies body and our snake's body. To do so we used lambda functions to filter the maze boundaries with 
+".filter(d -> head.moveTo(d).inBounds(mazeSize))", filter the opponents body with ".filter(d -> !opponent.elements.contains(head.moveTo(d)))" and filter our body with ".filter(d -> !snake.elements.contains(head.moveTo(d)))".
+\begin{minted}{java}
+  // avoids hitting the mazebounds, opponent body, and yourself
+        Direction[] notLosing = Arrays.stream(validMoves)
+                .filter(d -> head.moveTo(d).inBounds(mazeSize))
+                .filter(d -> !opponent.elements.contains(head.moveTo(d)))
+                .filter(d -> !snake.elements.contains(head.moveTo(d)))
+                .sorted()
+                .toArray(Direction[]::new);
+\end{minted}
+However now we get to the more interesting part. The part where our snake needs to know how to decide in which direction it should go. We need to consider that our snake should take the shortest path to the apple. In theory this is really simple.\\
+\NewAdigraph{dijkstra}
+{
+Left:0,0;
+Head:2.5,0;
+Right:5,0;
+Up:2.5,2;
+Apple,red:2.5,5
+}
+{
+Head,Left:1;
+Head,Right:1;
+Head,Up:1; 
+Left,Apple, red :12 ;
+Right,Apple, red :13 ; 
+Up,Apple,red: 14
+}[-]
+\dijkstra{}
+\\So first we need to know the costs of each direction to the apple. To do that we are calculating the distance by using the theorem of Pythagoras. After applying Dijkstra's algorithm to this graph, we get as result that our bot has to go to \textit{left}. The following picture will describe how we calculate the distances. We have to calculate two distances before every decision, the distance to the apple and the distance to the opponent's head.
+\includegraphics[scale=0.8]{calcs}
+\newpage
+The code would look like this:
+\begin{minted}{java}
+//calculate the distance to other snake
+double distanceToOtherSnake = 0;
+   distanceToOtherSnake =  
+   Math.sqrt(Math.pow((head.x - oppHead.x),2+Math.pow((head.yoppHead.y),2));
+   System.out.println("Distance to other snake: " + distanceToOtherSnake);
+\end{minted}
+We need the distance to the other snakes head to decide whether our snake should dodge the opponents head or not. Because it only makes sense to dodge the opponent's head if it is one pixel away from our snakes head.\\
+To handle the distances for each direction we used array lists. We basically calculate for each direction our snake possibly could take the  distance to the apple and to the other snakes head. You probably wonder why we should consider the distance to the enemy in this case. This is reasonable doubt but it is necessary for dodging the opponent's head. Because we take the directions which is the furthest distance to our opponent's head, to dodge his head.\\
+\begin{minted}{java}
+	ArrayList<Double> distancesToApple = new ArrayList<Double>();
+        ArrayList<Double> distancesToOpp = new ArrayList<Double>();
+        // mapping each direction of notLosing with the distance to the apple
+        for (Direction dir: notLosing) {
+                //calculate distances and put it in the arraylist
+                int newHeadCoordinateX = snake.getHead().x + dir.dx;
+                int newHeadCoordinateY = snake.getHead().y + dir.dy;
+                double x = apple.x - newHeadCoordinateX;
+                double y = apple.y - newHeadCoordinateY;
+                double distance =Math.sqrt(Math.pow(x,2)+Math.pow(y,2));
+                distancesToApple.add(distance);
+                x = oppHead.x - newHeadCoordinateX;
+                y = oppHead.y- newHeadCoordinateY;
+                distance = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));
+                distancesToOpp.add((distance));
+        }
+\end{minted}
+Now after knowing the distances our bot can look for the best directions. We are looping through our notLosing array and looking for min, max indexes of distances. So which direction is the one with the closest distance to the apple and the direction which is the furthest distance to the head of opponent.
+\newpage
+\begin{minted}{java}
+	double max;
+        double min;
+        int indexOfMinDistance = 0;
+        int indexOfMaxDistanceToOpp = 0;
+        min = distancesToApple.get(0);
+        max = distancesToOpp.get(0);
+         // choose the index of smallest distance
+         // choose the index of furthest distance to opponents head
+        for(int i = 1; i < notLosing.length; i++){
+           if(distancesToApple.get(i) < min) {
+               min = distancesToApple.get(i);
+               indexOfMinDistance = i;
+               // System.out.println(min);
+           }
+           if(distancesToOpp.get(i) > max){
+               max = distancesToOpp.get(i);
+               indexOfMaxDistanceToOpp = i;
+           }
+        }
+\end{minted}
+As last step our bot needs to decide which direction it should take based on the distance to the other snake and the possible directions of notLosing. If there is a possible direction which leads us not to die and where the distance to opponent snake's head is higher then 2 the bot takes the shortest path to the apple. If the distance to the opponents head is less or equal to 2, the bot dodges the head of the opponent. If none of these conditions met the bot just takes a valid move.
+\begin{minted}{java}
+	if(distancesToApple.size() > 0 && distanceToOtherSnake > 2){
+            System.out.println("using shortest path");
+            return notLosing[indexOfMinDistance];
+        } else if (distanceToOtherSnake <= 2) {
+            System.out.println("dodging opponents head");
+           return  notLosing[indexOfMaxDistanceToOpp];
+        } else{
+            System.out.println("using valid moves");
+            return validMoves[0];
+        }
+\end{minted}
 \section{Experimental Results and Statistical Tests}
 to-do
 \subsection{Simulations (Play with the Parameters!)}
