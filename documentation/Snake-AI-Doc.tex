@@ -153,14 +153,46 @@ This class is the Entry point of the UI and implements tournament of the Snake g
 The class BoatLoader fetches the class given the name  of the class and package. The class is taken from the classpath and could be dynamically added after the game of the Bot class. This class inharites the abstrack Java class ClassLoader.\\
 A class loader is an object that is responsible for loading classes. The class ClassLoader is an abstract class. Given the binary name of a class, a class loader should attempt to locate or generate data that constitutes a definition for the class. A typical strategy is to transform the name into a file name and then read a "class file" of that name from a file system.%\cite{shafiei2012modeling to-do}
 (to-do code snippet)
+\begin{minted}{java}
+public class BotLoader extends ClassLoader {
+    public Class<? extends Bot> getBotClass(String classBinName) {
+        try {
+            // Create a new JavaClassLoader
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+            // Load the target class using its binary name
+            Class<?> loadedMyClass = classLoader.loadClass(classBinName);
+            boolean isBot = Arrays.asList(loadedMyClass.getInterfaces()).contains(Bot.class);
+            if (isBot) {
+                System.out.println("Loaded bot.");
+            } else {
+                System.out.println("Did not match interface.");
+            }
+            System.out.println("Loaded class name: " + loadedMyClass.getName());
+
+            Class<? extends Bot> botClass = loadedMyClass.asSubclass(Bot.class);
+            Constructor<? extends Bot> botClassCtor = botClass.getConstructor();
+            return botClass;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+}
+
+\end{minted}
 \\
 The only method of BotLoader class gets classBinName as argument and returns an instance of the Bot class.
 
 \subsubsection{SnakesWindow}
 This class is responsible for the game's GUI window. The class creates and set ups the window and runs the UI. At the end it closes the frame. This class implements Runnable.\\
 The Runnable interface should be implemented by any class whose instances are intended to be executed by a thread. The class must define a method of no arguments called run.\\
-This interface is designed to provide a common protocol for objects that wish to execute code while they are active. For example, Runnable is implemented by class Thread. Being active simply means that a thread has been started and has not yet been stopped.\\
-In addition, Runnable provides the means for a class to be active while not subclassing Thread. A class that implements Runnable can run without subclassing Thread by instantiating a Thread instance and passing itself in as the target. In most cases, the Runnable interface should be used if you are only planning to override the run() method and no other Thread methods. This is important because classes should not be subclassed unless the programmer intends on modifying or enhancing the fundamental behavior of the class.(to-do ref)
+This interface is designed to provide a common protocol for objects that wish to execute code while they are active. For example, Runnable is implemented by class Thread.
+ Being active simply means that a thread has been started and has not yet been stopped.\\
+In addition, Runnable provides the means for a class to be active while not subclassing Thread. A class that implements Runnable can run without subclassing Thread by instantiating a 
+Thread instance and passing itself in as the target. In most cases, the Runnable interface should be used if you are only planning to override the run() method and no other Thread methods. This is important because classes should not be subclassed unless the programmer intends on modifying or enhancing the fundamental behavior of the class.(to-do ref)
 \subsubsection{SnakesRunner}
 This class also implements Runnable interface and is used for running bots in a separate threads. The Constructor of the class SnakesRunner recieves running bot, snake that is controlled by the current bot, opponent's snake, size of the board and coordinate of the current apple as arguments. In addition the chooseDirection method of the current bot is executed and saved(current direction) by this class. 
 \subsubsection{SnakesGame}
@@ -330,6 +362,119 @@ return validMoves[0];
 \end{minted}
 The biggest drawback of this bot was the frequent entrapment with itself or the opponent’s snake. Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent’s snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
 \subsection{Bot2}
+
+The idea behind my Bot is the famous Dijkstra Algorithem which is most widely used to find the shortest path.
+In my Programm before I give my Snake a Direction first of all I  always choose four adjucent cells from the current
+Head position of the Snake. Secondly, I have to eliminate one of the cell from them which is already located in the Snake
+body (next Cordinate after the Head). Thirdly, I have been checking whether the given move leads the Snake out of the Maze.
+Then with the help of Pythagoras formula I calculate the distance between the next postion of the Snake  and the apple.
+After that I calculate the minimum between all the distances. Finally I give the Snake the next Direction.
+\begin{minted}{java}
+    // functions to evaluate a valid move
+    // prevent snake to hit border of the board
+    // prevent to avoid collision
+    // prevent backward movement
+    boolean isValidMove(Snake snake,Coordinate mazeSize,Direction d,
+	HashSet<Coordinate>opponentPos,Snake opponent){
+
+        if(snake.getHead().moveTo(d).inBounds(mazeSize) && 
+		!snake.elements.contains(snake.getHead().moveTo(d)) && 
+        !opponentPos.contains(snake.getHead().moveTo(d)) && 
+		!opponent.elements.contains(snake.getHead().moveTo(d))){
+            //&& !opponent.elements.contains(snake.getHead().moveTo(d)
+            return true;
+        }
+        return  false;
+
+    }
+\end{minted}
+But in this Algorithem I was not considering the position of the opponent Snake. As a result there were many collisions between my Snake and opponent 
+Snake. To get rid of this I have also figured out all the possible next move of the Opponent Snake and saved them in a HashSet. While giving the next move 
+to my Snake I check whether this next move is also the next move of the opponent Snake or not. This has solved the Head to Head collision. But still there were some 
+collision with Body of the opponent Snake. That's why I have also justified whether the next move is one of the element of the opponent Body or not.
+
+\begin{minted}{java}
+  //variables to find all the distance from next move to apple
+        int disFromLeft = Integer.MAX_VALUE, disFromRight=Integer.MAX_VALUE,
+		disFromUp=Integer.MAX_VALUE,disFromDown=Integer.MAX_VALUE;
+
+        if (isValidMove(snake, mazeSize, Direction.UP, 
+		(HashSet<Coordinate>) possiblePositionsOpponent,opponent)) {
+
+            Coordinate toUp = snake.getHead().moveTo(Direction.UP);
+            // find minimum distance from up to the apple using Pythagoras
+            disFromUp =(int) Math.sqrt(Math.pow(toUp.x- apple.x,2)+
+			Math.pow(toUp.y- apple.y,2));
+
+        }
+        if (isValidMove(snake, mazeSize, Direction.LEFT,(HashSet<Coordinate>) 
+		     possiblePositionsOpponent,opponent)) {
+
+            Coordinate toLeft = snake.getHead().moveTo(Direction.LEFT);
+               // find minimum distance from left to the apple using Pythagoras
+            disFromLeft =(int) Math.sqrt(Math.pow(toLeft.x- apple.x,2)+
+			       Math.pow(toLeft.y- apple.y,2));
+
+        }
+        if (isValidMove(snake, mazeSize, Direction.DOWN,(HashSet<Coordinate>) 
+		          possiblePositionsOpponent,opponent)) {
+
+            Coordinate toDown = snake.getHead().moveTo(Direction.DOWN);
+             // find minimum distance from down to the apple using Pythagoras
+            disFromDown =(int) Math.sqrt(Math.pow(toDown.x- apple.x,2)+
+			   Math.pow(toDown.y- apple.y,2));
+
+        }
+        if (isValidMove(snake, mazeSize, Direction.RIGHT,(HashSet<Coordinate>)
+		      possiblePositionsOpponent,opponent)) {
+
+            Coordinate toRight = snake.getHead().moveTo(Direction.RIGHT);
+                   // find minimum distance from right to the apple using Pythagoras
+            disFromRight =(int) Math.sqrt(Math.pow(toRight.x- apple.x,2)+
+			      Math.pow(toRight.y- apple.y,2));
+        }
+       // find minimum from all the possible paths
+        int minDis = Math.min(Math.min(disFromRight,disFromDown),
+		       Math.min(disFromUp,disFromLeft));
+            
+            //give direction to the snake
+        if(minDis==disFromRight){
+            return Direction.RIGHT;
+        } 
+        else if(minDis==disFromDown){
+
+            return Direction.DOWN;
+        }
+        else if(minDis==disFromLeft){
+
+            return  Direction.LEFT;
+        }
+        else if(minDis==disFromUp) {
+            return Direction.UP;
+        }
+        else{
+          // to avoid worst cases.
+            Random rn = new Random();
+            int pos = rn.nextInt(3);
+            switch (pos){
+
+                case 0:
+                    return Direction.RIGHT;
+                case 1:
+                    return Direction.LEFT;
+                case 2:
+                    return Direction.UP;
+                default:
+                    return Direction.DOWN;
+            }
+        }
+
+\end{minted}
+In term of Time and Space Complexity this Algorithem is quite efficient. The Algorithem has Time Complexity of O(1) and Space
+Complexity is approximately O(n). Wher n is the number of elements of Opponent Snake body. 
+
+Inspite of all the Consideration there is still some Collisions in critical Situation. Anothe problem is Self Entrapping. 
+
 \subsection{Bot3}
 
 \section{Experimental Results and Statistical Tests}
