@@ -636,9 +636,22 @@ As last step our bot needs to decide which direction it should take based on the
         }
 \end{minted}
 \section{Experimental Results and Statistical Tests}
-to-do
+Like in many areas in real problems making a decision whether something is better than something else is not easy. In order to make a clearer decision, doing statistical tests and diagrams are the way to go.\\
+Doing 5 games and deciding if a bot is better than the other one would be a misguided decision. This is comparable to the Law of Large Numbers. If you have a coin, which is equally like that head or tail shows. The probability that head or tail shows is for both 50\%(0.5). If you know take the coin and toss it 10 times. If the result is 8 times head and 2 time tail you can't state correctly from your experiment that the probability is now for head 80\%(0.8) and for tail 20\%(0.2). Doing the same experiment 1000 times will show that the average chance to hit head or tail gets really close to 50\%.\\
+This is similar to our scenario. If we would let the bots play for 5 rounds and one snake is winning 4 times and the other 1 time you can't tell directly that the one who had more wins in this 5 rounds is the better snake. There are chances that the apple spawns in bad positions. So to tell whether a bot is better than a other bot we want to let them play 1000 times and then compare the wins. We also want to show statistical the average score, apple's eaten and time played. In the following you will see the results of our tests.
+\newpage
 \subsection{Simulations (Play with the Parameters!)}
-to-do
+First of all we need to dive into the code. The standard amount of rounds played is set to 5. To change that we navigated to the SnakesUIMain where you can setup the amount of rounds.
+\begin{minted}{Java}
+start_tournament_n_times(5, bots);
+\end{minted}
+Changing the first parameter to 1000 will let them play 1000 times against each other. The framework uses .txt files to track the games. The folder structure looks like this:\\
+\\
+\includegraphics[scale=0.8]{logs_structure}
+\\The "iteration\_i.txt" file logs the data for each round. The "total.txt" file logs the summary of all rounds. The content of those files are structured like this:\\
+\\
+\includegraphics[scale=0.8]{logs_content}
+\\For our statistical tests these information are not sufficient and not structured well.
 \subsection{Use Benchmarks}
 to-do
 \subsection{Tables: input data details, results of different algorithms}
