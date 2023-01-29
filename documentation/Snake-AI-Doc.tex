@@ -140,11 +140,20 @@ to-do
 to-do
 
 \section{Related Work}
-to-do
-\subsection{Related Algorithms, Applications}
-to-do
-
-!for example: Fractals, Data Generation, Games, Evolutionary Algorithms (Genetic Algortihms; Collective Intelligence like Particle Swarm Optimization - PSO, Ant Colony Optimizaton - ACO; Evolutionary Multiobjective Optimization, ...)
+There are also some other Games that implement the same concept as Snake AI. For Example,
+\begin{itemize}
+\item Flappy Bird AI
+\item Breakout AI
+\item Tetris AI
+\item PacMan AI
+\item Mario AI
+\end{itemize}
+As an example Mario AI games use artificial intelligence techniques to control the actions of the character,
+Mario. This can be done through techniques such as reinforcement learning, evolutionary algorithms,
+or rule-based systems. The AI system receives inputs from the game environment and based on these inputs,
+the AI model outputs actions for the player character, such as jumping, running and shooting.
+The AI's goal is to complete the game's objectives while avoiding obstacles and enemies.
+The performance of the AI is often evaluated based on metrics such as completion time, number of lives lost, and score.
 
 \section{Proposed Approaches}
 to-do
@@ -246,7 +255,7 @@ This Interface provides functions that should be implemented to create smart and
 
 \begin{figure}[h]
 \centering
-%\\includegraphics[scale=0.26]{ui.png}
+\includegraphics[scale=0.26]{ui.png}
 \caption{UML diagram of the GUI}
 %\label{fig:abc}
 \end{figure}
@@ -391,12 +400,12 @@ return validMoves[0];
 The biggest drawback of this bot was the frequent entrapment with itself or the opponent's snake. Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent's snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
 \subsection{Bot2}
 
-The idea behind my Bot is the famous Dijkstra Algorithem which is most widely used to find the shortest path.
-In my Programm before I give my Snake a Direction first of all I  always choose four adjucent cells from the current
-Head position of the Snake. Secondly, I have to eliminate one of the cell from them which is already located in the Snake
-body (next Cordinate after the Head). Thirdly, I have been checking whether the given move leads the Snake out of the Maze.
-Then with the help of Pythagoras formula I calculate the distance between the next postion of the Snake  and the apple.
-After that I calculate the minimum between all the distances. Finally I give the Snake the next Direction.
+The idea behind our Bot is the famous Dijkstra Algorithem which is most widely used to find the shortest path.
+In our Programm before we give the Snake a Direction first of all we  always choose four adjucent cells from the current
+Head position of the Snake. Secondly, we have to eliminate one of the cell from them which is already located in the Snake
+body (next Cordinate after the Head). Thirdly, we have been checking whether the given move leads the Snake out of the Maze.
+Then with the help of Pythagoras formula we calculate the distance between the next postion of the Snake  and the apple.
+After that we calculate the minimum between all the distances. Finally we give the Snake the next Direction.
 \begin{minted}{java}
     // functions to evaluate a valid move
     // prevent snake to hit border of the board
@@ -416,10 +425,10 @@ After that I calculate the minimum between all the distances. Finally I give the
 
     }
 \end{minted}
-But in this Algorithem I was not considering the position of the opponent Snake. As a result there were many collisions between my Snake and opponent 
-Snake. To get rid of this I have also figured out all the possible next move of the Opponent Snake and saved them in a HashSet. While giving the next move 
-to my Snake I check whether this next move is also the next move of the opponent Snake or not. This has solved the Head to Head collision. But still there were some 
-collision with Body of the opponent Snake. That's why I have also justified whether the next move is one of the element of the opponent Body or not.
+But in this Algorithem we were not considering the position of the opponent Snake. As a result there were many collisions between our Snake and opponent 
+Snake. To get rid of this we have also figured out all the possible next move of the Opponent Snake and saved them in a HashSet. While giving the next move 
+to our Snake we check whether this next move is also the next move of the opponent Snake or not. This has solved the Head to Head collision. But still there were some 
+collision with Body of the opponent Snake. That's why we have also justified whether the next move is one of the element of the opponent Body or not.
 
 \begin{minted}{java}
   //variables to find all the distance from next move to apple
@@ -498,8 +507,8 @@ collision with Body of the opponent Snake. That's why I have also justified whet
         }
 
 \end{minted}
-In term of Time and Space Complexity this Algorithem is quite efficient. The Algorithem has Time Complexity of O(1) and Space
-Complexity is approximately O(n). Wher n is the number of elements of Opponent Snake body. 
+In term of Time and Space Complexity this Algorithem is quite efficient. The Algorithem has Time Complexity of $\mathcal{O}(1)$ and Space
+Complexity is approximately $\mathcal{O}(n)$. Wher n is the number of elements of Opponent Snake body. 
 
 Inspite of all the Consideration there is still some Collisions in critical Situation. Anothe problem is Self Entrapping. 
 
