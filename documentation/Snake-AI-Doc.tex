@@ -551,6 +551,7 @@ So far we avoid going backwards. Now we need to handle the maze boundaries, enem
                 .toArray(Direction[]::new);
 \end{minted}
 However now we get to the more interesting part. The part where our snake needs to know how to decide in which direction it should go. We need to consider that our snake should take the shortest path to the apple. In theory this is really simple.\\
+This is a simplified version of Dijkstra with a small graph. For further implementations we could consider not only the next 3 possible directions the snake could take, but more in depth like for the next 2 steps, 3 steps or more. This would be a great point to work on in further investigations.\\
 \NewAdigraph{dijkstra}
 {
 Left:0,0;
@@ -568,7 +569,7 @@ Right,Apple, red :13 ;
 Up,Apple,red: 14
 }[-]
 \dijkstra{}
-\\So first we need to know the costs of each direction to the apple. To do that we are calculating the distance by using the theorem of Pythagoras. After applying Dijkstra's algorithm to this graph, we get as result that our bot has to go to \textit{left}. The following picture will describe how we calculate the distances. We have to calculate two distances before every decision, the distance to the apple and the distance to the opponent's head.
+So first we need to know the costs of each direction to the apple. To do that we are calculating the distance by using the theorem of Pythagoras. After applying Dijkstra's algorithm to this graph, we get as result that our bot has to go to \textit{left}. The following picture will describe how we calculate the distances. We have to calculate two distances before every decision, the distance to the apple and the distance to the opponent's head.\\
 \includegraphics[scale=0.8]{calcs}
 \newpage
 The code would look like this:
@@ -602,12 +603,12 @@ To handle the distances for each direction we used array lists. We basically cal
 Now after knowing the distances our bot can look for the best directions. We are looping through our notLosing array and looking for min, max indexes of distances. So which direction is the one with the closest distance to the apple and the direction which is the furthest distance to the head of opponent.
 \newpage
 \begin{minted}{java}
-	double max;
-        double min;
-        int indexOfMinDistance = 0;
-        int indexOfMaxDistanceToOpp = 0;
-        min = distancesToApple.get(0);
-        max = distancesToOpp.get(0);
+	min = 0;
+        max = 0;
+        if(!distancesToApple.isEmpty())
+            min = distancesToApple.get(0);
+        if(!distancesToOpp.isEmpty())
+            max = distancesToOpp.get(0);
          // choose the index of smallest distance
          // choose the index of furthest distance to opponents head
         for(int i = 1; i < notLosing.length; i++){
@@ -627,7 +628,7 @@ As last step our bot needs to decide which direction it should take based on the
 	if(distancesToApple.size() > 0 && distanceToOtherSnake > 2){
             System.out.println("using shortest path");
             return notLosing[indexOfMinDistance];
-        } else if (distanceToOtherSnake <= 2) {
+        } else if ( distancesToOpp.size() > 0 && distanceToOtherSnake <= 2) {
             System.out.println("dodging opponents head");
            return  notLosing[indexOfMaxDistanceToOpp];
         } else{
@@ -645,13 +646,14 @@ First of all we need to dive into the code. The standard amount of rounds played
 \begin{minted}{Java}
 start_tournament_n_times(5, bots);
 \end{minted}
-Changing the first parameter to 1000 will let them play 1000 times against each other. The framework uses .txt files to track the games. The folder structure looks like this:\\
+Changing the first parameter to 1000 will let them play 1000 times against each other. The framework uses .txt files to track the games. The folder structure, after setting the parameter to 10 and letting the bots play, looks like:\\
 \\
 \includegraphics[scale=0.8]{logs_structure}
 \\The "iteration\_i.txt" file logs the data for each round. The "total.txt" file logs the summary of all rounds. The content of those files are structured like this:\\
 \\
 \includegraphics[scale=0.8]{logs_content}
-\\For our statistical tests these information are not sufficient and not structured well.
+\\For our statistical tests these information are not sufficient and not structured well. So we need a new file structure. First of all we need to think about what we really want to show and which variables we want to use. We need a variables like round , type of bot, results, apples eaten, time played. Round describes the round number. Type of bot describes which bot is meant (e.g. 1 for the first bot 2 for the second bot). Apples eaten for each bot so how many apple they ate in that round. The other ones are trivial so we don't need any further explanations. An example entry would look like: 3,1,2,0,1,7,13,30.45
+\\ This would show the third round where the second bot has won. The first bot ate 7 and the second bot ate 13 apples. The round ended after 30.45 seconds.
 \subsection{Use Benchmarks}
 to-do
 \subsection{Tables: input data details, results of different algorithms}

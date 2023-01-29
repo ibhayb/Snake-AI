@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{start\PYGZus{}tournament\PYGZus{}n\PYGZus{}times}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{bots}\PYG{p}{);}
+\end{Verbatim}
