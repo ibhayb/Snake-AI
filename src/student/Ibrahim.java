@@ -70,29 +70,35 @@ public class Ibrahim implements Bot {
         double min;
         int indexOfMinDistance = 0;
         int indexOfMaxDistanceToOpp = 0;
-        min = distancesToApple.get(0);
-        max = distancesToOpp.get(0);
+
+        min = 0;
+        max = 0;
+        if(!distancesToApple.isEmpty())
+            min = distancesToApple.get(0);
+        if(!distancesToOpp.isEmpty())
+            max = distancesToOpp.get(0);
 
 
          // choose the index of smallest distance
          // choose the index of furthest distance to opponents head
-        for(int i = 1; i < notLosing.length; i++){
-           if(distancesToApple.get(i) < min) {
-               min = distancesToApple.get(i);
-               indexOfMinDistance = i;
-               // System.out.println(min);
-           }
-           if(distancesToOpp.get(i) > max){
-               max = distancesToOpp.get(i);
-               indexOfMaxDistanceToOpp = i;
-           }
+        if(min != 0 && max != 0) {
+            for (int i = 1; i < notLosing.length; i++) {
+                if (distancesToApple.get(i) < min) {
+                    min = distancesToApple.get(i);
+                    indexOfMinDistance = i;
+                    // System.out.println(min);
+                }
+                if (distancesToOpp.get(i) > max) {
+                    max = distancesToOpp.get(i);
+                    indexOfMaxDistanceToOpp = i;
+                }
+            }
         }
-
 
         if(distancesToApple.size() > 0 && distanceToOtherSnake > 2){
             System.out.println("using shortest path");
             return notLosing[indexOfMinDistance];
-        } else if (distanceToOtherSnake <= 2) {
+        } else if ( distancesToOpp.size() > 0 && distanceToOtherSnake <= 2) {
             System.out.println("dodging opponents head");
            return  notLosing[indexOfMaxDistanceToOpp];
         } else{
