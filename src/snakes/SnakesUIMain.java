@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class SnakesUIMain {
     private static final String LOG_DIRECTORY_PATH = "logs";
     private static FileWriter results_fw;
+
+    private static int global_round_number = 0;
+    private static FileWriter sum_results_fw;
     private static int[][] total_results_table;
 
     /**
@@ -32,7 +35,7 @@ public class SnakesUIMain {
         bots.add(loader.getBotClass(args[0]));
         bots.add(loader.getBotClass(args[1]));
 
-        start_tournament_n_times(5, bots);
+        start_tournament_n_times(10, bots);
     }
 
     /**
@@ -51,8 +54,16 @@ public class SnakesUIMain {
         for (int i = 0; i < n; i++) {
             System.out.println("\nTournament iteration number " + i + "\n");
             results_fw = new FileWriter(String.format("%s\\iteration_%d.txt", LOG_DIRECTORY_PATH, i), false);
+            global_round_number = i;
+            if(i == 0) {
+                sum_results_fw = new FileWriter(String.format("%s\\sum_total.txt", LOG_DIRECTORY_PATH, i), false);
+                sum_results_fw.write("round,bot1,bot2,score1,score2,apple1,apple2,time\n");
+            }
+            else
+                sum_results_fw = new FileWriter(String.format("%s\\sum_total.txt", LOG_DIRECTORY_PATH, i), true);
             start_round_robin_tournament(bots);
             results_fw.close();
+            sum_results_fw.close();
         }
 
         results_fw = new FileWriter(String.format("%s\\total.txt", LOG_DIRECTORY_PATH), false);
@@ -60,7 +71,8 @@ public class SnakesUIMain {
             for (int j = i + 1; j < bots.size(); j++) {
                 if (bots.get(i) == null || bots.get(j) == null) continue;
                 System.out.println("\n" + bots.get(i).getSimpleName() + " vs. " + bots.get(j).getSimpleName() + ": " + total_results_table[i][j] + " - " + total_results_table[j][i]);
-                results_fw.write(bots.get(i).getSimpleName() + " vs. " + bots.get(j).getSimpleName() + ": " + total_results_table[i][j] + " - " + total_results_table[j][i] + "\n");
+               // results_fw.write(bots.get(i).getSimpleName() + " vs. " + bots.get(j).getSimpleName() + ": " + total_results_table[i][j] + " - " + total_results_table[j][i] + "\n");
+                results_fw.write(total_results_table[i][j] + "," + total_results_table[j][i] + "\n");
             }
         results_fw.close();
     }
@@ -115,8 +127,18 @@ public class SnakesUIMain {
                 window.closeWindow();
 
                 float time_taken = (float)(System.currentTimeMillis() - game.startTime) / 1000;
-                results_fw.write(game.name0 + " vs " + game.name1 + " : " + game.gameResult + "");
-                results_fw.write(" (Time taken: " + time_taken + ")\n");
+                /* old file structuring */
+             //   results_fw.write(game.name0 + " vs " + game.name1 + " : " + game.gameResult + "");
+             //   results_fw.write(" (Time taken: " + time_taken + ")\n");
+                /* new file structuring */
+                System.out.println(game.gameResult);
+                String res = game.gameResult;
+                res =  res.trim();
+                res = res.replace("-", ",");
+                res = res.replaceAll(" ", "");
+                System.out.println(res);
+                results_fw.write("1,2," + res +"," + (game.snake0.elements.size()-3)+","+ (game.snake1.elements.size()-3) +","+ time_taken);
+                sum_results_fw.write(global_round_number + "," + "1,2," + res +"," + (game.snake0.elements.size()-3)+","+ (game.snake1.elements.size()-3) +","+ time_taken + "\n");
                 System.out.print(game.name0 + " vs " + game.name1 + " : " + game.gameResult);
                 System.out.println(" (Time taken: " + time_taken + ")");
 
@@ -147,15 +169,13 @@ public class SnakesUIMain {
             playerNumber.set(1, buffer_player_number);
         }
 
-        results_fw.write("\n-------------------------------------------\n\n");
+        // results_fw.write("\n-------------------------------------------\n\n");
         // get and print the results
         for (int i = 0; i < bots.size(); i++) {
             if (bots.get(i) == null) continue;
             System.out.println(bots_names.get(playerNumber.get(i)) + " earned: " + points.get(playerNumber.get(i)).toString());
-            results_fw.write(bots_names.get(playerNumber.get(i)) + " earned: " + points.get(playerNumber.get(i)).toString() + "\n");
+            // results_fw.write(bots_names.get(playerNumber.get(i)) + " earned: " + points.get(playerNumber.get(i)).toString() + "\n");
         }
-        
-        System.out.println("Servus Herr Hyber");
         
     }
 }
