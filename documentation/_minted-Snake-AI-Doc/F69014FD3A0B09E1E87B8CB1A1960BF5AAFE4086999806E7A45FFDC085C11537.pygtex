@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{private}\PYG{+w}{ }\PYG{k+kd}{static}\PYG{+w}{ }\PYG{k+kd}{final}\PYG{+w}{ }\PYG{n}{Direction}\PYG{o}{[]}\PYG{+w}{ }\PYG{n}{DIRECTIONS}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Direction}\PYG{o}{[]}
+\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{\PYGZcb{};}
+\PYG{p}{.}
+\PYG{p}{.}
+\PYG{p}{.}
+\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{head}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{oppHead}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{afterHead}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k+kc}{null}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{k}{if}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{body}\PYG{p}{.}\PYG{n+na}{size}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{Iterator}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{it}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{body}\PYG{p}{.}\PYG{n+na}{iterator}\PYG{p}{();}
+\PYG{+w}{            }\PYG{n}{it}\PYG{p}{.}\PYG{n+na}{next}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// first element}
+\PYG{+w}{            }\PYG{n}{afterHead}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{it}\PYG{p}{.}\PYG{n+na}{next}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// second element}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{k+kd}{final}\PYG{+w}{ }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{afterHeadPos}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{afterHead}\PYG{p}{;}
+\PYG{+w}{        }\PYG{c+c1}{// avoids going backwards}
+\PYG{+w}{        }\PYG{n}{Direction}\PYG{o}{[]}\PYG{+w}{ }\PYG{n}{validMoves}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Arrays}\PYG{p}{.}\PYG{n+na}{stream}\PYG{p}{(}\PYG{n}{DIRECTIONS}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{.}\PYG{n+na}{filter}\PYG{p}{(}\PYG{n}{d}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{o}{!}\PYG{n}{head}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{).}\PYG{n+na}{equals}\PYG{p}{(}\PYG{n}{afterHeadPos}\PYG{p}{))}
+\PYG{+w}{                }\PYG{p}{.}\PYG{n+na}{sorted}\PYG{p}{()}
+\PYG{+w}{                }\PYG{p}{.}\PYG{n+na}{toArray}\PYG{p}{(}\PYG{n}{Direction}\PYG{o}{[]}\PYG{p}{::}\PYG{k}{new}\PYG{p}{);}
+\end{Verbatim}

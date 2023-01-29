@@ -1,0 +1,77 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{  }\PYG{c+c1}{//variables to find all the distance from next move to apple}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{disFromLeft}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{disFromRight}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}
+\PYG{+w}{		}\PYG{n}{disFromUp}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}\PYG{n}{disFromDown}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{isValidMove}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{mazeSize}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{,}
+\PYG{+w}{		}\PYG{p}{(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+
+\PYG{+w}{            }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{toUp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{);}
+\PYG{+w}{            }\PYG{c+c1}{// find minimum distance from up to the apple using Pythagoras}
+\PYG{+w}{            }\PYG{n}{disFromUp}\PYG{+w}{ }\PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toUp}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}
+\PYG{+w}{			}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toUp}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
+
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{isValidMove}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{mazeSize}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{,(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{		     }\PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+
+\PYG{+w}{            }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{toLeft}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{);}
+\PYG{+w}{               }\PYG{c+c1}{// find minimum distance from left to the apple using Pythagoras}
+\PYG{+w}{            }\PYG{n}{disFromLeft}\PYG{+w}{ }\PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toLeft}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}
+\PYG{+w}{			       }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toLeft}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
+
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{isValidMove}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{mazeSize}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{,(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{		          }\PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+
+\PYG{+w}{            }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{toDown}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{);}
+\PYG{+w}{             }\PYG{c+c1}{// find minimum distance from down to the apple using Pythagoras}
+\PYG{+w}{            }\PYG{n}{disFromDown}\PYG{+w}{ }\PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toDown}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}
+\PYG{+w}{			   }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toDown}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
+
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{isValidMove}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{mazeSize}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{,(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)}
+\PYG{+w}{		      }\PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+
+\PYG{+w}{            }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{toRight}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{);}
+\PYG{+w}{                   }\PYG{c+c1}{// find minimum distance from right to the apple using Pythagoras}
+\PYG{+w}{            }\PYG{n}{disFromRight}\PYG{+w}{ }\PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toRight}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}
+\PYG{+w}{			      }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toRight}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{       }\PYG{c+c1}{// find minimum from all the possible paths}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{minDis}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{n}{disFromRight}\PYG{p}{,}\PYG{n}{disFromDown}\PYG{p}{),}
+\PYG{+w}{		       }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{n}{disFromUp}\PYG{p}{,}\PYG{n}{disFromLeft}\PYG{p}{));}
+
+\PYG{+w}{            }\PYG{c+c1}{//give direction to the snake}
+\PYG{+w}{        }\PYG{k}{if}\PYG{p}{(}\PYG{n}{minDis}\PYG{o}{==}\PYG{n}{disFromRight}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n}{minDis}\PYG{o}{==}\PYG{n}{disFromDown}\PYG{p}{)\PYGZob{}}
+
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n}{minDis}\PYG{o}{==}\PYG{n}{disFromLeft}\PYG{p}{)\PYGZob{}}
+
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{  }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{p}{(}\PYG{n}{minDis}\PYG{o}{==}\PYG{n}{disFromUp}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{else}\PYG{p}{\PYGZob{}}
+\PYG{+w}{          }\PYG{c+c1}{// to avoid worst cases.}
+\PYG{+w}{            }\PYG{n}{Random}\PYG{+w}{ }\PYG{n}{rn}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{Random}\PYG{p}{();}
+\PYG{+w}{            }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{pos}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{rn}\PYG{p}{.}\PYG{n+na}{nextInt}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{);}
+\PYG{+w}{            }\PYG{k}{switch}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{pos}\PYG{p}{)\PYGZob{}}
+
+\PYG{+w}{                }\PYG{k}{case}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{:}
+\PYG{+w}{                    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{case}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{:}
+\PYG{+w}{                    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{case}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{:}
+\PYG{+w}{                    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{default}\PYG{p}{:}
+\PYG{+w}{                    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{;}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\end{Verbatim}

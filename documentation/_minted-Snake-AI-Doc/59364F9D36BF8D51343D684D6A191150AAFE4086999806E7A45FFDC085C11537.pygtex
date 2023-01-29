@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{	}\PYG{k}{if}\PYG{p}{(}\PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{size}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{distanceToOtherSnake}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}using shortest path\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{indexOfMinDistance}\PYG{o}{]}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{+w}{ }\PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{size}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{distanceToOtherSnake}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}dodging opponents head\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{           }\PYG{k}{return}\PYG{+w}{  }\PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{indexOfMaxDistanceToOpp}\PYG{o}{]}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}using valid moves\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{validMoves}\PYG{o}{[}\PYG{l+m+mi}{0}\PYG{o}{]}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

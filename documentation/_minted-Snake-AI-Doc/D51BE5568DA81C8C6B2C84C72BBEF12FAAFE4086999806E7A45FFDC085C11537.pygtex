@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public}\PYG{+w}{ }\PYG{k+kd}{class} \PYG{n+nc}{BotLoader}\PYG{+w}{ }\PYG{k+kd}{extends}\PYG{+w}{ }\PYG{n}{ClassLoader}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kd}{public}\PYG{+w}{ }\PYG{n}{Class}\PYG{o}{\PYGZlt{}?}\PYG{+w}{ }\PYG{k+kd}{extends}\PYG{+w}{ }\PYG{n}{Bot}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{getBotClass}\PYG{p}{(}\PYG{n}{String}\PYG{+w}{ }\PYG{n}{classBinName}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{try}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{c+c1}{// Create a new JavaClassLoader}
+\PYG{+w}{            }\PYG{n}{ClassLoader}\PYG{+w}{ }\PYG{n}{classLoader}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Thread}\PYG{p}{.}\PYG{n+na}{currentThread}\PYG{p}{().}\PYG{n+na}{getContextClassLoader}\PYG{p}{();}
+
+\PYG{+w}{            }\PYG{c+c1}{// Load the target class using its binary name}
+\PYG{+w}{            }\PYG{n}{Class}\PYG{o}{\PYGZlt{}?\PYGZgt{}}\PYG{+w}{ }\PYG{n}{loadedMyClass}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{classLoader}\PYG{p}{.}\PYG{n+na}{loadClass}\PYG{p}{(}\PYG{n}{classBinName}\PYG{p}{);}
+\PYG{+w}{            }\PYG{k+kt}{boolean}\PYG{+w}{ }\PYG{n}{isBot}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Arrays}\PYG{p}{.}\PYG{n+na}{asList}\PYG{p}{(}\PYG{n}{loadedMyClass}\PYG{p}{.}\PYG{n+na}{getInterfaces}\PYG{p}{()).}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{Bot}\PYG{p}{.}\PYG{n+na}{class}\PYG{p}{);}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{isBot}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Loaded bot.\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Did not match interface.\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{            }\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Loaded class name: \PYGZdq{}}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{loadedMyClass}\PYG{p}{.}\PYG{n+na}{getName}\PYG{p}{());}
+
+\PYG{+w}{            }\PYG{n}{Class}\PYG{o}{\PYGZlt{}?}\PYG{+w}{ }\PYG{k+kd}{extends}\PYG{+w}{ }\PYG{n}{Bot}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{botClass}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{loadedMyClass}\PYG{p}{.}\PYG{n+na}{asSubclass}\PYG{p}{(}\PYG{n}{Bot}\PYG{p}{.}\PYG{n+na}{class}\PYG{p}{);}
+\PYG{+w}{            }\PYG{n}{Constructor}\PYG{o}{\PYGZlt{}?}\PYG{+w}{ }\PYG{k+kd}{extends}\PYG{+w}{ }\PYG{n}{Bot}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{botClassCtor}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{botClass}\PYG{p}{.}\PYG{n+na}{getConstructor}\PYG{p}{();}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{botClass}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{catch}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{Exception}\PYG{+w}{ }\PYG{n}{e}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n}{e}\PYG{p}{.}\PYG{n+na}{printStackTrace}\PYG{p}{();}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{k+kc}{null}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\end{Verbatim}
