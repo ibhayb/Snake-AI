@@ -14,7 +14,6 @@ public class Snake implements Cloneable {
     // Those two contain same values, but for different purposes
 
     public final Coordinate mazeSize;
-
     /**
      * Construct a snake with the body that defined in elements HashSet
      *
