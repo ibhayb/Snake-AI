@@ -135,7 +135,73 @@ something to every bot during the various stages of development.
 \newpage	
 
 \section{Problem Description}
-to-do
+As already mentioned in the second part of this documentation "Introduction",
+our task was to create and evaluate bots for the well-known game "Snake".
+What was special about this project was that we were provided with a functioning graphical user interface.
+This also included an extensive library of classes with corresponding functions, a "bot" interface, an enumeration, 
+and also some sample bots. On the one hand, this allowed us to concentrate exclusively on working on bots,
+but on the other hand, it was a challenge to get a precise understanding of the task at the beginning.
+An overview of all given things shall be given in chapter 7 - "Implementation Details" - of this documentation.
+The game "Snake" consists of a rectangular game board on which two snakes move around.
+The board  is divided into small squares of equal size.
+A snake consists of a head and several body elements. 
+The head and each body element completely fills out exactly one such square.
+A movement of the snake is performed starting from the head.
+All elements of the body and the head perform a movement at the same time. 
+A snake never moves diagonally and only ever makes one of the following moves: up, 
+down, right, left. One movement consists of the $(n+1)$th element of the snakes body 
+taking the position of the nth element of the body etc. $–$ the $0$th element is the head of the snake.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.26]{SnakeForward.png}
+    \caption{Snake movement}
+    %\label{fig:abc}
+\end{figure}
+
+The two snakes competing against each other perform their movements simultaneously. 
+Furthermore, one square of the game board represents an apple. 
+If a snake's head moves onto the square representing an apple, the apple disappears,
+a new apple appears at a random location, and a new body element is appended to the already existing body elements. 
+The new element occupies the square from which the snake's body would have just moved away. If the apple has not been reached 
+after ten movements, it disappears and a new apple is created at the same time in a different place. The exact rules of when
+a snake loses or wins have already been presented in Section 2.1.  . All parameters, such as the size of the game board,
+starting points of the snakes, and the number of rounds, can be adjusted in the methods of the SnakesUIMain class.
+ \begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.26]{SnakeApple.png}
+    \caption{Snake Apple}
+    %\label{fig:abc}
+\end{figure}
+A bot can be easily created by implementing the given interface "Bot". This interface contains a single function 
+"chooseDirection" that needs to be overridden in a bot class to create a valid bot. The function has four parameters:
+"Snake snake", "Snake opponent", "Coordinate mazeSize" , "Coordinate apple". "Snake" and "Coordinate" are already given 
+classes. As a return value, this function has to provide a direction in which the snake's head should move in the next round.
+The value of a direction is realized by the enum "Direction".
+The individual squares of the game board are represented by objects of the 
+"Coordinate" class, which implements the "Comparable" interface. An object of the
+"Coordinate" class consists of two integer values, the x and the y component, a constructor 
+and several useful methods. A very important object of this class is "mazeSize". This object 
+contains the least upper bounds for the x and y values of the coordinates of the game board and 
+is used, for example, to decide whether another “Coordinate”-object is inside or outside the game board.
+It is initialized inside the SnakesUIMain class. Two parameters of this type are passed to 
+the "chooseDirection" function - the coordinate of the apple and the already mentioned "mazeSize" object.
+A snake of this game is described by an object of the "Snake" class. An object of the class "Snake"
+consists of a HashSet "elements" whose elements are objects of the type "Coordinate", a deque "body"
+whose elements are also objects of the type "Coordinate" and a "Coordinate" object "mazeSize", which 
+should be initialized with the least upper bounds for the x and y values of the coordinates of the game
+board. Various constructors and useful methods are also implemented in this class. "elements" and "body" 
+of a "Snake" object contain the same values for different uses. Two parameters of this type are passed to 
+the "chooseDirection" function - "Snake snake", the snake for which a direction has to be found and "Snake opponent", the opposing snake.
+
+Based on these four parameters alone, an advantageous direction for the snake controlled by the bot 
+must be found. This direction is then passed as a return value in the form of an enum "Direction" value. 
+There are naturally four choices within this enumeration: Direction.UP, Direction.DOWN, Direction.LEFT,
+Direction.RIGHT. These can be interpreted as directional vectors constrained to an adjacent coordinate.
+A comprehensive tutorial on how to create a simple bot was also available to us on the follwing website: 
+https://github.com/BeLuckyDaf/snakes-game-tutorial. We used this tutorial excessively at the first, but then 
+gradually moved on and tried out our own ideas.
+
+
 \subsection{Formal description: definitions, examples, ...}
 to-do
 
