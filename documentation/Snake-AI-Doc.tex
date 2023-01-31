@@ -5,6 +5,7 @@
 \usepackage{minted}
 \usepackage{adigraph}
 \usepackage{graphicx}
+\usepackage{cite}
 \usepackage{url}
 \usepackage[colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,
 bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,
@@ -136,13 +137,13 @@ something to every bot during the various stages of development.
 
 \section{Problem Description}
 As already mentioned in the second part of this documentation "Introduction",
-our task was to create and evaluate bots for the well-known game "Snake".
-What was special about this project was that we were provided with a functioning graphical user interface.
+our task was to create and evaluate bots for the well-known game "Snake".\\
+\\What was special about this project was that we were provided with a functioning graphical user interface.
 This also included an extensive library of classes with corresponding functions, a "bot" interface, an enumeration, 
 and also some sample bots. On the one hand, this allowed us to concentrate exclusively on working on bots,
 but on the other hand, it was a challenge to get a precise understanding of the task at the beginning.
-An overview of all given things shall be given in chapter 7 - "Implementation Details" - of this documentation.
-The game "Snake" consists of a rectangular game board on which two snakes move around.
+An overview of all given things shall be given in chapter 7 - "Implementation Details" - of this documentation.\\
+\\The game "Snake" consists of a rectangular game board on which two snakes move around.
 The board  is divided into small squares of equal size.
 A snake consists of a head and several body elements. 
 The head and each body element completely fills out exactly one such square.
@@ -150,15 +151,15 @@ A movement of the snake is performed starting from the head.
 All elements of the body and the head perform a movement at the same time. 
 A snake never moves diagonally and only ever makes one of the following moves: up, 
 down, right, left. One movement consists of the $(n+1)$th element of the snakes body 
-taking the position of the nth element of the body etc. $–$ the $0$th element is the head of the snake.
+taking the position of the nth element of the body etc. The $0$th element is the head of the snake.
+\\
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.26]{SnakeForward.png}
+    \includegraphics[scale=0.8]{snakeForward.png}
     \caption{Snake movement}
     %\label{fig:abc}
 \end{figure}
-
-The two snakes competing against each other perform their movements simultaneously. 
+\newpage The two snakes competing against each other perform their movements simultaneously. 
 Furthermore, one square of the game board represents an apple. 
 If a snake's head moves onto the square representing an apple, the apple disappears,
 a new apple appears at a random location, and a new body element is appended to the already existing body elements. 
@@ -168,7 +169,7 @@ a snake loses or wins have already been presented in Section 2.1.  . All paramet
 starting points of the snakes, and the number of rounds, can be adjusted in the methods of the SnakesUIMain class.
  \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.26]{SnakeApple.png}
+    \includegraphics[scale=0.8]{SnakeApple.png}
     \caption{Snake Apple}
     %\label{fig:abc}
 \end{figure}
@@ -176,34 +177,29 @@ A bot can be easily created by implementing the given interface "Bot". This inte
 "chooseDirection" that needs to be overridden in a bot class to create a valid bot. The function has four parameters:
 "Snake snake", "Snake opponent", "Coordinate mazeSize" , "Coordinate apple". "Snake" and "Coordinate" are already given 
 classes. As a return value, this function has to provide a direction in which the snake's head should move in the next round.
-The value of a direction is realized by the enum "Direction".
-The individual squares of the game board are represented by objects of the 
+The value of a direction is realized by the enum "Direction".\\
+\\The individual squares of the game board are represented by objects of the 
 "Coordinate" class, which implements the "Comparable" interface. An object of the
 "Coordinate" class consists of two integer values, the x and the y component, a constructor 
 and several useful methods. A very important object of this class is "mazeSize". This object 
 contains the least upper bounds for the x and y values of the coordinates of the game board and 
 is used, for example, to decide whether another “Coordinate”-object is inside or outside the game board.
 It is initialized inside the SnakesUIMain class. Two parameters of this type are passed to 
-the "chooseDirection" function - the coordinate of the apple and the already mentioned "mazeSize" object.
-A snake of this game is described by an object of the "Snake" class. An object of the class "Snake"
+the "chooseDirection" function - the coordinate of the apple and the already mentioned "mazeSize" object.\\
+\\A snake of this game is described by an object of the "Snake" class. An object of the class "Snake"
 consists of a HashSet "elements" whose elements are objects of the type "Coordinate", a deque "body"
 whose elements are also objects of the type "Coordinate" and a "Coordinate" object "mazeSize", which 
 should be initialized with the least upper bounds for the x and y values of the coordinates of the game
 board. Various constructors and useful methods are also implemented in this class. "elements" and "body" 
 of a "Snake" object contain the same values for different uses. Two parameters of this type are passed to 
-the "chooseDirection" function - "Snake snake", the snake for which a direction has to be found and "Snake opponent", the opposing snake.
-
-Based on these four parameters alone, an advantageous direction for the snake controlled by the bot 
+the "chooseDirection" function - "Snake snake", the snake for which a direction has to be found and "Snake opponent", the opposing snake.\\
+\\Based on these four parameters alone, an advantageous direction for the snake controlled by the bot 
 must be found. This direction is then passed as a return value in the form of an enum "Direction" value. 
 There are naturally four choices within this enumeration: Direction.UP, Direction.DOWN, Direction.LEFT,
-Direction.RIGHT. These can be interpreted as directional vectors constrained to an adjacent coordinate.
-A comprehensive tutorial on how to create a simple bot was also available to us on the follwing website: 
+Direction.RIGHT. These can be interpreted as directional vectors constrained to an adjacent coordinate.\\
+\\A comprehensive tutorial on how to create a simple bot was also available to us on the follwing website: 
 https://github.com/BeLuckyDaf/snakes-game-tutorial. We used this tutorial excessively at the first, but then 
 gradually moved on and tried out our own ideas.
-
-
-\subsection{Formal description: definitions, examples, ...}
-to-do
 
 \section{Related Work}
 There are also some other Games that implement the same concept as Snake AI. For Example,
@@ -627,6 +623,8 @@ So far we avoid going backwards. Now we need to handle the maze boundaries, enem
 \end{minted}
 However now we get to the more interesting part. The part where our snake needs to know how to decide in which direction it should go. We need to consider that our snake should take the shortest path to the apple. In theory this is really simple.\\
 This is a simplified version of Dijkstra with a small graph. For further implementations we could consider not only the next 3 possible directions the snake could take, but more in depth like for the next 2 steps, 3 steps or more. This would be a great point to work on in further investigations.\\
+
+\begin{center}
 \NewAdigraph{dijkstra}
 {
 Left:0,0;
@@ -644,8 +642,15 @@ Right,Apple, red :13 ;
 Up,Apple,red: 14
 }[-]
 \dijkstra{}
+\end{center}
+%\caption{Graph of Bot3}
 So first we need to know the costs of each direction to the apple. To do that we are calculating the distance by using the theorem of Pythagoras. After applying Dijkstra's algorithm to this graph, we get as result that our bot has to go to \textit{left}. The following picture will describe how we calculate the distances. We have to calculate two distances before every decision, the distance to the apple and the distance to the opponent's head.\\
+\begin{figure}  
+\centering
 \includegraphics[scale=0.8]{calcs}
+\caption{Calculations as graphical overview}
+\end{figure}
+
 \newpage
 The code would look like this:
 \begin{minted}{java}
@@ -714,17 +719,20 @@ As last step our bot needs to decide which direction it should take based on the
 \section{Experimental Results and Statistical Tests}
 Like in many areas in real problems making a decision whether something is better than something else is not easy. In order to make a clearer decision, doing statistical tests and diagrams are the way to go.\\
 Doing 5 games and deciding if a bot is better than the other one would be a misguided decision. This is comparable to the Law of Large Numbers. If you have a coin, which is equally like that head or tail shows. The probability that head or tail shows is for both 50\%(0.5). If you know take the coin and toss it 10 times. If the result is 8 times head and 2 time tail you can't state correctly from your experiment that the probability is now for head 80\%(0.8) and for tail 20\%(0.2). Doing the same experiment 1000 times will show that the average chance to hit head or tail gets really close to 50\%.\\
-This is similar to our scenario. If we would let the bots play for 5 rounds and one snake is winning 4 times and the other 1 time you can't tell directly that the one who had more wins in this 5 rounds is the better snake. There are chances that the apple spawns in bad positions. So to tell whether a bot is better than a other bot we want to let them play 1000 times and then compare the wins. We also want to show statistical the average score, apple's eaten and time played. In the following you will see the results of our tests.
-\newpage
+This is similar to our scenario. If we would let the bots play for 5 rounds and one snake is winning 4 times and the other 1 time you can't tell directly that the one who had more wins in this 5 rounds is the better snake. There are chances that the apple spawns in bad positions. So to tell whether a bot is better than a other bot we want to let them play 1000 times and then compare the wins. We also want to show statistical the average score, apple's eaten and time played. In the following you will see the results of our tests.\newpage
 \subsection{Simulations (Play with the Parameters!)}
 First of all we need to dive into the code. The standard amount of rounds played is set to 5. To change that we navigated to the SnakesUIMain where you can setup the amount of rounds.
 \begin{minted}{Java}
 start_tournament_n_times(5, bots);
 \end{minted}
-Changing the first parameter to 1000 will let them play 1000 times against each other. The framework uses .txt files to track the games. The folder structure, after setting the parameter to 10 and letting the bots play, looks like:\\
-\\
+Changing the first parameter to 1000 will let them play 1000 times against each other. The framework uses .txt files to track the games. The folder structure, after setting the parameter to 10 and letting the bots play, looks like:
+
+\begin{center}
 \includegraphics[scale=0.8]{logs_structure}
-\\The "iteration\_i.txt" file logs the data for each round. The "total.txt" file logs the summary of all rounds. The content of those files are structured like this:\\
+\end{center}
+%\caption{Logs_structure.png}
+
+The "iteration\_i.txt" file logs the data for each round. The "total.txt" file logs the summary of all rounds. The content of those files are structured like this:\\
 \\
 \includegraphics[scale=0.8]{logs_content}
 \\For our statistical tests these information are not sufficient and not structured well. So we need a new file structure. First of all we need to think about what we really want to show and which variables we want to use. We need a variables like round , type of bot, results, apples eaten, time played. Round describes the round number. Type of bot describes which bot is meant (e.g. 1 for the first bot 2 for the second bot). Apples eaten for each bot so how many apple they ate in that round. The other ones are trivial so we don't need any further explanations. An example entry would look like: 3,1,2,0,1,7,13,30.45
@@ -746,6 +754,6 @@ to-do
 to-do
 \subsection{Ideas for the future development of your application, new algorithms}
 to-do
-
-hello world
+\bibliography{bibliography}
+\bibliographystyle{plain}
 \end{document}
