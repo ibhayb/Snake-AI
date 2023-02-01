@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k}{if}\PYG{p}{(}\PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{size}\PYG{p}{()} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{distanceToOtherSnake} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{2}\PYG{p}{)\PYGZob{}}
+            \PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}using shortest path\PYGZdq{}}\PYG{p}{);}
+            \PYG{k}{return} \PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{indexOfMinDistance}\PYG{o}{]}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{k}{if} \PYG{p}{(} \PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{size}\PYG{p}{()} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{distanceToOtherSnake} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{2}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}dodging opponents head\PYGZdq{}}\PYG{p}{);}
+           \PYG{k}{return}  \PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{indexOfMaxDistanceToOpp}\PYG{o}{]}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}} \PYG{k}{else}\PYG{p}{\PYGZob{}}
+            \PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}using valid moves\PYGZdq{}}\PYG{p}{);}
+            \PYG{k}{return} \PYG{n}{validMoves}\PYG{o}{[}\PYG{l+m+mi}{0}\PYG{o}{]}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+\end{Verbatim}

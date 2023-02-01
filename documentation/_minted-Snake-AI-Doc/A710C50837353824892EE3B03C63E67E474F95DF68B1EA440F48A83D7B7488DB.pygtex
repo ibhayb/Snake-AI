@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{n}{min} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{n}{max} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+        \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{isEmpty}\PYG{p}{())}
+            \PYG{n}{min} \PYG{o}{=} \PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+        \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{isEmpty}\PYG{p}{())}
+            \PYG{n}{max} \PYG{o}{=} \PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+         \PYG{c+c1}{// choose the index of smallest distance}
+         \PYG{c+c1}{// choose the index of furthest distance to opponents head}
+        \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{notLosing}\PYG{p}{.}\PYG{n+na}{length}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+           \PYG{k}{if}\PYG{p}{(}\PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{n}{min}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+               \PYG{n}{min} \PYG{o}{=} \PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+               \PYG{n}{indexOfMinDistance} \PYG{o}{=} \PYG{n}{i}\PYG{p}{;}
+               \PYG{c+c1}{// System.out.println(min);}
+           \PYG{p}{\PYGZcb{}}
+           \PYG{k}{if}\PYG{p}{(}\PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{n}{max}\PYG{p}{)\PYGZob{}}
+               \PYG{n}{max} \PYG{o}{=} \PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+               \PYG{n}{indexOfMaxDistanceToOpp} \PYG{o}{=} \PYG{n}{i}\PYG{p}{;}
+           \PYG{p}{\PYGZcb{}}
+        \PYG{p}{\PYGZcb{}}
+\end{Verbatim}

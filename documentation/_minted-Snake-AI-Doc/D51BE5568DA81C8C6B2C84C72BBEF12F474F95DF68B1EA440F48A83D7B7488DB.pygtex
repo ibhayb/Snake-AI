@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{BotLoader} \PYG{k+kd}{extends} \PYG{n}{ClassLoader} \PYG{p}{\PYGZob{}}
+    \PYG{k+kd}{public} \PYG{n}{Class}\PYG{o}{\PYGZlt{}?} \PYG{k+kd}{extends} \PYG{n}{Bot}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{getBotClass}\PYG{p}{(}\PYG{n}{String} \PYG{n}{classBinName}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{k}{try} \PYG{p}{\PYGZob{}}
+            \PYG{c+c1}{// Create a new JavaClassLoader}
+            \PYG{n}{ClassLoader} \PYG{n}{classLoader} \PYG{o}{=} \PYG{n}{Thread}\PYG{p}{.}\PYG{n+na}{currentThread}\PYG{p}{().}\PYG{n+na}{getContextClassLoader}\PYG{p}{();}
+
+            \PYG{c+c1}{// Load the target class using its binary name}
+            \PYG{n}{Class}\PYG{o}{\PYGZlt{}?\PYGZgt{}} \PYG{n}{loadedMyClass} \PYG{o}{=} \PYG{n}{classLoader}\PYG{p}{.}\PYG{n+na}{loadClass}\PYG{p}{(}\PYG{n}{classBinName}\PYG{p}{);}
+            \PYG{k+kt}{boolean} \PYG{n}{isBot} \PYG{o}{=} \PYG{n}{Arrays}\PYG{p}{.}\PYG{n+na}{asList}\PYG{p}{(}\PYG{n}{loadedMyClass}\PYG{p}{.}\PYG{n+na}{getInterfaces}\PYG{p}{()).}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{Bot}\PYG{p}{.}\PYG{n+na}{class}\PYG{p}{);}
+            \PYG{k}{if} \PYG{p}{(}\PYG{n}{isBot}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+                \PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Loaded bot.\PYGZdq{}}\PYG{p}{);}
+            \PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+                \PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Did not match interface.\PYGZdq{}}\PYG{p}{);}
+            \PYG{p}{\PYGZcb{}}
+            \PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Loaded class name: \PYGZdq{}} \PYG{o}{+} \PYG{n}{loadedMyClass}\PYG{p}{.}\PYG{n+na}{getName}\PYG{p}{());}
+
+            \PYG{n}{Class}\PYG{o}{\PYGZlt{}?} \PYG{k+kd}{extends} \PYG{n}{Bot}\PYG{o}{\PYGZgt{}} \PYG{n}{botClass} \PYG{o}{=} \PYG{n}{loadedMyClass}\PYG{p}{.}\PYG{n+na}{asSubclass}\PYG{p}{(}\PYG{n}{Bot}\PYG{p}{.}\PYG{n+na}{class}\PYG{p}{);}
+            \PYG{n}{Constructor}\PYG{o}{\PYGZlt{}?} \PYG{k+kd}{extends} \PYG{n}{Bot}\PYG{o}{\PYGZgt{}} \PYG{n}{botClassCtor} \PYG{o}{=} \PYG{n}{botClass}\PYG{p}{.}\PYG{n+na}{getConstructor}\PYG{p}{();}
+            \PYG{k}{return} \PYG{n}{botClass}\PYG{p}{;}
+
+        \PYG{p}{\PYGZcb{}} \PYG{k}{catch} \PYG{p}{(}\PYG{n}{Exception} \PYG{n}{e}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{e}\PYG{p}{.}\PYG{n+na}{printStackTrace}\PYG{p}{();}
+        \PYG{p}{\PYGZcb{}}
+
+        \PYG{k}{return} \PYG{k+kc}{null}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\end{Verbatim}
