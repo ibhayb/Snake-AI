@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{c+c1}{// functions to evaluate a valid move}
+    \PYG{c+c1}{// prevent snake to hit border of the board}
+    \PYG{c+c1}{// prevent to avoid collision}
+    \PYG{c+c1}{// prevent backward movement}
+    \PYG{k+kt}{boolean} \PYG{n+nf}{isValidMove}\PYG{p}{(}\PYG{n}{Snake} \PYG{n}{snake}\PYG{p}{,}\PYG{n}{Coordinate} \PYG{n}{mazeSize}\PYG{p}{,}\PYG{n}{Direction} \PYG{n}{d}\PYG{p}{,}
+	\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{n}{opponentPos}\PYG{p}{,}\PYG{n}{Snake} \PYG{n}{opponent}\PYG{p}{)\PYGZob{}}
+
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{).}\PYG{n+na}{inBounds}\PYG{p}{(}\PYG{n}{mazeSize}\PYG{p}{)} \PYG{o}{\PYGZam{}\PYGZam{}}
+		\PYG{o}{!}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{elements}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{))} \PYG{o}{\PYGZam{}\PYGZam{}}
+        \PYG{o}{!}\PYG{n}{opponentPos}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{))} \PYG{o}{\PYGZam{}\PYGZam{}}
+		\PYG{o}{!}\PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{elements}\PYG{p}{.}\PYG{n+na}{contains}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{d}\PYG{p}{)))\PYGZob{}}
+            \PYG{c+c1}{//\PYGZam{}\PYGZam{} !opponent.elements.contains(snake.getHead().moveTo(d)}
+            \PYG{k}{return} \PYG{k+kc}{true}\PYG{p}{;}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{k}{return}  \PYG{k+kc}{false}\PYG{p}{;}
+
+    \PYG{p}{\PYGZcb{}}
+\end{Verbatim}
