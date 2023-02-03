@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{//Bubble Sort; Sorting Elements of \PYGZdq{}NotLosing\PYGZdq{}}
+\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{distance1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{distance2}\PYG{p}{;}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{a1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{a2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{h11}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{h12}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{h21}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{h22}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{d1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{d2}\PYG{p}{;}
+\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{test1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{test2}\PYG{p}{;}
+\PYG{n}{Direction}\PYG{+w}{ }\PYG{n}{temp}\PYG{p}{;}
+\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{notLosing}\PYG{p}{.}\PYG{n+na}{length}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)\PYGZob{}}
+\PYG{n}{a1}\PYG{o}{=}\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{;}
+\PYG{n}{a2}\PYG{o}{=}\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{;}
+\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{notLosing}\PYG{p}{.}\PYG{n+na}{length}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{a}\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{a}\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{notLosing}\PYG{p}{.}\PYG{n+na}{length}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{a}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+\PYG{n}{test1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{head}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{i}\PYG{o}{]}\PYG{p}{);}
+\PYG{n}{test2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{head}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{a}\PYG{o}{]}\PYG{p}{);}
+\PYG{n}{h11}\PYG{o}{=}\PYG{+w}{ }\PYG{n}{test1}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{;}
+\PYG{n}{h12}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{test1}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{;}
+\PYG{n}{d1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{h11}\PYG{o}{\PYGZhy{}}\PYG{n}{a1}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{h11}\PYG{o}{\PYGZhy{}}\PYG{n}{a1}\PYG{p}{)}\PYG{o}{+}\PYG{p}{(}\PYG{n}{h12}\PYG{o}{\PYGZhy{}}\PYG{n}{a2}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{h12}\PYG{o}{\PYGZhy{}}\PYG{n}{a2}\PYG{p}{);}
+\PYG{n}{distance1}\PYG{o}{=}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{((}\PYG{k+kt}{double}\PYG{p}{)}\PYG{n}{d1}\PYG{p}{);}
+\PYG{n}{h21}\PYG{o}{=}\PYG{+w}{ }\PYG{n}{test2}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{;}
+\PYG{n}{h22}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{test2}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{;}
+\PYG{n}{d2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{h21}\PYG{o}{\PYGZhy{}}\PYG{n}{a1}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{h21}\PYG{o}{\PYGZhy{}}\PYG{n}{a1}\PYG{p}{)}\PYG{o}{+}\PYG{p}{(}\PYG{n}{h22}\PYG{o}{\PYGZhy{}}\PYG{n}{a2}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{h22}\PYG{o}{\PYGZhy{}}\PYG{n}{a2}\PYG{p}{);}
+\PYG{n}{distance2}\PYG{o}{=}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{((}\PYG{k+kt}{double}\PYG{p}{)}\PYG{n}{d2}\PYG{p}{);}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{distance2}\PYG{o}{\PYGZlt{}}\PYG{n}{distance1}\PYG{p}{)\PYGZob{}}
+\PYG{n}{temp}\PYG{o}{=}\PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{i}\PYG{o}{]}\PYG{p}{;}
+\PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{i}\PYG{o}{]=}\PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{a}\PYG{o}{]}\PYG{p}{;}
+\PYG{n}{notLosing}\PYG{o}{[}\PYG{n}{a}\PYG{o}{]=}\PYG{n}{temp}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{return}\PYG{+w}{ }\PYG{n}{notLosing}\PYG{o}{[}\PYG{l+m+mi}{0}\PYG{o}{]}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{else}\PYG{p}{\PYGZob{}}
+\PYG{k}{return}\PYG{+w}{ }\PYG{n}{validMoves}\PYG{o}{[}\PYG{l+m+mi}{0}\PYG{o}{]}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,5 +1,17 @@
 \begin{thebibliography}{1}
 
+\bibitem{classLoader}
+class classloader, 2020.
+
+\bibitem{Cloneable}
+Interface cloneable, 2020.
+
+\bibitem{runnable}
+Interface runnable, 2020.
+
+\bibitem{awt}
+Package javax.swing, 2020.
+
 \bibitem{geeksdijkstra}
 geeksforgeeksuser:@dipesh99kumar.
 \newblock Applications of dijkstra’s shortest path algorithm, 2022.
