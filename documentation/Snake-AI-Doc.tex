@@ -51,9 +51,8 @@ diagram. Besides that we followed a YouTube Tutorial which was also provided by 
 Many people know the popular game "Snake" which appeared on a Nokia device back in 1997.
 This project focuses on reestablishing Snake but in a different way. 
 The most special feature is that instead of moving one single snake manually, we will have two intelligent Snake bots competing against each other.
-The goal of a bot is to be the last standing snake or have the highest score by eating apples in 3 minutes. 
-\textit{Survival of the fittest} is a great saying.\\
-This chapter focuses on the general overview of this project and comparison to similar problems in practice.
+The goal of a bot is to be the last standing snake or have the highest score by eating apples in 3 minutes.
+\\This chapter focuses on the general overview of this project and comparison to similar problems in practice.
 \subsection{General Topic}
 Our main objective is to make two efficiently working Snake Bots. To create a working bot, all we have to do is to implement a class that implements the Bot interface. This interface has one method which is the \textit{chooseDirection()} method. We can say that the method simulates the brain of the bot. The return value of this method is the direction in which the snake should move to. For directions we have \textit{up, down, left or right}. For example we could implement a first simple bot that just turns right one time. But this type of bot is really uninteresting. For our project we are aiming to implement a bot that use algorithms from the fields of Artificial Intelligence. But for now let us look into the game rules.\\
 \\The rules are described as follows: \\
@@ -79,6 +78,8 @@ victories; then the number of draws; then the result of\\
 \subsection{Similar problems in practice (References every time, look for actual ones)}
 Furthermore, since our bot should be smart then it definitely should use intelligent algorithms. What if we could implement a simple bot that just goes into the direction of the apple and gets closer and closer after every decision. But would this be enough to call it a smart bot? Of course not. Well it is a good behavior that our snake goes for apples.  But that is not enough. It should also take the shortest path to the apple. For this we want to use algorithm of Dijkstra. Dijkstra algorithm is a graph based algorithm which calculates the shortest path from one node to every other node. Let us get a better understanding of this by looking into an example.\\
 \\
+\begin{figure}[H]
+    \centering
 \NewAdigraph{mygraph}
 {
 A,blue:0,0;
@@ -97,8 +98,10 @@ E,C:5;
 C,D:9;
 }[-]
 \mygraph{}
-\\
-\\We want to know the shortest path from node A to node B. We as human can easily look into that graph and see that taking the route from A-D with cost of 1 is much lesser than rather taking A-C with cost of 7 or A-B with cost of 12. As next we would also see that we have a cost of 2 from D-E. So in total we see that the shortest path from A to D is A-D-E. But telling this to a computer which only knows 0's and 1's is nonsense. Thats why we have algorithms like Dijkstra, which calculates and erases paths with higher costs and returns us the shortest path. Anyway there are many daily life problems where we are using algorithms to compute the shortest path. For example when you are using a navigation tool to drive from one city to an other city. We all would have serious problems if the navigation would take any random path to our destination rather than taking the shortest path or the path with less travel time. Or even when you are crossing over a street where cars are driving. You surely want to take the shortest and safest walkway to the other side.\\
+\caption{Graph example Dijkstra}
+    \label{fig:graph1}
+\end{figure}
+We want to know the shortest path from node A to node B. We as human can easily look into that graph and see that taking the route from A-D with cost of 1 is much lesser than rather taking A-C with cost of 7 or A-B with cost of 12. As next we would also see that we have a cost of 2 from D-E. So in total we see that the shortest path from A to D is A-D-E. But telling this to a computer which only knows 0's and 1's is nonsense. Thats why we have algorithms like Dijkstra, which calculates and erases paths with higher costs and returns us the shortest path. Anyway there are many daily life problems where we are using algorithms to compute the shortest path. For example when you are using a navigation tool to drive from one city to an other city. We all would have serious problems if the navigation would take any random path to our destination rather than taking the shortest path or the path with less travel time. Or even when you are crossing over a street where cars are driving. You surely want to take the shortest and safest walkway to the other side.\\
 \\Well that is not the only use case of Dijkstra in real life applications. When we talk about computer networks we will see a use case of Dijkstra too. Considering IP-routing to find the shortest path between source and destination router. Dijkstra algorithm is commonly used in routing protocols for updating the forwarding tables.\\
 \\In a case where robots are used you surely want them to work efficient. So drones and robots, which are automatically working without human interaction, are using pathing algorithms. These drones/robots could delivery the needed package in the fastest way.\\
 \\Even many dating or social media applications are using Dijkstra to recommend you a person which you may know or be interested in. The users can be seen as nodes. The distance could be defined on different aspects like common friends, same interest or even living in the same city.\cite{geeksdijkstra}\\
@@ -576,14 +579,14 @@ collision with Body of the opponent Snake. That's why we have also justified whe
                     return Direction.DOWN;
             }
         }
-
+        
 \end{minted}
 In term of Time and Space Complexity this Algorithem is quite efficient. The Algorithem has Time Complexity of $\mathcal{O}(1)$ and Space
-Complexity is approximately $\mathcal{O}(n)$. Wher n is the number of elements of Opponent Snake body. 
+Complexity is approximately $\mathcal{O}(n)$. Where n is the number of elements of Opponent Snake body. 
 
 Inspite of all the Consideration there is still some Collisions in critical Situation. Anothe problem is Self Entrapping. 
 
-\subsection{SimplifiedDijkstraV2}
+\subsection{Bot3}
 \label{SimplifiedDijkstraV2}
 The following bot description deals about "SimplifiedDijkstraV2.java".\\
 \\
@@ -598,7 +601,6 @@ The bot needs to handle the following problems:
 \end{itemize}
 To explain how we solved these problems let us look into the source code.
 As usual we first implement the static array of directions and with that we also create a array of direction which filters with lambda functions the the valid moves.
-\newpage
 \begin{minted}{java}
 private static final Direction[] DIRECTIONS = new Direction[] 
 { Direction.RIGHT, Direction.DOWN, Direction.UP, Direction.LEFT};
