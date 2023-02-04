@@ -5,7 +5,7 @@ import snakes.Coordinate;
 import snakes.Direction;
 import snakes.Snake;
 
-public class RanaMax2 implements Bot {
+public class RecursiveBot implements Bot {
     private int oracle(Snake snake, Snake opponent, Coordinate apple, int simSteps) {
         // Base cases
 
