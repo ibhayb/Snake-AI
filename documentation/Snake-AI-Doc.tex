@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt, oneside]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
@@ -7,12 +7,6 @@
 \usepackage{graphicx}
 \usepackage{cite}
 \usepackage{url}
-% packages for longtable
-\usepackage{float}
-\usepackage{makecell, cellspace, caption}
-\setlength\cellspacetoplimit{3pt}
-\setlength\cellspacebottomlimit{3pt}
-\usepackage{graphicx}
 \usepackage[colorlinks,pdfpagelabels,pdfstartview = FitH,bookmarksopen = true,
 bookmarksnumbered = true,linkcolor = black,plainpages = false,hypertexnames = false,
 citecolor = black] {hyperref}
@@ -50,11 +44,12 @@ diagram. Besides that we followed a YouTube Tutorial which was also provided by 
 \section{Introduction}
 Many people know the popular game "Snake" which appeared on a Nokia device back in 1997.
 This project focuses on reestablishing Snake but in a different way. 
-The most special feature is that instead of moving one single snake manually, we will have two intelligent Snake bots competing against each other.
-The goal of a bot is to be the last standing snake or have the highest score by eating apples in 3 minutes.
-\\This chapter focuses on the general overview of this project and comparison to similar problems in practice.
+The most special is that instead moving one single snake manually, we will have two intelligent Snake bots competing against each other.
+The aim of a bot is to be the last standing snake or have the highest score by eating apples in 3 minutes. 
+\textit{Survival of the fittest} is a great saying.\\
+This chapter focuses on the general overview of this project and comparison to similar problems in practice.
 \subsection{General Topic}
-Our main objective is to make two efficiently working Snake Bots. To create a working bot, all we have to do is to implement a class that implements the Bot interface. This interface has one method which is the \textit{chooseDirection()} method. We can say that the method simulates the brain of the bot. The return value of this method is the direction in which the snake should move to. For directions we have \textit{up, down, left or right}. For example we could implement a first simple bot that just turns right one time. But this type of bot is really uninteresting. For our project we are aiming to implement a bot that use algorithms from the fields of Artificial Intelligence. But for now let us look into the game rules.\\
+Our main objective is to make two efficiently working Snake Bots. To create a working bot, all we have to do is to implement a class that implements the Bot interface. This interface has one method which is the \textit{chooseDirection()} method. We can say that the method simulates the brain of the bot. The return value of this method is the direction in which the snake should move to. For directions we have \textit{up, down, left or right}. For example we could implement a first simple bot that just turns right one time. But this type of bot is really uninteresting. For our project we are aiming to implement a bot that uses algorithms from the fields of Artificial Intelligence. But for now let us look into the game rules.\\
 \\The rules are described as follows: \\
 \textbf{Rule 1:}  A bot controls only the direction (going either north, south, east, or west) to
 be taken by its own snake.\\
@@ -78,8 +73,6 @@ victories; then the number of draws; then the result of\\
 \subsection{Similar problems in practice (References every time, look for actual ones)}
 Furthermore, since our bot should be smart then it definitely should use intelligent algorithms. What if we could implement a simple bot that just goes into the direction of the apple and gets closer and closer after every decision. But would this be enough to call it a smart bot? Of course not. Well it is a good behavior that our snake goes for apples.  But that is not enough. It should also take the shortest path to the apple. For this we want to use algorithm of Dijkstra. Dijkstra algorithm is a graph based algorithm which calculates the shortest path from one node to every other node. Let us get a better understanding of this by looking into an example.\\
 \\
-\begin{figure}[H]
-    \centering
 \NewAdigraph{mygraph}
 {
 A,blue:0,0;
@@ -98,10 +91,8 @@ E,C:5;
 C,D:9;
 }[-]
 \mygraph{}
-\caption{Graph example Dijkstra}
-    \label{fig:graph1}
-\end{figure}
-We want to know the shortest path from node A to node B. We as human can easily look into that graph and see that taking the route from A-D with cost of 1 is much lesser than rather taking A-C with cost of 7 or A-B with cost of 12. As next we would also see that we have a cost of 2 from D-E. So in total we see that the shortest path from A to D is A-D-E. But telling this to a computer which only knows 0's and 1's is nonsense. Thats why we have algorithms like Dijkstra, which calculates and erases paths with higher costs and returns us the shortest path. Anyway there are many daily life problems where we are using algorithms to compute the shortest path. For example when you are using a navigation tool to drive from one city to an other city. We all would have serious problems if the navigation would take any random path to our destination rather than taking the shortest path or the path with less travel time. Or even when you are crossing over a street where cars are driving. You surely want to take the shortest and safest walkway to the other side.\\
+\\
+\\We want to know the shortest path from node A to node B. We as human can easily look into that graph and see that taking the route from A-D with cost of 1 is much lesser than rather taking A-C with cost of 7 or A-B with cost of 12. As next we would also see that we have a cost of 2 from D-E. So in total we see that the shortest path from A to D is A-D-E. But telling this to a computer which only knows 0's and 1's is nonsense. Thats why we have algorithms like Dijkstra, which calculates and erases paths with higher costs and returns us the shortest path. Anyway there are many daily life problems where we are using algorithms to compute the shortest path. For example when you are using a navigation tool to drive from one city to an other city. We all would have serious problems if the navigation would take any random path to our destination rather than taking the shortest path or the path with less travel time. Or even when you are crossing over a street where cars are driving. You surely want to take the shortest and safest walkway to the other side.\\
 \\Well that is not the only use case of Dijkstra in real life applications. When we talk about computer networks we will see a use case of Dijkstra too. Considering IP-routing to find the shortest path between source and destination router. Dijkstra algorithm is commonly used in routing protocols for updating the forwarding tables.\\
 \\In a case where robots are used you surely want them to work efficient. So drones and robots, which are automatically working without human interaction, are using pathing algorithms. These drones/robots could delivery the needed package in the fastest way.\\
 \\Even many dating or social media applications are using Dijkstra to recommend you a person which you may know or be interested in. The users can be seen as nodes. The distance could be defined on different aspects like common friends, same interest or even living in the same city.\cite{geeksdijkstra}\\
@@ -212,7 +203,16 @@ https://github.com/BeLuckyDaf/snakes-game-tutorial. We used this tutorial excess
 gradually moved on and tried out our own ideas.
 
 \section{Related Work}
-There are also some other Games that implement the same concept as Snake AI. For Example,
+
+In recent years, the development of artificial intelligence algorithms has seen a rapid growth,
+and this growth has been particularly evident in the field of gaming. Snake, as a classic and popular game, 
+has been a subject of research in the field of AI and has attracted a great deal of attention from researchers.\\
+Several studies have focused on developing AI algorithms for playing Snake. For instance, reinforcement learning 
+algorithms have been used to train AI agents to play Snake and improve their gameplay. Genetic algorithms have also
+been applied in this context, enabling the evolution of AI agents to play Snake at a high level.\\
+There has also been work on developing multi-agent systems for Snake, where multiple AI agents compete against each other.
+This approach has been used to explore topics such as collaboration and competition in AI systems, as well as the development of more advanced AI algorithms.\\
+There are also some other Games that implement the same Algorithm as Snake AI.\cite{RelatedWork}
 \begin{itemize}
 \item Flappy Bird AI
 \item Breakout AI
@@ -220,7 +220,7 @@ There are also some other Games that implement the same concept as Snake AI. For
 \item PacMan AI
 \item Mario AI
 \end{itemize}
-As an example Mario AI games use artificial intelligence techniques to control the actions of the character,
+For instance,Mario AI games use artificial intelligence techniques to control the actions of the character,
 Mario. This can be done through techniques such as reinforcement learning, evolutionary algorithms,
 or rule-based systems. The AI system receives inputs from the game environment and based on these inputs,
 the AI model outputs actions for the player character, such as jumping, running and shooting.
@@ -235,11 +235,8 @@ to-do
 to-do
 
 \section{Implementation Details}
- this is my test
-to-do
 \subsection{Application Structure}
-The Snake AI project consists of one Interface, one Enum and eight classes. They are following, 
-
+The Snake AI game consists of a interface, several classes and an enumeration, including: 
 \begin{itemize}
 \item Bot(Interface)
 \item Direction(Enum)
@@ -254,75 +251,65 @@ The Snake AI project consists of one Interface, one Enum and eight classes. They
 \end{itemize}
 
 \subsection{GUI Details}
-In this section all the classes will be discussed in details. 
+In this section, comprehensive details of all classes will be thoroughly discussed.
 \subsubsection{SnakeUIMain}
-This class is the Entry point of the UI and implements tournament of the Snake game with several rounds. The main method of the class gets two classes(snake \& opponent) implementing the Bot interface as arguments. The class is also responsible to launch several rounds of snake game between bots. In this class the basic I/O actions are performed to record scores of opponent, apple eaten by both the snakes and time taken in each rounds which will be later used to make further statistical analysis.
+This class serves as the starting point for the Snake game tournament, where several rounds of the game are conducted.
+The main method of the class accepts two instances of the class Snake (snake and opponent) as arguments.\\
+It is responsible for initiating rounds of the Snake game between the bots, managing I/O operations such as recording the score of the opponent and snake,
+apples consumed by both snakes, and the time taken in each round. These records will be used for future statistical analysis.
 \subsubsection{BotLoader}
-The class BoatLoader fetches the class given the name  of the class and package. The class is taken from the classpath and could be dynamically added after the game of the Bot class. This class inharites the abstrack Java class ClassLoader.\\
-A class loader is an object that is responsible for loading classes. The class ClassLoader is an abstract class. Given the binary name of a class, a class loader should attempt to locate or generate data that constitutes a definition for the class. A typical strategy is to transform the name into a file name and then read a "class file" of that name from a file system.\cite{classLoader}
-
-\begin{minted}{java}
-public class BotLoader extends ClassLoader {
-    public Class<? extends Bot> getBotClass(String classBinName) {
-        try {
-            // Create a new JavaClassLoader
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-
-            // Load the target class using its binary name
-            Class<?> loadedMyClass = classLoader.loadClass(classBinName);
-            boolean isBot = Arrays.asList(loadedMyClass.getInterfaces()).contains(Bot.class);
-            if (isBot) {
-                System.out.println("Loaded bot.");
-            } else {
-                System.out.println("Did not match interface.");
-            }
-            System.out.println("Loaded class name: " + loadedMyClass.getName());
-
-            Class<? extends Bot> botClass = loadedMyClass.asSubclass(Bot.class);
-            Constructor<? extends Bot> botClassCtor = botClass.getConstructor();
-            return botClass;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-}
-
-\end{minted}
-\newpage
+The BoatLoader class retrieves the specified class based on its name and package from the classpath.
+It enables the dynamic addition of classes to the Bot game after it has been initiated. This class inherits the abstract Java ClassLoader class.\\
+A class loader is an object that is responsible for loading classes.ClassLoader is an abstract class.
+When the name of a class given, a class loader should attempt to locate or generate data that constitutes a definition for the class. 
+A typical strategy is to transform the name into a file name and then read a "class file" of that name from a file system.\cite{classLoader}
 The only method of BotLoader class gets classBinName as argument and returns an instance of the Bot class.
 
 \subsubsection{SnakesWindow}
-This class is responsible for the game's GUI window. The class creates and set ups the window and runs the UI. At the end it closes the frame. This class implements Runnable.\\
-The Runnable interface should be implemented by any class whose instances are intended to be executed by a thread. The class must define a method of no arguments called run.\\
-This interface is designed to provide a common protocol for objects that wish to execute code while they are active. For example, Runnable is implemented by class Thread.
- Being active simply means that a thread has been started and has not yet been stopped.\\
-In addition, Runnable provides the means for a class to be active while not subclassing Thread. A class that implements Runnable can run without subclassing Thread by instantiating a 
+The SnakesWindow class manages the graphical user interface of the game. It creates and sets up the window, runs the UI, and closes the frame when necessary. This class implements the Runnable interface.
+The Runnable interface is intended for classes whose instances are meant to be executed by a thread. 
+It requires the implementation of a method called 'run' that takes no arguments. The interface provides a standard protocol for objects that need to run code while active. For instance, the Thread class implements Runnable.
+Being active refers to a state where a thread has been started and is yet to be stopped.\\
+Moreover, Runnable allows a class to be active without requiring it to subclass Thread. A class that implements Runnable can run without subclassing Thread by instantiating a 
 Thread instance and passing itself in as the target. In most cases, the Runnable interface should be used if you are only planning to override the run() method and no other Thread methods. This is important because classes should not be subclassed unless the programmer intends on modifying or enhancing the fundamental behavior of the class.\cite{runnable}
 \subsubsection{SnakesRunner}
-This class also implements Runnable interface and is used for running bots in a separate threads. The Constructor of the class SnakesRunner recieves running bot, snake that is controlled by the current bot, opponent's snake, size of the board and coordinate of the current apple as arguments. In addition the chooseDirection method of the current bot is executed and saved(current direction) by this class. 
+This class also implements Runnable interface and is used for running bots in a separate threads.
+The Constructor of the class SnakesRunner gets running bot, snake that is controlled by the current bot,
+opponent's snake, size of the board and coordinate of current position of the apple as arguments.
+In addition, the chooseDirection method of the current bot is executed and saved(current direction) by this class. 
 \subsubsection{SnakesGame}
-The class SnakesGame implements the main games flow and runs game for two bots. The Override toString() method converts the game to string representation and return game state as a string. randomNonOccupiedCell() method selects random non-occupied cell of maze which is used to create new location of a apple. If a Snake takes more than one seconds to choose its  next direction the runOneStep() methods stopps that rounds.
+The SnakesGame class implements the central gameplay flow and executes the game for two bots.
+It overrides the toString() method to convert the game into a string representation and return the current game state as a string.
+The randomNonOccupiedCell() method selects a random cell in the maze that is not occupied, which is used to generate a new location for the apple.
+Additionally, the runOneStep() method terminates the current round if a snake takes more than one second to choose its next direction.
 
 \subsubsection{SnakeCanvas}
-The purpose of this class is to design the UI and give the UI a better look. This class helps to fill the  snake Body wicht color and make it visible on the UI. After filling the body of snake and opponent and apple the render() method renders the game. After every movement of the snake, opponent and apple the previous occupied positions are recolord and marked the free for next movement. This class inharites the Java swing class JPanel which is used to create different generic lightweight container with one or more single component.
+The SnakeCanvas class designs the graphical user interface and enhances its appearance. It is responsible for coloring the body of the snake and opponent, making them visible on the UI.
+The render() method renders the game window after filling the body of the snake, opponent and apple.
+With each movement of the snake, opponent, and apple, the previously occupied positions are re-colored and marked as available for further movements.
+This class inherits the Java Swing class JPanel, which is used to create various lightweight containers that can hold one or more components.
 \subsubsection{Snake}
-This class implements snake body(not brain) that determines the place of head, body, and length of body on the game board. For implementing the body of the snake two logical and efficient data structure from Java Collections framework are used. They are,
+The Snake class implements the physical representation of the snakes on the game board, determining the position of snake's head, body, and length.
+To achieve this, the class utilizes two efficient and logical data structures from the Java Collections framework. Each of them contains the Objects of the class "Coordinate" as elements. They are,
 \begin{itemize}
 \item Dequeue
 \item HashSet
 \end{itemize}
-Deque(double ended queue) data structure helps to add or delete elements from both side(head and tail) within $\mathcal{O}(1)$ constant time complexity. On the other hand HashSet data structure ensures basics search operation in $\mathcal{O}(1)$ time complexity.\\
-This class has a important feature of cloneability which allows to copy one object to another object without using new operator.\\
+Those two structures contain same values, but for different purposes.
+The Deque (double-ended queue) data structure allows the addition and deletion of elements from both the ends(head and tail) in $\mathcal{O}(1)$ time complexity. 
+The HashSet data structure ensures basic searching, addition and deletion operations in $\mathcal{O}(1)$ time complexity .\\
+This class has a important feature of cloneability which allows to copy one Object to another object without using new operator.
 A class implements the Cloneable interface to indicate to the Object.clone() method that it is legal for that method to make a field-for-field copy of instances of that class.
 Invoking Object's clone method on an instance that does not implement the Cloneable interface results in the exception CloneNotSupportedException being thrown.\cite{Cloneable}
 \subsubsection{Coordinate}
-Coordinates class implements position of a cell on the game board. It helps to grow up the snake by adding new coordinate at the beginning of the snake body. inBounds() methods helps to keep the snake in side the game board. This methods implements Comparable interface which is useful while comparing two Coordinate. 
+The Coordinate class implements the position of a cell on the game board. It helps in the growth of the snake body by adding a new coordinate at the beginning of its body.
+The inBounds() method ensures that the snake stays within the boundaries of the game board. This method implements the Comparable interface, making it useful in comparing two Coordinates. 
 \subsubsection{Bot}
-This Interface provides functions that should be implemented to create smart and intelligent snake bot for the game. chooseDirection() methds returns an appropriate next moves which plays a vital role to continue the game. 
-
+To create a working bot, all we have to do is to generate a class that implements the “Bot”-interface
+The Bot interface defines a single method, chooseDirection(), which represents the decision-making process of the bot.
+This method returns the direction in which the snake should move, with the options being up, down, left, or right.
+\subsubsection{Apple}
+Apple is an instance of the class "Coordinate".
 \subsection{UML Diagram}
 
 \begin{figure}[h]
@@ -335,12 +322,12 @@ This Interface provides functions that should be implemented to create smart and
 \subsection{Used Libraries}
 For the Developement of the Snake AI Game Java Swing Framework has been used.
 Some Components from AWT framework have also been used.\\ 
-Swing is a Java Foundation Classes [JFC] library and an extension of the Abstract Window Toolkit [AWT]. Swing offers much-improved functionality over AWT, new components, expanded components features, and excellent event handling with drag-and-drop support.\cite{awt}
- 
+Swing is a Java Foundation Classes [JFC] library and an extension of the Abstract Window Toolkit [AWT].
+Swing offers much-improved functionality over AWT, new components, expanded components features, and excellent event handling with drag-and-drop support.\cite{awt}
+
 %\subsection{Code Snippets} write code snippet with discription.
 \section{Our Bots with different implementations}
 \subsection{Bot1}
-\label{RecursiveBot}
 \title{Bot 1 (IntBot1.java):}\\
 \\
 After getting to know the framework of our task, one of our first objectives was implementing a
@@ -470,42 +457,25 @@ return validMoves[0];
 }
 }
 \end{minted}
-The biggest drawback of this bot was the frequent entrapment with itself or the opponent's snake. Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent's snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
+The biggest drawback of this bot was the frequent entrapment with itself or the opponent's snake. 
+Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent's
+snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
 \subsection{Bot2}
-\label{SimplifiedDijkstra}
-
-The idea behind our Bot is the famous Dijkstra Algorithm which is most widely used to find the shortest path.
-In our Programm before we give the Snake a Direction first of all we  always choose four adjucent cells from the current
-Head position of the Snake. Secondly, we have to eliminate one of the cell from them which is already located in the Snake
-body (next Cordinate after the Head). Thirdly, we have been checking whether the given move leads the Snake out of the Maze.
-Then with the help of Pythagoras formula we calculate the distance between the next postion of the Snake  and the apple.
-After that we calculate the minimum between all the distances. Finally we give the Snake the next Direction.
+The concept of this Bot is based on the famous Dijkstra Algorithm which is used to determine the shortest path between two points.
+In this Algorithm the following steps are performed to determine the next best possible move of the snake:
+\begin{itemize}
+\item finds a valid move.
+\item Selects four adjacent cells(RIGHT,LEFT,UP,DOWN) from the current position(from head) of the snake.
+\item Eliminates the cell that is already occupied by the snake's body(second element of snake body after head).
+\item Checks if the selected move dose not lead the snake to go outside of the maze.
+\item Uses the Pythagorean theorem to calculate the distance between the next position of the snake's head and the apple.
+\item Determines the minimum distance among all the calculated distances.
+\item Assigns the next move of the snake in the direction of the minimum distance.
+\end{itemize}
+To prevent collisions with the opponent snake, we have calculated all possible next moves of the opponent and stored them in a HashSet "possiblePositionsOpponent".
+When determining the next move for our snake, we check if it's also the next move of the opponent.This eliminates head-to-head collisions.
 \begin{minted}{java}
-    // functions to evaluate a valid move
-    // prevent snake to hit border of the board
-    // prevent to avoid collision
-    // prevent backward movement
-    boolean isValidMove(Snake snake,Coordinate mazeSize,Direction d,
-	HashSet<Coordinate>opponentPos,Snake opponent){
-
-        if(snake.getHead().moveTo(d).inBounds(mazeSize) && 
-		!snake.elements.contains(snake.getHead().moveTo(d)) && 
-        !opponentPos.contains(snake.getHead().moveTo(d)) && 
-		!opponent.elements.contains(snake.getHead().moveTo(d))){
-            //&& !opponent.elements.contains(snake.getHead().moveTo(d)
-            return true;
-        }
-        return  false;
-
-    }
-\end{minted}
-But in this algorithm we were not considering the position of the opponent Snake. As a result there were many collisions between our Snake and opponent 
-Snake. To get rid of this we have also figured out all the possible next move of the Opponent Snake and saved them in a HashSet. While giving the next move 
-to our Snake we check whether this next move is also the next move of the opponent Snake or not. This has solved the Head to Head collision. But still there were some 
-collision with Body of the opponent Snake. That's why we have also justified whether the next move is one of the element of the opponent Body or not.
-
-\begin{minted}{java}
-  //variables to find all the distance from next move to apple
+  //variables to find all the distances from next position of snake(head) to apple
         int disFromLeft = Integer.MAX_VALUE, disFromRight=Integer.MAX_VALUE,
 		disFromUp=Integer.MAX_VALUE,disFromDown=Integer.MAX_VALUE;
 
@@ -579,17 +549,33 @@ collision with Body of the opponent Snake. That's why we have also justified whe
                     return Direction.DOWN;
             }
         }
-        
+
 \end{minted}
-In term of Time and Space Complexity this Algorithem is quite efficient. The Algorithem has Time Complexity of $\mathcal{O}(1)$ and Space
-Complexity is approximately $\mathcal{O}(n)$. Where n is the number of elements of Opponent Snake body. 
+To determine a valid move the following additional method is used.
+\begin{minted}{java}
+    // evaluate a valid move
+    // prevent snake to hit border of the board
+    // prevent collision with the opponent
+    // prevent backward movement
+    boolean isValidMove(Snake snake,Coordinate mazeSize,Direction d,
+	HashSet<Coordinate>opponentPos,Snake opponent){
 
-Inspite of all the Consideration there is still some Collisions in critical Situation. Anothe problem is Self Entrapping. 
+        if(snake.getHead().moveTo(d).inBounds(mazeSize) && 
+		!snake.elements.contains(snake.getHead().moveTo(d)) && 
+        !opponentPos.contains(snake.getHead().moveTo(d)) && 
+		!opponent.elements.contains(snake.getHead().moveTo(d))){
+            //&& !opponent.elements.contains(snake.getHead().moveTo(d)
+            return true;
+        }
+        return  false;
 
+    }
+\end{minted}
+This algorithm is considered to be highly efficient in terms of its time and space complexity. 
+It has a time complexity of $\mathcal{O}(1)$, meaning it runs at constant time regardless of the size of the input. 
+Additionally, its space complexity is approximately $\mathcal{O}(n)$, where $n$ is the number of elements in the opponent snake's body.
+The drawback of this bot was the entrapment with itself or the opponent's snake.
 \subsection{Bot3}
-\label{SimplifiedDijkstraV2}
-The following bot description deals about "SimplifiedDijkstraV2.java".\\
-\\
 This bot is using theorem of Pythagoras, a simplified shortest path algorithm and a kind of reversed Dijkstra which uses the longest path.\\
 The bot needs to handle the following problems:
 \begin{itemize}
@@ -601,6 +587,7 @@ The bot needs to handle the following problems:
 \end{itemize}
 To explain how we solved these problems let us look into the source code.
 As usual we first implement the static array of directions and with that we also create a array of direction which filters with lambda functions the the valid moves.
+\newpage
 \begin{minted}{java}
 private static final Direction[] DIRECTIONS = new Direction[] 
 { Direction.RIGHT, Direction.DOWN, Direction.UP, Direction.LEFT};
@@ -734,167 +721,33 @@ After testing this bot and watching it for many games we noticed some problems, 
 \section{Experimental Results and Statistical Tests}
 Like in many areas in real problems making a decision whether something is better than something else is not easy. In order to make a clearer decision, doing statistical tests and diagrams are the way to go.\\
 Doing 5 games and deciding if a bot is better than the other one would be a misguided decision. This is comparable to the Law of Large Numbers. If you have a coin, which is equally like that head or tail shows. The probability that head or tail shows is for both 50\%(0.5). If you know take the coin and toss it 10 times. If the result is 8 times head and 2 time tail you can't state correctly from your experiment that the probability is now for head 80\%(0.8) and for tail 20\%(0.2). Doing the same experiment 1000 times will show that the average chance to hit head or tail gets really close to 50\%.\\
-This is similar to our scenario. If we would let the bots play for 5 rounds and one snake is winning 4 times and the other 1 time you can't state clearly that the one who had more wins in this 5 rounds is the better snake. There are chances that the apple spawns in bad positions. So to decide whether a bot is better than an other bot we want to let them play 1000 times and then compare the wins. We also want to show statistical the average score, apple's eaten and time played. In the following you will see the results of our tests.\newpage
-\subsection{Simulations}
+This is similar to our scenario. If we would let the bots play for 5 rounds and one snake is winning 4 times and the other 1 time you can't tell directly that the one who had more wins in this 5 rounds is the better snake. There are chances that the apple spawns in bad positions. So to tell whether a bot is better than a other bot we want to let them play 1000 times and then compare the wins. We also want to show statistical the average score, apple's eaten and time played. In the following you will see the results of our tests.\newpage
+\subsection{Simulations (Play with the Parameters!)}
 First of all we need to dive into the code. The standard amount of rounds played is set to 5. To change that we navigated to the SnakesUIMain where you can setup the amount of rounds.
 \begin{minted}{Java}
 start_tournament_n_times(5, bots);
 \end{minted}
 Changing the first parameter to 1000 will let them play 1000 times against each other. The framework uses .txt files to track the games. The folder structure, after setting the parameter to 10 and letting the bots play, looks like:
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{logs_structure}
-\caption{logstructure.png}
-    \label{fig:logs_structure.png}
-\end{figure}
 
-
+\begin{center}
+\includegraphics[scale=0.8]{logs_structure}
+\end{center}
+%\caption{Logs_structure.png}
 
 The "iteration\_i.txt" file logs the data for each round. The "total.txt" file logs the summary of all rounds. The content of those files are structured like this:\\
 \\
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{logs_content}
-\caption{logcontent.png}
-    \label{fig:logs_content.png}
-\end{figure}
-For our statistical tests these information are not sufficient and not structured well. So we need a new file structure. First of all we need to think about what we really want to show and which variables we want to use. We need a variables like round , type of bot, results, apples eaten, time played. Round describes the round number. Type of bot describes which bot is meant (e.g. 1 for the first bot 2 for the second bot). Apples eaten for each bot so how many apple they ate in that round. The other ones are trivial so we don't need any further explanations. An example entry would look like:
-\begin{itemize}
-	\item 3,1,2,0,1,7,13,30.45
-\end{itemize}
-This would show the third round where the second bot has won. The first bot ate 7 and the second bot ate 13 apples. The round ended after 30.45 seconds.\\
-We used as input 1000 games and collected a reasonable amount of data. 
-\\The collect data contains the following scenarios:
-\begin{itemize}
-\item RecursiveBot vs. SimplifiedDijkstra
-\item RecursiveBot vs. SimplifiedDijkstraV2
-\end{itemize}
-\subsection{Results of Different Algorithms}
-The following table will show the measures of the 1000 games.\\
-\subsubsection{RecursiveBot vs. SimplifiedDijkstra}
-%--- Table  begin RecursiveBot vs SimplifiedDijkstra Results
-\begin{table}[ht]
-\caption{RecursiveBot vs SimplifiedDijkstra Results} % title of Table
-\centering % used for centering table
-\begin{tabular}{c c c c } % centered columns (4 columns)
-\hline\hline %inserts double horizontal lines
-Bot & avg. apples & max. apples & score\\ [0.5ex] % inserts table
-%heading
-\hline % inserts single horizontal line
-RecursiveBot & 10 & 31 & 810 \\ % inserting body of the table
-SimplifiedDijkstra & 7 & 26 & 184 \\
-[1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}
-\label{table:recvsdijkstra} % is used to refer this table in the text
-\end{table}
-%--- Table end
-This table shows clearly, that the recursive-bot\ref{Bot2} dominated the Simplified-Dijkstra bot. There is a huge difference in the score and a little difference in average apples eaten. This means that the recursive bot has the ability to eat many apples and to survive. However the other bot's max apple score is also notable.\\
-Here are more interesting measures about the time taken for each round:\\
-\begin{itemize}
-	\item max. time: 137.53 s
-	\item avg. time:  35.44 s
-\end{itemize}
-\subsubsection{RecursiveBot vs. SimplifiedDijkstraV2}
-
-%--- Table  begin RecursiveBot vs SimplifiedDijkstra Results
-\begin{table}[ht]
-\caption{RecursiveBot vs SimplifiedDijkstraV2 Results} % title of Table
-\centering % used for centering table
-\begin{tabular}{c c c c } % centered columns (4 columns)
-\hline\hline %inserts double horizontal lines
-Bot & avg. apples & max. apples & score\\ [0.5ex] % inserts table
-%heading
-\hline % inserts single horizontal line
-RecursiveBot & 8 & 32 & 650 \\ % inserting body of the table
-SimplifiedDijkstraV2 & 6 & 20 & 297 \\
-[1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}
-\label{table:recvsdijkstra2} % is used to refer this table in the text
-\end{table}
-%--- Table end
-These results show that the Simplified-DijkstraV2 bot scored better than the previous version. But still had no chance to defeat the recursive-bot. It's interesting when comparing the two results. The difference of average apples eaten was 3 in the first test and in the second it dropped down to 2. Also the difference of max. apples was 5 before and then 12. But overall the second version performed better in manner of score.
-If we look at the time taken for each round:\\
-\begin{itemize}
-	\item max. time: 107.07 s
-	\item avg. time:  28.47 s
-\end{itemize}
-Looking at both results we can see that the time played is in the second test much shorter than in the first test.
-\newpage
-\subsubsection{Other Results}
-%--- Table  begin other results
-\begin{table}[H]
-\caption{Other Results 1} % title of Table
-\centering % used for centering table
-\begin{tabular}{c c c c } % centered columns (4 columns)
-\hline\hline %inserts double horizontal lines
-total & RecursiveBot &SimplifiedDijkstra & $\Sigma$ \\ [0.5ex] % inserts table
-%heading
-\hline % inserts single horizontal line
-apples & 10018 & 7340 & 17358 \\ % inserting body of the table
-[1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}
-\label{table:otherresults1} % is used to refer this table in the text
-\\Total time of 1000 rounds: 35442.56 seconds $=$ 590.7093 minutes $=$ 9.845155 Hours $=$ approx. 9 Hours 50 Minutes 42 seconds
-\end{table}
-%--- Table end
-
-%--- Table  begin other results 2
-\begin{table}[H]
-\caption{Other Results 2} % title of Table
-\centering % used for centering table
-\begin{tabular}{c c c c } % centered columns (4 columns)
-\hline\hline %inserts double horizontal lines
-total & RecursiveBot &SimplifiedDijkstraV2 & $\Sigma$ \\ [0.5ex] % inserts table
-%heading
-\hline % inserts single horizontal line
-apples & 8469 & 6055 & 14524 \\ % inserting body of the table
-[1ex] % [1ex] adds vertical space
-\hline %inserts single line
-\end{tabular}
-\label{table:otherresults2} % is used to refer this table in the text
-\\Total time of 1000 rounds: 28465.49 seconds $=$ 474.4248 minutes $=$ 7.90708 Hours $=$ approx. 7 Hours 54 Minutes 25 seconds
-\end{table}
-%--- Table end
-\newpage
+\includegraphics[scale=0.8]{logs_content}
+\\For our statistical tests these information are not sufficient and not structured well. So we need a new file structure. First of all we need to think about what we really want to show and which variables we want to use. We need a variables like round , type of bot, results, apples eaten, time played. Round describes the round number. Type of bot describes which bot is meant (e.g. 1 for the first bot 2 for the second bot). Apples eaten for each bot so how many apple they ate in that round. The other ones are trivial so we don't need any further explanations. An example entry would look like: 3,1,2,0,1,7,13,30.45
+\\ This would show the third round where the second bot has won. The first bot ate 7 and the second bot ate 13 apples. The round ended after 30.45 seconds.
+\subsection{Use Benchmarks}
+to-do
+\subsection{Tables: input data details, results of different algorithms}
+to-do
 \subsection{Charts}
-\subsubsection{RecursiveBot vs. SimplifiedDijkstra}
-%-- Score Bar Chart
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{{barchart1.png}}
-    \caption{Barchart Wins}
-    \label{fig:barchart1}
-\end{figure}
-%-- Time Boxplot
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{{boxplot1.png}}
-    \caption{Boxplot of time played}
-    \label{fig:boxplot1}
-\end{figure}
-
-\subsubsection{RecursiveBot vs. SimplifiedDijkstraV2}
-%-- Score Bar Chart
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{{barchart2.png}}
-    \caption{Barchart Wins}
-    \label{fig:barchart1}
-\end{figure}
-%-- Time Boxplot
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.8]{{boxplot2.png}}
-    \caption{Boxplot of time played}
-    \label{fig:boxplot1}
-\end{figure}
+to-do
 \subsection{Evaluations}
-To make a conclusion out of our statistical test we have to look at the charts. The boxplot shows that the Recursive-Bot vs. Simplified-Dijkstra playing time took longer than the other one. The extreme values were also different. In the first you can see one extreme value is almost at 140 seconds, which is our max. time: 137.53 s. In the second boxplot the extreme value is almost at 110, which is our max. time: 107.07 s. We can clearly state, that the time played in the first test is much higher than the second. So we can assume that the first version of the Dijkstra is playing safer than the second one. But if we compare the scores, we can make an assumption that the second one is more aggressive. It seems like it's an aggressive bot which either dies fast or takes out the opponent bot fast. If we look at the max. apple eaten of both versions, our assumption gets emphasized. Because the first version has a max value of eaten apples with 26 and the other just 20. This is a huge difference.\\
-Furthermore looking at the statistical test it turned out, that the recursive bot is the most promising one. It solves the problems of the two other bots, because they have a self-entrapment and the recursive one not.
-To conclude we can say, that the data analysis was successful and brought us new findings. This kind of statistical test points out the bad and good sides of our different algorithms. 
+to-do
+
 \section{Conclusions and Future Work}
 to-do
 \subsection{How the team work went}
@@ -903,7 +756,6 @@ to-do
 to-do
 \subsection{Ideas for the future development of your application, new algorithms}
 to-do
-\newpage
 \bibliography{bibliography}
 \bibliographystyle{plain}
 \end{document}
