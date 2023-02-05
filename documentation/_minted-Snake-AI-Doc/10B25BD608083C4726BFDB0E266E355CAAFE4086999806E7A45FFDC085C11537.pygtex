@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{val\PYGZus{}left}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{snake\PYGZus{}left}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{false}\PYG{p}{))\PYGZob{}}
+\PYG{n}{val\PYGZus{}left}\PYG{o}{=}\PYG{+w}{ }\PYG{n}{evaluateDirection}\PYG{p}{(}\PYG{n}{snake\PYGZus{}left}\PYG{p}{,}\PYG{n}{opponent\PYGZus{}clone}\PYG{p}{,}\PYG{n}{apple}\PYG{p}{,}\PYG{n}{simSteps}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{val\PYGZus{}right}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{snake\PYGZus{}right}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{RIGHT}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{false}\PYG{p}{))\PYGZob{}}
+\PYG{n}{val\PYGZus{}right}\PYG{o}{=}\PYG{+w}{ }\PYG{n}{evaluateDirection}\PYG{p}{(}\PYG{n}{snake\PYGZus{}right}\PYG{p}{,}\PYG{n}{opponent\PYGZus{}clone}\PYG{p}{,}\PYG{n}{apple}\PYG{p}{,}\PYG{n}{simSteps}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{val\PYGZus{}up}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{snake\PYGZus{}up}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{false}\PYG{p}{))\PYGZob{}}
+\PYG{n}{val\PYGZus{}up}\PYG{o}{=}\PYG{+w}{ }\PYG{n}{evaluateDirection}\PYG{p}{(}\PYG{n}{snake\PYGZus{}up}\PYG{p}{,}\PYG{n}{opponent\PYGZus{}clone}\PYG{p}{,}\PYG{n}{apple}\PYG{p}{,}\PYG{n}{simSteps}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{val\PYGZus{}down}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{snake\PYGZus{}down}\PYG{p}{.}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{DOWN}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{false}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{n}{val\PYGZus{}down}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{evaluateDirection}\PYG{p}{(}\PYG{n}{snake\PYGZus{}down}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{opponent\PYGZus{}clone}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{simSteps}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{best\PYGZus{}val}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{n}{val\PYGZus{}down}\PYG{p}{,}\PYG{n}{val\PYGZus{}up}\PYG{p}{),}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{min}\PYG{p}{(}\PYG{n}{val\PYGZus{}left}\PYG{p}{,}\PYG{n}{val\PYGZus{}right}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{);}
+\end{Verbatim}

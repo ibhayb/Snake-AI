@@ -12,8 +12,20 @@ Interface runnable, 2020.
 \bibitem{awt}
 Package javax.swing, 2020.
 
+\bibitem{RelatedWork}
+academia:@Yashshree Patil.
+\newblock Snake game using reinforcement learning, 2020.
+
+\bibitem{chesstable}
+Niklas Fiekas.
+\newblock https://syzygy-tables.info/.
+
 \bibitem{geeksdijkstra}
 geeksforgeeksuser:@dipesh99kumar.
 \newblock Applications of dijkstra’s shortest path algorithm, 2022.
+
+\bibitem{manhatten}
+geeksforgeeksuser:@ujalisharmaus415.
+\newblock Calculate the manhattan distance between two cells of given 2d array.
 
 \end{thebibliography}

@@ -1,5 +1,5 @@
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{+w}{  }\PYG{c+c1}{//variables to find all the distance from next move to apple}
+\PYG{+w}{  }\PYG{c+c1}{//variables to find all the distances from next position of snake(head) to apple}
 \PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{disFromLeft}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{disFromRight}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}
 \PYG{+w}{		}\PYG{n}{disFromUp}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}\PYG{n}{disFromDown}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{;}
 

@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{x}\PYG{o}{==}\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{y}\PYG{o}{==}\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{best\PYGZus{}val}\PYG{o}{\PYGZlt{}}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{)\PYGZob{}}
+\PYG{k}{return}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{else}\PYG{p}{\PYGZob{}}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{best\PYGZus{}val}\PYG{o}{==}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{)\PYGZob{}}
+\PYG{k}{return}\PYG{+w}{ }\PYG{n}{best\PYGZus{}val}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{return}\PYG{+w}{ }\PYG{n}{best\PYGZus{}val}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{p}{...}
+\end{Verbatim}

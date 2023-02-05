@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{opponent\PYGZus{}clone}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{opponent}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{opponent\PYGZus{}clone}\PYG{p}{.}\PYG{n+na}{body}\PYG{p}{.}\PYG{n+na}{isEmpty}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{n}{opponent\PYGZus{}clone}\PYG{p}{.}\PYG{n+na}{elements}\PYG{p}{.}\PYG{n+na}{remove}\PYG{p}{(}\PYG{n}{opponent\PYGZus{}clone}\PYG{p}{.}\PYG{n+na}{body}\PYG{p}{.}\PYG{n+na}{removeLast}\PYG{p}{());}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake\PYGZus{}left}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake\PYGZus{}right}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake\PYGZus{}up}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake\PYGZus{}down}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\end{Verbatim}

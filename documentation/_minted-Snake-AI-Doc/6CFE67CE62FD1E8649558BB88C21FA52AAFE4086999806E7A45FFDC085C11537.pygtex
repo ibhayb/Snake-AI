@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{public}\PYG{+w}{ }\PYG{n}{Direction}\PYG{+w}{ }\PYG{n+nf}{chooseDirection}\PYG{p}{(}\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{opponent}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{mazeSize}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{simSteps}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake\PYGZus{}left}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake\PYGZus{}right}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake\PYGZus{}up}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake\PYGZus{}down}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{clone}\PYG{p}{();}
+\PYG{p}{...}
+\end{Verbatim}

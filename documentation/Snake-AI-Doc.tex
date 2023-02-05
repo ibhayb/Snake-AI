@@ -328,8 +328,7 @@ Swing offers much-improved functionality over AWT, new components, expanded comp
 %\subsection{Code Snippets} write code snippet with discription.
 \section{Our Bots with different implementations}
 \subsection{Bot1}
-\title{Bot 1 (IntBot1.java):}\\
-\\
+\subsubsection{IntBot1}
 After getting to know the framework of our task, one of our first objectives was implementing a
 basic bot by ourselves that does the following:\\
 \begin{itemize}
@@ -459,7 +458,196 @@ return validMoves[0];
 \end{minted}
 The biggest drawback of this bot was the frequent entrapment with itself or the opponent's snake. 
 Even though basic evasive movements were often enough to avoid losing the game, more complex dangers like a U-shape of the opponent's
-snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.\\
+snake or the bot’s snake could not be recognized by this bot. This becomes more apparent the more elements the bodies of the snakes have.
+\subsubsection{RecursiveBot}
+\label{RecursiveBot}
+\textbf{Preliminary consideration:}\\
+\\Since "IntBot1" turned out to be very vulnerable to self-entrapment or entrapment by the opponent,
+we started to search for a solution to this specific problem. We conducted our search by overriding
+IntBot1's "bubble sort" section with various other approaches. In order to subsequently evaluate the
+different results, we had the resulting bots compete against one another several hundred times. This
+quickly gave us a rough evaluation of a bots capabilities and showed us which idea was promising.\\
+\\Our first idea consisted of an extension of the first part of "IntBot1" that creates more than one
+possible enemy position. Several arrays were created containing these future moves of the
+opponent. We were hoping that this would at least make our bot less prone to getting entrapped by
+the opponent, but that wasn't the case. In the end, this bot turned out to be inferior to the original
+"Intbot1", since many squares of the game board could no longer be accessed by it. The bot's
+decisions led to defeat very quickly, since most of the time it returned a value from the
+"validMoves" array, which, for example, led to our snake leaving the game board. As a reminder,
+"validMoves" contained all possible moves, except for the backwards movement of the snake\\
+\\Another idea was to save different constellations of the two snakes, the apple, and the already
+precalculated best possible movement. Thus, the only task of the bot would be to recognize a
+position and select an already calculated solution from a database. For example, comprehensive
+databases for analyzed chess positions have already been created in this way. \cite{chesstable}
+Here, however, the very large number of possible positions represented an insurmountable obstacle
+for us, which is why we soon gave up this idea.\\
+\\A recursive function for evaluating possible moves turned out to be a very neat solution to the
+problem of self-entrapment. The basic idea was as follows. Starting from the snake's head, all four
+surrounding fields are scanned using a recursive method. If there is a collision with the snake's own
+body or with the opponent, a bad rating is returned. If the apple is reached, a good rating can be
+returned. However, this should also depend on whether the snake still has free squares available
+after reaching the apple. Reaching the apple and subsequent entrapment are of course undesirable!
+If nothing special happens, a neutral rating should be returned. Starting from the simulated position,
+the function then looks at the next possible set of squares. If not interrupted, this process is repeated
+until the desired number of simulation steps has been reached - this is the final break condition of
+the recursive function. Finally, the bot's ChooseDirection method returns the direction to the best
+scoring square.\\
+\\We created such a function by using various predefined methods of the “Snake” and “Coordinate”
+classes. During the implementation, we realized that this function rendered much of the first part of
+the bot "IntBot1" obsolete. For example, by checking all fields around the head, the second body
+element of the snake is also always checked. Since this is counted as a collision, this coordinate
+always gets the worst rating and is only called if the position of the snake is lost anyway. As a
+result, we completely removed the first section of "IntBot1".\\
+\\This resulted in "IntBot1" and "RecursiveBot" no longer having any identical lines of code, even
+though "RecursiveBot" was developed directly from "IntBot1". In the following, "RecursiveBot"
+will be presented in detail.\\
+\\\textbf{ChooseDirection:}\\
+\\In the following, the resulting "ChooseDirection" method of the bot "RecursiveBot" will be
+analyzed first.
+\begin{minted}{java}
+public Direction chooseDirection(Snake snake, Snake opponent, Coordinate mazeSize, Coordinate apple) {
+int simSteps=10;
+Snake snake_left = snake.clone();
+Snake snake_right = snake.clone();
+Snake snake_up = snake.clone();
+Snake snake_down = snake.clone();
+...
+\end{minted}
+As already explained, the appropriate parameters are passed indirectly to the "chooseDirection"
+method from the main function. These parameters serve as the basis for our decision-making
+algorithm.
+The first variable "simSteps" can in theory be chosen freely and serves as a termination condition
+for the recursive function later on. (In our test runs, integers between 7 and 11 had proven to be
+advantageous.) Then the "clone()" method of the "Snake" class is used to create four clones of the
+object "snake", which contains all parameters of the snake that is controlled by the bot.
+Subsequently these clones will be moved in the appropriate direction and evaluated.
+\begin{minted}{java}
+...
+int val_left = Integer.MAX_VALUE;
+if(snake_left.moveTo(Direction.LEFT, false)){
+val_left= evaluateDirection(snake_left,opponent,apple,simSteps);
+}
+int val_right = Integer.MAX_VALUE;
+if(snake_right.moveTo(Direction.RIGHT, false)){
+val_right= evaluateDirection(snake_right,opponent,apple,simSteps);
+}
+int val_up = Integer.MAX_VALUE;
+if(snake_up.moveTo(Direction.UP, false)){
+val_up= evaluateDirection(snake_up,opponent,apple,simSteps);
+}
+int val_down = Integer.MAX_VALUE;
+if(snake_down.moveTo(Direction.DOWN, false)) {
+val_down = evaluateDirection(snake_down, opponent, apple, simSteps );
+}
+...
+\end{minted}
+In this section, the evaluation of the different directions is realized. An integer is declared for each direction and initialized with the value "Integer.MAX\_VALUE". This should represent the worst
+rating. The "moveTo" method of the "Snake" class returns true if a movement of a snake does not
+lead to a collision with itself or to the snake leaving the game board. The snake calling this method
+will be moved in this direction if possible, which means that the HashSet and deque of the snake
+will be modified. The second parameter decides whether the snake should be extended at the end or
+not. This is the case when the snake reaches an apple. However, this case is not important for our
+bot and so "false" is always passed as the second parameter.\\
+If a movement is possible, the "if"-branch is entered and the recursive function "evaluateDirection"
+is called with the appropriate parameters. The return value of this function then overwrites the
+evaluation of this movement of the snake.
+\begin{minted}{java}
+...
+int best_val = Math.min( Math.min(val_down,val_up),Math.min(val_left,val_right) );
+if(val_left==best_val){
+return Direction.LEFT;
+}
+if(val_down==best_val){
+return Direction.DOWN;
+}
+if(val_right==best_val){
+return Direction.RIGHT;
+}
+else{
+return Direction.UP;
+}
+...
+\end{minted}
+In the final section of the "ChooseDirection" function, the "Math.min" method is used to find the
+smallest value of the evaluations and to save this value as the "best\_val" variable. Finally,
+"best\_val" is used to return the best rated direction.
+\\
+\\\textbf{evaluateDirection}
+\begin{minted}{java}
+//Base cases
+if(snake.headCollidesWith(opponent)){
+return Integer.MAX_VALUE;
+}
+if(simSteps==0){
+return Math.abs(apple.x-snake.getHead().x) + Math.abs(apple.y - snake.getHead().y);
+}
+\end{minted}
+At the beginning of the recursive function, the base cases are determined. If the snake collides with
+the opponent, "Integer.MAX\_VALUE" is returned, which represents the worst score. This if branch is
+necessary because the "moveTo" method of the snake class only detects collisions with itself.
+The second base case considers the case that the number of desired simulation steps is reached.
+Then the distance from the current position of the head to the apple is returned. Since a snake
+cannot move diagonally and the return value must always be an integer, the calculation of the
+"Manhattan Distance" is suitable here.\cite{manhatten}
+\begin{minted}{java}
+Snake opponent_clone = opponent.clone();
+if(!opponent_clone.body.isEmpty()) {
+opponent_clone.elements.remove(opponent_clone.body.removeLast());
+}
+Snake snake_left = snake.clone();
+Snake snake_right = snake.clone();
+Snake snake_up = snake.clone();
+Snake snake_down = snake.clone();
+\end{minted}
+The next section performs creating clones of the snakes, analogously to the "ChooseDirection"
+method. These clones are later on needed to call the "evaluateDirection" function again. But before
+that, a clone of the opponent is created and the last element of his body is removed. The prerequisite
+is that the body of the opponent still has elements. This square is now recognized by our function as
+an available square. This makes sense since the opponent has already moved on at this point of the
+simulation. However, if the opponent reaches an apple, this turns out to be problematic, because
+then the opponent grows again and the evaluation of squares becomes incorrect.
+\begin{minted}{java}
+int val_left = Integer.MAX_VALUE;
+if(snake_left.moveTo(Direction.LEFT, false)){
+val_left= evaluateDirection(snake_left,opponent_clone,apple,simSteps-1);
+}
+int val_right = Integer.MAX_VALUE;
+if(snake_right.moveTo(Direction.RIGHT, false)){
+val_right= evaluateDirection(snake_right,opponent_clone,apple,simSteps-1);
+}
+int val_up = Integer.MAX_VALUE;
+if(snake_up.moveTo(Direction.UP, false)){
+val_up= evaluateDirection(snake_up,opponent_clone,apple,simSteps-1);
+}
+int val_down = Integer.MAX_VALUE;
+if(snake_down.moveTo(Direction.DOWN, false)) {
+val_down = evaluateDirection(snake_down, opponent_clone, apple, simSteps - 1);
+}
+int best_val = Math.min( Math.min(val_down,val_up),Math.min(val_left,val_right) );
+\end{minted}
+The next section executes the recursive calls of the "evaluateDirection" function analogously to the
+"ChooseDirection" method. However, it should be noted that the steps of the simulation are reduced by one. "best\_val" is also created as described in the "ChooseDirection" method.
+\begin{minted}{java}
+if(snake.getHead().x==apple.x &&snake.getHead().y==apple.y&& best_val<Integer.MAX_VALUE){
+return 0;
+}
+else{
+if(best_val==Integer.MAX_VALUE){
+return best_val;
+}
+return best_val+1;
+}
+...
+\end{minted}
+The last section of the recursive function now calculates the return values of the remaining cases.
+The first if branch examines whether an apple has been reached. The original "snake" object is used
+for this check. In addition, it is checked whether the movements after reaching the apple all lead to a
+collision, which means "Integer.MAX\_VALUE" is returned. If this is the case, the apple is ignored!
+If the value of "best\_val" is "Integer.MAX\_VALUE", "best\_value" is returned unchanged. This is
+necessary because adding one to this value leads to an overflow.
+For all other cases, "best\_val+1" is returned. This ensures that a longer path to the apple is rated
+worse than a shorter path to the apple. Since "recursiveBot" is a direct development of "IntBot1" and had proven to be clearly superior in
+various test runs, "IntBot1" was no longer considered in the following chapters.
 \subsection{Bot2}
 The concept of this Bot is based on the famous Dijkstra Algorithm which is used to determine the shortest path between two points.
 In this Algorithm the following steps are performed to determine the next best possible move of the snake:
@@ -721,32 +909,167 @@ After testing this bot and watching it for many games we noticed some problems, 
 \section{Experimental Results and Statistical Tests}
 Like in many areas in real problems making a decision whether something is better than something else is not easy. In order to make a clearer decision, doing statistical tests and diagrams are the way to go.\\
 Doing 5 games and deciding if a bot is better than the other one would be a misguided decision. This is comparable to the Law of Large Numbers. If you have a coin, which is equally like that head or tail shows. The probability that head or tail shows is for both 50\%(0.5). If you know take the coin and toss it 10 times. If the result is 8 times head and 2 time tail you can't state correctly from your experiment that the probability is now for head 80\%(0.8) and for tail 20\%(0.2). Doing the same experiment 1000 times will show that the average chance to hit head or tail gets really close to 50\%.\\
-This is similar to our scenario. If we would let the bots play for 5 rounds and one snake is winning 4 times and the other 1 time you can't tell directly that the one who had more wins in this 5 rounds is the better snake. There are chances that the apple spawns in bad positions. So to tell whether a bot is better than a other bot we want to let them play 1000 times and then compare the wins. We also want to show statistical the average score, apple's eaten and time played. In the following you will see the results of our tests.\newpage
-\subsection{Simulations (Play with the Parameters!)}
+This is similar to our scenario. If we would let the bots play for 5 rounds and one snake is winning 4 times and the other 1 time you can't state clearly that the one who had more wins in this 5 rounds is the better snake. There are chances that the apple spawns in bad positions. So to decide whether a bot is better than an other bot we want to let them play 1000 times and then compare the wins. We also want to show statistical the average score, apple's eaten and time played. In the following you will see the results of our tests.\newpage
+\subsection{Simulations}
 First of all we need to dive into the code. The standard amount of rounds played is set to 5. To change that we navigated to the SnakesUIMain where you can setup the amount of rounds.
 \begin{minted}{Java}
 start_tournament_n_times(5, bots);
 \end{minted}
 Changing the first parameter to 1000 will let them play 1000 times against each other. The framework uses .txt files to track the games. The folder structure, after setting the parameter to 10 and letting the bots play, looks like:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{logs_structure}
+\caption{logstructure.png}
+    \label{fig:logs_structure.png}
+\end{figure}
 
-\begin{center}
-\includegraphics[scale=0.8]{logs_structure}
-\end{center}
-%\caption{Logs_structure.png}
+
 
 The "iteration\_i.txt" file logs the data for each round. The "total.txt" file logs the summary of all rounds. The content of those files are structured like this:\\
 \\
-\includegraphics[scale=0.8]{logs_content}
-\\For our statistical tests these information are not sufficient and not structured well. So we need a new file structure. First of all we need to think about what we really want to show and which variables we want to use. We need a variables like round , type of bot, results, apples eaten, time played. Round describes the round number. Type of bot describes which bot is meant (e.g. 1 for the first bot 2 for the second bot). Apples eaten for each bot so how many apple they ate in that round. The other ones are trivial so we don't need any further explanations. An example entry would look like: 3,1,2,0,1,7,13,30.45
-\\ This would show the third round where the second bot has won. The first bot ate 7 and the second bot ate 13 apples. The round ended after 30.45 seconds.
-\subsection{Use Benchmarks}
-to-do
-\subsection{Tables: input data details, results of different algorithms}
-to-do
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{logs_content}
+\caption{logcontent.png}
+    \label{fig:logs_content.png}
+\end{figure}
+For our statistical tests these information are not sufficient and not structured well. So we need a new file structure. First of all we need to think about what we really want to show and which variables we want to use. We need a variables like round , type of bot, results, apples eaten, time played. Round describes the round number. Type of bot describes which bot is meant (e.g. 1 for the first bot 2 for the second bot). Apples eaten for each bot so how many apple they ate in that round. The other ones are trivial so we don't need any further explanations. An example entry would look like:
+\begin{itemize}
+	\item 3,1,2,0,1,7,13,30.45
+\end{itemize}
+This would show the third round where the second bot has won. The first bot ate 7 and the second bot ate 13 apples. The round ended after 30.45 seconds.\\
+We used as input 1000 games and collected a reasonable amount of data. 
+\\The collect data contains the following scenarios:
+\begin{itemize}
+\item RecursiveBot vs. SimplifiedDijkstra
+\item RecursiveBot vs. SimplifiedDijkstraV2
+\end{itemize}
+\subsection{Results of Different Algorithms}
+The following table will show the measures of the 1000 games.\\
+\subsubsection{RecursiveBot vs. SimplifiedDijkstra}
+%--- Table  begin RecursiveBot vs SimplifiedDijkstra Results
+\begin{table}[ht]
+\caption{RecursiveBot vs SimplifiedDijkstra Results} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c c } % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+Bot & avg. apples & max. apples & score\\ [0.5ex] % inserts table
+%heading
+\hline % inserts single horizontal line
+RecursiveBot & 10 & 31 & 810 \\ % inserting body of the table
+SimplifiedDijkstra & 7 & 26 & 184 \\
+[1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\label{table:recvsdijkstra} % is used to refer this table in the text
+\end{table}
+%--- Table end
+This table shows clearly, that the recursive-bot\ref{Bot2} dominated the Simplified-Dijkstra bot. There is a huge difference in the score and a little difference in average apples eaten. This means that the recursive bot has the ability to eat many apples and to survive. However the other bot's max apple score is also notable.\\
+Here are more interesting measures about the time taken for each round:\\
+\begin{itemize}
+	\item max. time: 137.53 s
+	\item avg. time:  35.44 s
+\end{itemize}
+\subsubsection{RecursiveBot vs. SimplifiedDijkstraV2}
+
+%--- Table  begin RecursiveBot vs SimplifiedDijkstra Results
+\begin{table}[ht]
+\caption{RecursiveBot vs SimplifiedDijkstraV2 Results} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c c } % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+Bot & avg. apples & max. apples & score\\ [0.5ex] % inserts table
+%heading
+\hline % inserts single horizontal line
+RecursiveBot & 8 & 32 & 650 \\ % inserting body of the table
+SimplifiedDijkstraV2 & 6 & 20 & 297 \\
+[1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\label{table:recvsdijkstra2} % is used to refer this table in the text
+\end{table}
+%--- Table end
+These results show that the Simplified-DijkstraV2 bot scored better than the previous version. But still had no chance to defeat the recursive-bot. It's interesting when comparing the two results. The difference of average apples eaten was 3 in the first test and in the second it dropped down to 2. Also the difference of max. apples was 5 before and then 12. But overall the second version performed better in manner of score.
+If we look at the time taken for each round:\\
+\begin{itemize}
+	\item max. time: 107.07 s
+	\item avg. time:  28.47 s
+\end{itemize}
+Looking at both results we can see that the time played is in the second test much shorter than in the first test.
+\newpage
+\subsubsection{Other Results}
+%--- Table  begin other results
+\begin{table}[H]
+\caption{Other Results 1} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c c } % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+total & RecursiveBot &SimplifiedDijkstra & $\Sigma$ \\ [0.5ex] % inserts table
+%heading
+\hline % inserts single horizontal line
+apples & 10018 & 7340 & 17358 \\ % inserting body of the table
+[1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\label{table:otherresults1} % is used to refer this table in the text
+\\Total time of 1000 rounds: 35442.56 seconds $=$ 590.7093 minutes $=$ 9.845155 Hours $=$ approx. 9 Hours 50 Minutes 42 seconds
+\end{table}
+%--- Table end
+
+%--- Table  begin other results 2
+\begin{table}[H]
+\caption{Other Results 2} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c c } % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+total & RecursiveBot &SimplifiedDijkstraV2 & $\Sigma$ \\ [0.5ex] % inserts table
+%heading
+\hline % inserts single horizontal line
+apples & 8469 & 6055 & 14524 \\ % inserting body of the table
+[1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\label{table:otherresults2} % is used to refer this table in the text
+\\Total time of 1000 rounds: 28465.49 seconds $=$ 474.4248 minutes $=$ 7.90708 Hours $=$ approx. 7 Hours 54 Minutes 25 seconds
+\end{table}
+%--- Table end
+\newpage
 \subsection{Charts}
-to-do
+\subsubsection{RecursiveBot vs. SimplifiedDijkstra}
+%-- Score Bar Chart
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{{barchart1.png}}
+    \caption{Barchart Wins}
+    \label{fig:barchart1}
+\end{figure}
+%-- Time Boxplot
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{{boxplot1.png}}
+    \caption{Boxplot of time played}
+    \label{fig:boxplot1}
+\end{figure}
+
+\subsubsection{RecursiveBot vs. SimplifiedDijkstraV2}
+%-- Score Bar Chart
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{{barchart2.png}}
+    \caption{Barchart Wins}
+    \label{fig:barchart1}
+\end{figure}
+%-- Time Boxplot
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{{boxplot2.png}}
+    \caption{Boxplot of time played}
+    \label{fig:boxplot1}
+\end{figure}
 \subsection{Evaluations}
-to-do
+To make a conclusion out of our statistical test we have to look at the charts. The boxplot shows that the Recursive-Bot vs. Simplified-Dijkstra playing time took longer than the other one. The extreme values were also different. In the first you can see one extreme value is almost at 140 seconds, which is our max. time: 137.53 s. In the second boxplot the extreme value is almost at 110, which is our max. time: 107.07 s. We can clearly state, that the time played in the first test is much higher than the second. So we can assume that the first version of the Dijkstra is playing safer than the second one. But if we compare the scores, we can make an assumption that the second one is more aggressive. It seems like it's an aggressive bot which either dies fast or takes out the opponent bot fast. If we look at the max. apple eaten of both versions, our assumption gets emphasized. Because the first version has a max value of eaten apples with 26 and the other just 20. This is a huge difference.\\
+Furthermore looking at the statistical test it turned out, that the recursive bot is the most promising one. It solves the problems of the two other bots, because they have a self-entrapment and the recursive one not.
+To conclude we can say, that the data analysis was successful and brought us new findings. This kind of statistical test points out the bad and good sides of our different algorithms. 
 
 \section{Conclusions and Future Work}
 We started our project with a small amount of knowledge and now we know more about algorithms in field of Artificial Intelligence. Our beginning was hard because not everything was clear. But we managed to meet weekly and talk about problems and new findings. Every meeting made our visions of this project clearer. Our goal was to make multiple bots and to compete them against each other. Back then we started with implementing basic algorithms. Afterwards we observed benefits and drawbacks of the algorithms we used. Then we worked again on them to improve them. To decide which one of the final algorithms were the best one, we made statistical tests. We collected data and then made a data analysis. Out of that data analysis we could decide, that the best bot was the recursive-bot \ref{RecursiveBot}. We had a lot of fun while working on this project.
@@ -755,10 +1078,10 @@ Talking about the team work, communication was our keyword to success. If any te
 We were able to find a time slot where we could meet. This made it easier for us to work on the documentation and algorithms. The benefit was definitely the group size. The more persons in the group , the more difficult it gets to find a schedule where everyone has time for.
 \subsection{What we have learned}
 We have learned a lot about pathing algorithms. It also made us clear how important it is to have algorithms, like Dijkstra, which returns us the shortest path. While working out, where we could use it in real life, we realized that we are facing these algorithms daily.  In navigation and social media apps e.g.
-This project taught us not only how to implement efficiently working algorithms, but also to work in a team. We learned that we have to talk about our problems. Not only problems in development, also psychological problems. It was a tough time for all of us, because we had a strict schedule and many modules to study for. We helped each other in both of the problems, so we were motivated to work on this project even more. We found a good sense for distributing the work, which also made the work in total easier.\\
-
-\subsection{Ideas for the future development of your application, new algorithms}
+This project taught us not only how to implement efficiently working algorithms, but also to work in a team. We learned that we have to talk about our problems. Not only problems in development, also psychological problems. It was a tough time for all of us, because we had a strict schedule and many modules to study for. We helped each other in both of the problems, so we were motivated to work on this project even more. We found a good sense for distributing the work, which also made the work in total easier.
+\subsection{Ideas for the future development}
 to-do
+\newpage
 \bibliography{bibliography}
 \bibliographystyle{plain}
 \end{document}

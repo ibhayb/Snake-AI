@@ -1,7 +1,7 @@
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{+w}{    }\PYG{c+c1}{// functions to evaluate a valid move}
+\PYG{+w}{    }\PYG{c+c1}{// evaluate a valid move}
 \PYG{+w}{    }\PYG{c+c1}{// prevent snake to hit border of the board}
-\PYG{+w}{    }\PYG{c+c1}{// prevent to avoid collision}
+\PYG{+w}{    }\PYG{c+c1}{// prevent collision with the opponent}
 \PYG{+w}{    }\PYG{c+c1}{// prevent backward movement}
 \PYG{+w}{    }\PYG{k+kt}{boolean}\PYG{+w}{ }\PYG{n+nf}{isValidMove}\PYG{p}{(}\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{,}\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{mazeSize}\PYG{p}{,}\PYG{n}{Direction}\PYG{+w}{ }\PYG{n}{d}\PYG{p}{,}
 \PYG{+w}{	}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{n}{opponentPos}\PYG{p}{,}\PYG{n}{Snake}\PYG{+w}{ }\PYG{n}{opponent}\PYG{p}{)\PYGZob{}}
