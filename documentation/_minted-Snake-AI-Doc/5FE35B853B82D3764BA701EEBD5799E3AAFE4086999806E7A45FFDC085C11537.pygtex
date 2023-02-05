@@ -1,0 +1,28 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{	}\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{max}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k+kt}{double}\PYG{+w}{ }\PYG{n}{min}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{indexOfMinDistance}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{indexOfMaxDistanceToOpp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{n}{min}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{max}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{isEmpty}\PYG{p}{())}
+\PYG{+w}{            }\PYG{n}{min}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{isEmpty}\PYG{p}{())}
+\PYG{+w}{            }\PYG{n}{max}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{+w}{         }\PYG{c+c1}{// choose the index of smallest distance}
+\PYG{+w}{         }\PYG{c+c1}{// choose the index of furthest distance to opponents head}
+\PYG{+w}{        }\PYG{k}{if}\PYG{p}{(}\PYG{n}{min}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{max}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{notLosing}\PYG{p}{.}\PYG{n+na}{length}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{min}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{min}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{distancesToApple}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+\PYG{+w}{                    }\PYG{n}{indexOfMinDistance}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{c+c1}{// System.out.println(min);}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{max}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{max}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{distancesToOpp}\PYG{p}{.}\PYG{n+na}{get}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+\PYG{+w}{                    }\PYG{n}{indexOfMaxDistanceToOpp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{;}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

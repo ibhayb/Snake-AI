@@ -1,5 +1,6 @@
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{+w}{  }\PYG{c+c1}{//variables to find all the distances from next position of snake(head) to apple}
+\PYG{+w}{  }\PYG{c+c1}{//variables to find all the distances}
+\PYG{+w}{  }\PYG{c+c1}{// from next position of snake(head) to apple}
 \PYG{+w}{        }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{disFromLeft}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{disFromRight}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}
 \PYG{+w}{		}\PYG{n}{disFromUp}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{,}\PYG{n}{disFromDown}\PYG{o}{=}\PYG{n}{Integer}\PYG{p}{.}\PYG{n+na}{MAX\PYGZus{}VALUE}\PYG{p}{;}
 
@@ -7,7 +8,7 @@
 \PYG{+w}{		}\PYG{p}{(}\PYG{n}{HashSet}\PYG{o}{\PYGZlt{}}\PYG{n}{Coordinate}\PYG{o}{\PYGZgt{}}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
 
 \PYG{+w}{            }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{toUp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{UP}\PYG{p}{);}
-\PYG{+w}{            }\PYG{c+c1}{// find minimum distance from up to the apple using Pythagoras}
+\PYG{+w}{            }\PYG{c+c1}{//find minimum distance from up to the apple using Pythagoras}
 \PYG{+w}{            }\PYG{n}{disFromUp}\PYG{+w}{ }\PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toUp}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}
 \PYG{+w}{			}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toUp}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
 
@@ -16,7 +17,7 @@
 \PYG{+w}{		     }\PYG{n}{possiblePositionsOpponent}\PYG{p}{,}\PYG{n}{opponent}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
 
 \PYG{+w}{            }\PYG{n}{Coordinate}\PYG{+w}{ }\PYG{n}{toLeft}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{snake}\PYG{p}{.}\PYG{n+na}{getHead}\PYG{p}{().}\PYG{n+na}{moveTo}\PYG{p}{(}\PYG{n}{Direction}\PYG{p}{.}\PYG{n+na}{LEFT}\PYG{p}{);}
-\PYG{+w}{               }\PYG{c+c1}{// find minimum distance from left to the apple using Pythagoras}
+\PYG{+w}{        }\PYG{c+c1}{// find minimum distance from left to the apple using Pythagoras}
 \PYG{+w}{            }\PYG{n}{disFromLeft}\PYG{+w}{ }\PYG{o}{=}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{sqrt}\PYG{p}{(}\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toLeft}\PYG{p}{.}\PYG{n+na}{x}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{x}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}
 \PYG{+w}{			       }\PYG{n}{Math}\PYG{p}{.}\PYG{n+na}{pow}\PYG{p}{(}\PYG{n}{toLeft}\PYG{p}{.}\PYG{n+na}{y}\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{apple}\PYG{p}{.}\PYG{n+na}{y}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{));}
 

@@ -505,7 +505,8 @@ will be presented in detail.\\
 \\In the following, the resulting "ChooseDirection" method of the bot "RecursiveBot" will be
 analyzed first.
 \begin{minted}{java}
-public Direction chooseDirection(Snake snake, Snake opponent, Coordinate mazeSize, Coordinate apple) {
+public Direction chooseDirection(Snake snake, Snake opponent,
+ Coordinate mazeSize, Coordinate apple) {
 int simSteps=10;
 Snake snake_left = snake.clone();
 Snake snake_right = snake.clone();
@@ -553,7 +554,8 @@ is called with the appropriate parameters. The return value of this function the
 evaluation of this movement of the snake.
 \begin{minted}{java}
 ...
-int best_val = Math.min( Math.min(val_down,val_up),Math.min(val_left,val_right) );
+int best_val = Math.min( Math.min(val_down,val_up),
+Math.min(val_left,val_right) );
 if(val_left==best_val){
 return Direction.LEFT;
 }
@@ -579,7 +581,8 @@ if(snake.headCollidesWith(opponent)){
 return Integer.MAX_VALUE;
 }
 if(simSteps==0){
-return Math.abs(apple.x-snake.getHead().x) + Math.abs(apple.y - snake.getHead().y);
+return Math.abs(apple.x-snake.getHead().x) + 
+Math.abs(apple.y - snake.getHead().y);
 }
 \end{minted}
 At the beginning of the recursive function, the base cases are determined. If the snake collides with
@@ -623,12 +626,14 @@ int val_down = Integer.MAX_VALUE;
 if(snake_down.moveTo(Direction.DOWN, false)) {
 val_down = evaluateDirection(snake_down, opponent_clone, apple, simSteps - 1);
 }
-int best_val = Math.min( Math.min(val_down,val_up),Math.min(val_left,val_right) );
+int best_val = Math.min( Math.min(val_down,val_up),
+Math.min(val_left,val_right) );
 \end{minted}
 The next section executes the recursive calls of the "evaluateDirection" function analogously to the
 "ChooseDirection" method. However, it should be noted that the steps of the simulation are reduced by one. "best\_val" is also created as described in the "ChooseDirection" method.
 \begin{minted}{java}
-if(snake.getHead().x==apple.x &&snake.getHead().y==apple.y&& best_val<Integer.MAX_VALUE){
+if(snake.getHead().x==apple.x &&
+snake.getHead().y==apple.y&& best_val<Integer.MAX_VALUE){
 return 0;
 }
 else{
@@ -663,7 +668,8 @@ In this Algorithm the following steps are performed to determine the next best p
 To prevent collisions with the opponent snake, we have calculated all possible next moves of the opponent and stored them in a HashSet "possiblePositionsOpponent".
 When determining the next move for our snake, we check if it's also the next move of the opponent.This eliminates head-to-head collisions.
 \begin{minted}{java}
-  //variables to find all the distances from next position of snake(head) to apple
+  //variables to find all the distances 
+  // from next position of snake(head) to apple
         int disFromLeft = Integer.MAX_VALUE, disFromRight=Integer.MAX_VALUE,
 		disFromUp=Integer.MAX_VALUE,disFromDown=Integer.MAX_VALUE;
 
@@ -671,7 +677,7 @@ When determining the next move for our snake, we check if it's also the next mov
 		(HashSet<Coordinate>) possiblePositionsOpponent,opponent)) {
 
             Coordinate toUp = snake.getHead().moveTo(Direction.UP);
-            // find minimum distance from up to the apple using Pythagoras
+            //find minimum distance from up to the apple using Pythagoras
             disFromUp =(int) Math.sqrt(Math.pow(toUp.x- apple.x,2)+
 			Math.pow(toUp.y- apple.y,2));
 
@@ -680,7 +686,7 @@ When determining the next move for our snake, we check if it's also the next mov
 		     possiblePositionsOpponent,opponent)) {
 
             Coordinate toLeft = snake.getHead().moveTo(Direction.LEFT);
-               // find minimum distance from left to the apple using Pythagoras
+        // find minimum distance from left to the apple using Pythagoras
             disFromLeft =(int) Math.sqrt(Math.pow(toLeft.x- apple.x,2)+
 			       Math.pow(toLeft.y- apple.y,2));
 
@@ -855,6 +861,7 @@ To handle the distances for each direction we used array lists. We basically cal
 	ArrayList<Double> distancesToApple = new ArrayList<Double>();
         ArrayList<Double> distancesToOpp = new ArrayList<Double>();
         // mapping each direction of notLosing with the distance to the apple
+        // and for distancesToOpp
         for (Direction dir: notLosing) {
                 //calculate distances and put it in the arraylist
                 int newHeadCoordinateX = snake.getHead().x + dir.dx;
@@ -872,7 +879,12 @@ To handle the distances for each direction we used array lists. We basically cal
 Now after knowing the distances our bot can look for the best directions. We are looping through our notLosing array and looking for min, max indexes of distances. So which direction is the one with the closest distance to the apple and the direction which is the furthest distance to the head of opponent.
 \newpage
 \begin{minted}{java}
-	min = 0;
+	double max;
+        double min;
+        int indexOfMinDistance = 0;
+        int indexOfMaxDistanceToOpp = 0;
+
+        min = 0;
         max = 0;
         if(!distancesToApple.isEmpty())
             min = distancesToApple.get(0);
@@ -880,16 +892,18 @@ Now after knowing the distances our bot can look for the best directions. We are
             max = distancesToOpp.get(0);
          // choose the index of smallest distance
          // choose the index of furthest distance to opponents head
-        for(int i = 1; i < notLosing.length; i++){
-           if(distancesToApple.get(i) < min) {
-               min = distancesToApple.get(i);
-               indexOfMinDistance = i;
-               // System.out.println(min);
-           }
-           if(distancesToOpp.get(i) > max){
-               max = distancesToOpp.get(i);
-               indexOfMaxDistanceToOpp = i;
-           }
+        if(min != 0 && max != 0) {
+            for (int i = 1; i < notLosing.length; i++) {
+                if (distancesToApple.get(i) < min) {
+                    min = distancesToApple.get(i);
+                    indexOfMinDistance = i;
+                    // System.out.println(min);
+                }
+                if (distancesToOpp.get(i) > max) {
+                    max = distancesToOpp.get(i);
+                    indexOfMaxDistanceToOpp = i;
+                }
+            }
         }
 \end{minted}
 As last step our bot needs to decide which direction it should take based on the distance to the other snake and the possible directions of notLosing. If there is a possible direction which leads us not to die and where the distance to opponent snake's head is higher then 2 the bot takes the shortest path to the apple. If the distance to the opponents head is less or equal to 2, the bot dodges the head of the opponent. If none of these conditions met the bot just takes a valid move.
@@ -1072,15 +1086,25 @@ Furthermore looking at the statistical test it turned out, that the recursive bo
 To conclude we can say, that the data analysis was successful and brought us new findings. This kind of statistical test points out the bad and good sides of our different algorithms. 
 
 \section{Conclusions and Future Work}
-We started our project with a small amount of knowledge and now we know more about algorithms in field of Artificial Intelligence. Our beginning was hard because not everything was clear. But we managed to meet weekly and talk about problems and new findings. Every meeting made our visions of this project clearer. Our goal was to make multiple bots and to compete them against each other. Back then we started with implementing basic algorithms. Afterwards we observed benefits and drawbacks of the algorithms we used. Then we worked again on them to improve them. To decide which one of the final algorithms were the best one, we made statistical tests. We collected data and then made a data analysis. Out of that data analysis we could decide, that the best bot was the recursive-bot \ref{RecursiveBot}. We had a lot of fun while working on this project.
+We started our project with a small amount of knowledge and now we know more about algorithms in field of Artificial Intelligence. Our beginning was hard because not everything was clear. But we managed to meet weekly and talk about problems and new findings. Every meeting made our visions of this project clearer. Our goal was to make multiple bots and to compete them against each other. Back then we started with implementing basic algorithms. Afterwards we observed benefits and drawbacks of the algorithms we used. Then we worked again on them to improve them. To decide which one of the final algorithms were the best one, we made statistical tests. We collected data and then made a data analysis. Out of that data analysis we could decide, that the best bot was the recursive-bot \ref{RecursiveBot}. From this we know analyzing the surrounding area seems to be more important than finding the shortest
+distance and showing evasive behavior towards the opponent. We had a lot of fun while working on this project.
 \subsection{How the team work went}
-Talking about the team work, communication was our keyword to success. If any team member had problems we assembled and helped out each other. We held meetings in the university and also meetings via Discord. Discord is a online service where people can join servers and talk with each other, share files and chat with each other. We made a server for this project. Where we uploaded sometimes files, but for the most time we used it for holding our meetings. Our version control was done with GitHub.\\
+Speaking of team work, communication was our key to success. When a team member had any problems, we gathered and helped each other.We held meetings at the university and also meetings via Discord. Discord is a online service where people can join servers and talk with each other, share files and chat with each other. We made a server for this project. Where we uploaded sometimes files, but for the most time we used it for holding our meetings. Our version control was done with GitHub.\\
 We were able to find a time slot where we could meet. This made it easier for us to work on the documentation and algorithms. The benefit was definitely the group size. The more persons in the group , the more difficult it gets to find a schedule where everyone has time for.
 \subsection{What we have learned}
 We have learned a lot about pathing algorithms. It also made us clear how important it is to have algorithms, like Dijkstra, which returns us the shortest path. While working out, where we could use it in real life, we realized that we are facing these algorithms daily.  In navigation and social media apps e.g.
 This project taught us not only how to implement efficiently working algorithms, but also to work in a team. We learned that we have to talk about our problems. Not only problems in development, also psychological problems. It was a tough time for all of us, because we had a strict schedule and many modules to study for. We helped each other in both of the problems, so we were motivated to work on this project even more. We found a good sense for distributing the work, which also made the work in total easier.
+\newpage
 \subsection{Ideas for the future development}
-to-do
+Due to our workload and strict schedules we couldn't dive deeper in to the topic then we did and as we would like to. But we are still proud and happy of our results. For future development we would like to improve the Recursive-Bot\ref{RecursiveBot}. This improvement would consider following areas:\\
+Once a square of the game board has been rated, that rating should be saved so that it does not
+need to be recalculated.\\
+and\\
+Possible positions of the opponent should be taken into account when evaluating a square. This
+requires an optimization of previous calculation methods.\\
+and\\
+The bot could try to entrap the opponent.
+
 \newpage
 \bibliography{bibliography}
 \bibliographystyle{plain}
