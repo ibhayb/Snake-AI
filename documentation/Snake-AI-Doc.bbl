@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{classLoader}
 class classloader, 2020.
@@ -27,5 +27,13 @@ geeksforgeeksuser:@dipesh99kumar.
 \bibitem{manhatten}
 geeksforgeeksuser:@ujalisharmaus415.
 \newblock Calculate the manhattan distance between two cells of given 2d array.
+
+\bibitem{nokia}
+Fiona Jackson.
+\newblock History of snake, 2022.
+
+\bibitem{LargeNumbers}
+Zach.
+\newblock Law of large numbers: Definition + examples, 2020.
 
 \end{thebibliography}

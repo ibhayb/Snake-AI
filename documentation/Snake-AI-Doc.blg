@@ -21,49 +21,53 @@ Warning--entry type for "chesstable" isn't style-file defined
 --line 45 of file bibliography.bib
 Warning--entry type for "manhatten" isn't style-file defined
 --line 51 of file bibliography.bib
+Warning--entry type for "nokia" isn't style-file defined
+--line 59 of file bibliography.bib
+Warning--entry type for "LargeNumbers" isn't style-file defined
+--line 67 of file bibliography.bib
 Warning--to sort, need author or key in classLoader
 Warning--to sort, need author or key in runnable
 Warning--to sort, need author or key in Cloneable
 Warning--to sort, need author or key in awt
-You've used 8 entries,
+You've used 10 entries,
             2118 wiz_defined-function locations,
-            522 strings with 4486 characters,
-and the built_in function-call counts, 1408 in all, are:
-= -- 118
-> -- 32
+            529 strings with 4591 characters,
+and the built_in function-call counts, 1804 in all, are:
+= -- 152
+> -- 46
 < -- 0
-+ -- 16
-- -- 8
-* -- 48
-:= -- 195
-add.period$ -- 12
-call.type$ -- 8
-change.case$ -- 28
++ -- 22
+- -- 12
+* -- 60
+:= -- 261
+add.period$ -- 16
+call.type$ -- 10
+change.case$ -- 36
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 56
-empty$ -- 181
-format.name$ -- 8
-if$ -- 323
+cite$ -- 14
+duplicate$ -- 70
+empty$ -- 225
+format.name$ -- 12
+if$ -- 409
 int.to.chr$ -- 0
-int.to.str$ -- 8
+int.to.str$ -- 10
 missing$ -- 0
-newline$ -- 31
-num.names$ -- 8
-pop$ -- 70
+newline$ -- 39
+num.names$ -- 12
+pop$ -- 88
 preamble$ -- 1
-purify$ -- 20
+purify$ -- 26
 quote$ -- 0
-skip$ -- 68
+skip$ -- 83
 stack$ -- 0
-substring$ -- 40
-swap$ -- 8
+substring$ -- 50
+swap$ -- 10
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 32
+type$ -- 40
 warning$ -- 4
-while$ -- 8
-width$ -- 9
-write$ -- 56
-(There were 12 warnings)
+while$ -- 12
+width$ -- 12
+write$ -- 72
+(There were 14 warnings)

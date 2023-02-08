@@ -33,24 +33,22 @@ citecolor = black] {hyperref}
 
 \newpage
 \section{How we started}
-This chapter describes how we started with the project.\\
-\\As we all know the hardest part of a journey is the start. But once started it is a easy on going.
-It is like the impact on the first domino stone, which brings the whole project in rolling.
-\\As usual in any task of life we need to understand what the problem is and which requirements are necessary to solve the problem. To do so, we read the description from the organizers carefully. In addition to that we watched a few videos about our topic to get a better understanding.\\
-After gaining knowledge about the problem we felt ready to start working with the Snake-AI framework, provided by the organizers on a GitHub repository. The framework was written in the Java programming language. To get familiar we looked into the UML class
-diagram. Besides that we followed a YouTube Tutorial which was also provided by the organizers, where we implemented our first working version. A detailed introduction and our results will now be presented.
+In this chapter we will briefly describe how we started working on the task that we had chosen after the first part of the Java-course was completed.\\
+\\As we all know, the hardest part of any task is getting started. But once the start has been made, the later steps seem to follow naturally.
+You could think of this as  a series of dominoes that all fall after the first one has been knocked over.\\
+\\As usual with any task, first one needs to precisely understand what the problem is and what are the requirements to solve the problem. In order to do just that, we carefully read the description of the organizers and in addition to that, we watched a few videos on our topic.\\
+\\After each team member became familiar with the task, we started working with the Snake AI framework, which was provided in a GitHub repository. The framework was written in the Java programming language. If anything was unclear, we used the UML class diagram to get a better understanding of the structure of the problem. We also watched an extensive YouTube tutorial, also provided by the organizers, that enabled us to quickly create our first bots. In the following chapters, a detailed introduction and our results will be presented.
 \newpage
 
 \section{Introduction}
-Many people know the popular game "Snake" which appeared on a Nokia device back in 1997.
-This project focuses on reestablishing Snake but in a different way. 
-The most special is that instead moving one single snake manually, we will have two intelligent Snake bots competing against each other.
-The aim of a bot is to be the last standing snake or have the highest score by eating apples in 3 minutes. 
-\textit{Survival of the fittest} is a great saying.\\
-This chapter focuses on the general overview of this project and comparison to similar problems in practice.
+Many are familiar with the game “Snake”, which became famous because it was preinstalled on a popular Nokia device back in 1997.\cite{nokia}
+However, the essence of our project was to look at this game from a slightly different perspective. 
+What made our task special was that instead of manually moving a single snake, we were to create two intelligent snake bots competing against each other.
+The goal of a bot is to win, following the rules that will be described later on.
+This chapter focuses on the general overview of this project and comparison with similar problems in practice.
 \subsection{General Topic}
-Our main objective is to make two efficiently working Snake Bots. To create a working bot, all we have to do is to implement a class that implements the Bot interface. This interface has one method which is the \textit{chooseDirection()} method. We can say that the method simulates the brain of the bot. The return value of this method is the direction in which the snake should move to. For directions we have \textit{up, down, left or right}. For example we could implement a first simple bot that just turns right one time. But this type of bot is really uninteresting. For our project we are aiming to implement a bot that uses algorithms from the fields of Artificial Intelligence. But for now let us look into the game rules.\\
-\\The rules are described as follows: \\
+As already mentioned, our main task was to create snake bots that had to be as intelligent as possible. To create such bot, all we had to do was to implement a class that implements the Bot interface. This interface has only one method, which is the \textit{chooseDirection()} method. One could say that this method simulates the brain of the bot. The return value of this method is the direction in which the snake should move. As possible directions we have \textit{up, down, left or right}.For example, a bot could be implemented that turns right every time. But such a bot would of course be very uninteresting. For our project, we wanted to create bots that use artificial intelligence algorithms or other complex structures. \\ \\First of all, the rules of the game are presented below.\\
+\\
 \textbf{Rule 1:}  A bot controls only the direction (going either north, south, east, or west) to
 be taken by its own snake.\\
 \textbf{Rule 2:} Snakes always move simultaneously and forward. Their size increases by one position
@@ -70,9 +68,11 @@ somewhere else on the map.\\
 \textbf{Rule 7:} At the end of the tournament, players are ranked according to the number of
 victories; then the number of draws; then the result of\\
 
-\subsection{Similar problems in practice (References every time, look for actual ones)}
-Furthermore, since our bot should be smart then it definitely should use intelligent algorithms. What if we could implement a simple bot that just goes into the direction of the apple and gets closer and closer after every decision. But would this be enough to call it a smart bot? Of course not. Well it is a good behavior that our snake goes for apples.  But that is not enough. It should also take the shortest path to the apple. For this we want to use algorithm of Dijkstra. Dijkstra algorithm is a graph based algorithm which calculates the shortest path from one node to every other node. Let us get a better understanding of this by looking into an example.\\
+\subsection{Similar problems in practice}
+Since the bots did not have an easy task to solve, it was necessary to use smart solution methods to produce a favorable return value for any given position of the game. What if we could implement a bot that just roughly goes after the apple. Would this be enough to call it a smart bot? Of course not. It is in principle a desired behavior of our snake to reach for apples, but that is generally not enough. It should also take the shortest path to the apple. For example the Dijkstra algorithm can be used to get a such a shortest distance. The Dijkstra algorithm is a graph based algorithm which calculates the shortest path from one node to every other node. To get a better understanding of this concept, we will give an example below.\\
 \\
+\begin{figure}[H]
+\centering
 \NewAdigraph{mygraph}
 {
 A,blue:0,0;
@@ -91,12 +91,14 @@ E,C:5;
 C,D:9;
 }[-]
 \mygraph{}
-\\
-\\We want to know the shortest path from node A to node B. We as human can easily look into that graph and see that taking the route from A-D with cost of 1 is much lesser than rather taking A-C with cost of 7 or A-B with cost of 12. As next we would also see that we have a cost of 2 from D-E. So in total we see that the shortest path from A to D is A-D-E. But telling this to a computer which only knows 0's and 1's is nonsense. Thats why we have algorithms like Dijkstra, which calculates and erases paths with higher costs and returns us the shortest path. Anyway there are many daily life problems where we are using algorithms to compute the shortest path. For example when you are using a navigation tool to drive from one city to an other city. We all would have serious problems if the navigation would take any random path to our destination rather than taking the shortest path or the path with less travel time. Or even when you are crossing over a street where cars are driving. You surely want to take the shortest and safest walkway to the other side.\\
-\\Well that is not the only use case of Dijkstra in real life applications. When we talk about computer networks we will see a use case of Dijkstra too. Considering IP-routing to find the shortest path between source and destination router. Dijkstra algorithm is commonly used in routing protocols for updating the forwarding tables.\\
-\\In a case where robots are used you surely want them to work efficient. So drones and robots, which are automatically working without human interaction, are using pathing algorithms. These drones/robots could delivery the needed package in the fastest way.\\
-\\Even many dating or social media applications are using Dijkstra to recommend you a person which you may know or be interested in. The users can be seen as nodes. The distance could be defined on different aspects like common friends, same interest or even living in the same city.\cite{geeksdijkstra}\\
-\\A really interesting real life application would be that we could use pathing algorithms in case of emergency calls. If there is a fire anywhere and a emergency call was send out. The algorithm could calculate based on the location which firefighter department is the closest one. Based on this they could send out firefighters. The same could be applied for police department and hospitals.
+\caption{Dijkstra Graph Example}
+\end{figure}
+In the given example we want to know the shortest path from node A to node B. A human can easily look at the graph and see that taking the route from A-D at the cost of 1 is much better than taking A-C at the cost of 7, or A-B at the cost of 12. Next, we would also see that we have a cost of 2 from D-E. In total we see that the shortest path from A to D is A-D-E. Since a computer cannot "see" the cost of each edge the concept of simply looking at the graph is not an option for it. That is why we have algorithms like Dijkstra, which calculate and erase paths with higher costs and return to us the shortest path.\\
+\\There are many everyday problems where we are using algorithms to compute the shortest path. Using a navigation tool to drive from one city to an other city is one example of such a usage. We all would be in serious trouble, if a navigation tool would take any random path to a destination rather than taking the shortest path, or the path with lowest travel time.\\
+\\This is of course not the only use case of Dijkstra in real life applications. When we talk about computer networks, we will also find the use of Dijkstra, considering IP-routing to find the shortest path between the source and the destination router. Dijkstra algorithm is commonly used in routing protocols for updating the forwarding tables.\\
+\\In a scenario, where robots are used, you surely want them to work efficiently. Drones and robots, which are working automatically, are using pathing algorithms.\\
+\\Even many dating or social media applications are using Dijkstra to recommend a user to another user. The users are seen as nodes. The distance could be defined by different parameters like common friends, same interests or even living in the same city.\cite{geeksdijkstra}\\
+\\A fascinating real life application would be using algorithms to make emergency calls more efficient. Based on the location of the caller, the algorithm calculates, for example, which firefighter department is the closest one. Of course, the same concept could be used for calling police departments and hospitals.
 
 \section{Team Work}
 The project "Snakes AI" offered many possibilities to try out different approaches regarding team
@@ -226,13 +228,6 @@ or rule-based systems. The AI system receives inputs from the game environment a
 the AI model outputs actions for the player character, such as jumping, running and shooting.
 The AI's goal is to complete the game's objectives while avoiding obstacles and enemies.
 The performance of the AI is often evaluated based on metrics such as completion time, number of lives lost, and score.
-
-\section{Proposed Approaches}
-to-do
-\subsection{Input/Output Format, Benchmarks (Generation, Examples)}
-to-do
-\subsection{Algorithms in Pseudocode}
-to-do
 
 \section{Implementation Details}
 \subsection{Application Structure}
@@ -704,7 +699,7 @@ When determining the next move for our snake, we check if it's also the next mov
 		      possiblePositionsOpponent,opponent)) {
 
             Coordinate toRight = snake.getHead().moveTo(Direction.RIGHT);
-                   // find minimum distance from right to the apple using Pythagoras
+     // find minimum distance from right to the apple using Pythagoras
             disFromRight =(int) Math.sqrt(Math.pow(toRight.x- apple.x,2)+
 			      Math.pow(toRight.y- apple.y,2));
         }
@@ -921,15 +916,15 @@ As last step our bot needs to decide which direction it should take based on the
 \end{minted}
 After testing this bot and watching it for many games we noticed some problems, we also had in bots before. This bot's problem is, that it only calculates the next step. It would be more efficient to calculate more steps. With this current status the bot sometimes takes bads decisions. In some cases it takes the next closes direction to the apple and then it kills itself by hitting his own body. This is the problem of this greedy algorithm. 
 \section{Experimental Results and Statistical Tests}
-Like in many areas in real problems making a decision whether something is better than something else is not easy. In order to make a clearer decision, doing statistical tests and diagrams are the way to go.\\
-Doing 5 games and deciding if a bot is better than the other one would be a misguided decision. This is comparable to the Law of Large Numbers. If you have a coin, which is equally like that head or tail shows. The probability that head or tail shows is for both 50\%(0.5). If you know take the coin and toss it 10 times. If the result is 8 times head and 2 time tail you can't state correctly from your experiment that the probability is now for head 80\%(0.8) and for tail 20\%(0.2). Doing the same experiment 1000 times will show that the average chance to hit head or tail gets really close to 50\%.\\
-This is similar to our scenario. If we would let the bots play for 5 rounds and one snake is winning 4 times and the other 1 time you can't state clearly that the one who had more wins in this 5 rounds is the better snake. There are chances that the apple spawns in bad positions. So to decide whether a bot is better than an other bot we want to let them play 1000 times and then compare the wins. We also want to show statistical the average score, apple's eaten and time played. In the following you will see the results of our tests.\newpage
+As in many areas of real world problem solving, deciding whether one case is better than another is not easy. In order to make a proper decision, analyzing statistical data is the best approach.\\
+With insufficient data deciding if one bot is better than the other may lead to a wrong decision. This is comparable to the underlying principle of the Law of Large Numbers.\cite{LargeNumbers} For example, when you flip a coin the probability that heads or tails shows is for both 50\%(0.5). Now, flipping a coin ten times, if the result is 8 times heads and 2 times tails, we cannot conclude from this experiment that the probability of heads is 80\%(0.8) and of tails is 20\%(0.2). Doing the same experiment 1000 times will show that the average chance to hit heads or tails gets close to 50\%.
+This is similar to our scenario. If we would let two bots play against each other for only five rounds and one snake is winning four times, it cannot be deduced that the winner is the better snake. So to determine whether a bot is better than another bot we decided to let them play against each other for thousand times and then compare the numbers of wins and loses. We also wanted to show statistically the average score, number of apples eaten and time played in each round. In the following section the results of our tests will be presented.\newpage
 \subsection{Simulations}
-First of all we need to dive into the code. The standard amount of rounds played is set to 5. To change that we navigated to the SnakesUIMain where you can setup the amount of rounds.
+First, the code of the "SnakesUIMain" class should be briefly remembered. The number of game rounds was set in the "start\_tournament\_n\_times" method and was set to five by default. To change the number of rounds we simply change the first parameter of the function.
 \begin{minted}{Java}
 start_tournament_n_times(5, bots);
 \end{minted}
-Changing the first parameter to 1000 will let them play 1000 times against each other. The framework uses .txt files to track the games. The folder structure, after setting the parameter to 10 and letting the bots play, looks like:
+Changing the first parameter to thousand will lead to the game beeing started a thousand times. The framework uses .txt files to track the games. The folder structure, after setting the parameter to ten and letting the bots play, looks like this:
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.8]{logs_structure}
@@ -939,7 +934,7 @@ Changing the first parameter to 1000 will let them play 1000 times against each 
 
 
 
-The "iteration\_i.txt" file logs the data for each round. The "total.txt" file logs the summary of all rounds. The content of those files are structured like this:\\
+The "iteration\_i.txt" file logs the data for each round. The "total.txt" file logs the summary of all rounds. The content of those files are structured in the following way:\\
 \\
 \begin{figure}[H]
     \centering
@@ -947,9 +942,9 @@ The "iteration\_i.txt" file logs the data for each round. The "total.txt" file l
 \caption{logcontent.png}
     \label{fig:logs_content.png}
 \end{figure}
-For our statistical tests these information are not sufficient and not structured well. So we need a new file structure. First of all we need to think about what we really want to show and which variables we want to use. We need a variables like round , type of bot, results, apples eaten, time played. Round describes the round number. Type of bot describes which bot is meant (e.g. 1 for the first bot 2 for the second bot). Apples eaten for each bot so how many apple they ate in that round. The other ones are trivial so we don't need any further explanations. An example entry would look like:
+For our statistical tests these information are not sufficient and not structured well, so we needed a new file structure. First of all, we had to think about what we really wanted to show and which variables were needed. We need variables like round ,results, apples eaten, time played. An example entry would look like:
 \begin{itemize}
-	\item 3,1,2,0,1,7,13,30.45
+	\item 3,0,1,7,13,30.45
 \end{itemize}
 This would show the third round where the second bot has won. The first bot ate 7 and the second bot ate 13 apples. The round ended after 30.45 seconds.\\
 We used as input 1000 games and collected a reasonable amount of data. 
@@ -1018,7 +1013,7 @@ Looking at both results we can see that the time played is in the second test mu
 \centering % used for centering table
 \begin{tabular}{c c c c } % centered columns (4 columns)
 \hline\hline %inserts double horizontal lines
-total & RecursiveBot &SimplifiedDijkstra & $\Sigma$ \\ [0.5ex] % inserts table
+total & RecursiveBot & SimplifiedDijkstra & $\Sigma$ \\ [0.5ex] % inserts table
 %heading
 \hline % inserts single horizontal line
 apples & 10018 & 7340 & 17358 \\ % inserting body of the table
@@ -1081,29 +1076,27 @@ apples & 8469 & 6055 & 14524 \\ % inserting body of the table
     \label{fig:boxplot1}
 \end{figure}
 \subsection{Evaluations}
-To make a conclusion out of our statistical test we have to look at the charts. The boxplot shows that the Recursive-Bot vs. Simplified-Dijkstra playing time took longer than the other one. The extreme values were also different. In the first you can see one extreme value is almost at 140 seconds, which is our max. time: 137.53 s. In the second boxplot the extreme value is almost at 110, which is our max. time: 107.07 s. We can clearly state, that the time played in the first test is much higher than the second. So we can assume that the first version of the Dijkstra is playing safer than the second one. But if we compare the scores, we can make an assumption that the second one is more aggressive. It seems like it's an aggressive bot which either dies fast or takes out the opponent bot fast. If we look at the max. apple eaten of both versions, our assumption gets emphasized. Because the first version has a max value of eaten apples with 26 and the other just 20. This is a huge difference.\\
-Furthermore looking at the statistical test it turned out, that the recursive bot is the most promising one. It solves the problems of the two other bots, because they have a self-entrapment and the recursive one not.
-To conclude we can say, that the data analysis was successful and brought us new findings. This kind of statistical test points out the bad and good sides of our different algorithms. 
+In order to draw a conclusion from our statistical tests, we had to evaluate the diagrams. The boxplot clearly showed that the playing time of the competition between the RecursiveBot and the SimplifiedDijktra-Bot was on average longer than the other competition that was presented above. It was, however, not clear to us, how this information can be interpreted. One could say, that if bots are equally strong, the resulting playing time turns out to be longer, but the next chart clearly contradicted this statement.\\
+\\ The maximum values of the playing time were also different. In the first competition, the maximum value was  137.53 seconds. In the second competition, the maximum value was only 107.07 seconds. We can thus state, that the playing time in the first test was significantly longer than in the second. \\
+\\We interpreted the data in the following way: The first version of the Dijkstra is playing "safer" than the second one. But if we compare the wins and losses, we can make the assumption that the second one is more aggressive and either dies fast or takes out the opponent quickly. If we consider the maximum number of apples eaten, this interpretation gets emphasized, because the first version had only a maximum of 26  and the SimplifiedDijkstraV2 had a maximum of only 20 apples eaten.\\
+\\Considering the statistical tests, it seemed that the recursive bot is the most promising one. The recursive bot tackled the problem of self-entrapment, which  seemed to be the biggest flaw of all other bots that we tested. 
+In conclusion,  we can say, that the data analysis was able to give us new insights into the different strengths and weaknesses of our bots.  Statistical testing had the power to reveal the severity of certain flaws that our bots had. For example, without analyzing the data, it would have been impossible to state that the avoidance of self-entrapment is more important than finding the shortest path to the apple.  
 
 \section{Conclusions and Future Work}
-We started our project with a small amount of knowledge and now we know more about algorithms in field of Artificial Intelligence. Our beginning was hard because not everything was clear. But we managed to meet weekly and talk about problems and new findings. Every meeting made our visions of this project clearer. Our goal was to make multiple bots and to compete them against each other. Back then we started with implementing basic algorithms. Afterwards we observed benefits and drawbacks of the algorithms we used. Then we worked again on them to improve them. To decide which one of the final algorithms were the best one, we made statistical tests. We collected data and then made a data analysis. Out of that data analysis we could decide, that the best bot was the recursive-bot \ref{RecursiveBot}. From this we know analyzing the surrounding area seems to be more important than finding the shortest
-distance and showing evasive behavior towards the opponent. We had a lot of fun while working on this project.
+Since none of us had any previous knowledge about creating an intelligent bot, it was at the beginning very difficult for us to develop ideas that would be appropriate for our project and could also be handled by us. As already mentioned in chapter 3, we were able to meet weekly and in our meetings talked about different approaches and further improvements of our results. In this way, step by step, our ideas became more obvious and  manageable. Our way of working was to create several bots and have them compete against each other.  The statistical data of these competitions was subsequently analyzed, and then it was decided what had to be done next. From this data analysis, we were able to decide that the recursive bot \ref{RecursiveBot} was our best result. Analyzing the surroundings seems to be more important for a bot than finding the shortest distance to the apple and showing rudimentary evasive behavior towards the opponent.  
 \subsection{How the team work went}
-Speaking of team work, communication was our key to success. When a team member had any problems, we gathered and helped each other.We held meetings at the university and also meetings via Discord. Discord is a online service where people can join servers and talk with each other, share files and chat with each other. We made a server for this project. Where we uploaded sometimes files, but for the most time we used it for holding our meetings. Our version control was done with GitHub.\\
-We were able to find a time slot where we could meet. This made it easier for us to work on the documentation and algorithms. The benefit was definitely the group size. The more persons in the group , the more difficult it gets to find a schedule where everyone has time for.
-\subsection{What we have learned}
-We have learned a lot about pathing algorithms. It also made us clear how important it is to have algorithms, like Dijkstra, which returns us the shortest path. While working out, where we could use it in real life, we realized that we are facing these algorithms daily.  In navigation and social media apps e.g.
-This project taught us not only how to implement efficiently working algorithms, but also to work in a team. We learned that we have to talk about our problems. Not only problems in development, also psychological problems. It was a tough time for all of us, because we had a strict schedule and many modules to study for. We helped each other in both of the problems, so we were motivated to work on this project even more. We found a good sense for distributing the work, which also made the work in total easier.
-\newpage
+
+Since the project was very extensive and no team member had previously dealt with a comparable task, communication among the team members was essential. Creating solutions together or analyzing solutions together was necessary in order to identify weaknesses and work out strengths. The interactions between team members were always very friendly and solution oriented. Furthermore, different sections of the documentation and statistical analysis were evenly distributed among the team members so that everyone had roughly the same workload.\\
+\\The size of the team was appropriate and also beneficial in two ways.  As each of us created bots, we always had enough bots to test against each other. With fewer team members, the number of bots would have also been fewer. Since there were only three of us, it was relatively easy to schedule meetings. If there had been more people involved, this would have been much more difficult. 
+
+\subsection{What we learned}
+When we were analyzing the statistical data, we realized that a simple assessment of a bot before any testing, aside from things like the time complexity, was not easily possible. Things that initially seemed very important turned out to be negligible. An example of this is the rudimentary evasive behavior of a bot concerning the opponent. Sound statements about bots could only be made after a game had been run several hundred or a thousand times. \\
+\\We also discovered a successfull technique for detecting weaknesses of a bot. If you let a bot compete against itself, it is easy to determine what are its weaknesses by simple observing the movements of the snakes. Even in bots that turned out to be very successful, weaknesses could be found. In particular, our best result, RecursiveBot, could be further improved using this technique to identify its flaws. 
+\\
+
 \subsection{Ideas for the future development}
-Due to our workload and strict schedules we couldn't dive deeper in to the topic then we did and as we would like to. But we are still proud and happy of our results. For future development we would like to improve the Recursive-Bot\ref{RecursiveBot}. This improvement would consider following areas:\\
-Once a square of the game board has been rated, that rating should be saved so that it does not
-need to be recalculated.\\
-and\\
-Possible positions of the opponent should be taken into account when evaluating a square. This
-requires an optimization of previous calculation methods.\\
-and\\
-The bot could try to entrap the opponent.
+As already mentioned, the recursive bot turned out to be our strongest bot, so the obvious decision would be to use this bot as the basis for further development. The first thing that could be an important improvement is a structure that allows this bot to save ratings of squares of the game board. As already explained in chapter 6, the recursive bot uses a function that returns integer values that serve as a rating system for the surrounding squares. In its current version, the recursive bot calculates ratings for certain squares more than one time. This, of course, uses a lot of ressources that could be utilized for other things, like calculating positions of the opponent, which is our second idea for improving this bot. The current recursive bot does not calculate any future positions of the opponent. A second recursive structure could be implemented for this bot which does exactly that.\\
+\\Another type of improvement would be the implementation of some form of advanced tactics. For example, the bot could try to actively trap the opponent. However, we currently do not know how this could be implemented.
 
 \newpage
 \bibliography{bibliography}
